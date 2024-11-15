@@ -4,6 +4,9 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
+    "web": "cd apps/web && yarn start",
+    "ios": "cd apps/native && yarn ios",
+    "android": "cd apps/native && yarn android",
     "clean": "turbo run clean && rm -rf node_modules",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
