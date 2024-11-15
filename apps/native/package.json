@@ -4,20 +4,20 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web",
+    "android": "expo start --android -c",
+    "ios": "expo start --ios -c",
+    "web": "expo start --web -c",
     "lint": "expo lint"
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.0",
     "@react-navigation/native": "^6.0.2",
     "app": "*",
-    "expo": "52",
+    "expo": "52.0.7",
     "expo-constants": "~17.0.3",
     "expo-font": "~13.0.1",
     "expo-linking": "~7.0.2",
-    "expo-router": "~4.0.5",
+    "expo-router": "~3.5.14",
     "expo-splash-screen": "~0.29.10",
     "expo-status-bar": "~2.0.0",
     "expo-system-ui": "~4.0.3",
@@ -37,6 +37,8 @@
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@types/react": "~18.3.12",
+    "babel-plugin-react-compiler": "^19.0.0-beta-a7bf2bd-20241110",
+    "react-compiler-runtime": "^19.0.0-beta-a7bf2bd-20241110",
     "typescript": "~5.3.3"
   },
   "private": true
