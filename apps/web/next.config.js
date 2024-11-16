@@ -12,6 +12,9 @@ module.exports = withExpo({
     "nativewind",
     "react-native-css-interop",
     "solito",
+    "app",
+    "react-native-reanimated",
+    "react-native-gesture-handler",
     // Add other packages that need transpiling
   ],
   webpack: (config) => {
