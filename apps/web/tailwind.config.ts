@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import tailwindConfigBase from "../../packages/tailwind.config";
 
 const config: Config = {
   content: [
@@ -8,10 +9,6 @@ const config: Config = {
     "../../packages/**/*.{js,ts,jsx,tsx}",
   ],
   important: "html",
-  presets: [require("nativewind/preset")],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
+  presets: [require("nativewind/preset"), tailwindConfigBase],
 };
 export default config;

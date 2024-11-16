@@ -10,3 +10,5 @@
 export const SafeArea = ({ children }: { children: React.ReactElement }) => (
   <>{children}</>
 )
+
+export { useSafeArea } from "./use-safe-area.web";

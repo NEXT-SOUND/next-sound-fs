@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base { 
+  :root {
+    --wrapper: #f8f8fc;
+    --wrapper-primary: #f1f4f4;
+    --background: #ffffff;
+    --foreground: #0a0a0b;
+    --card: #ffffff;
+    --card-foreground: #0a0a0b;
+    --popover: #ffffff;
+    --popover-foreground: #0a0a0b;
+    --primary: #0ad4d2;
+    --primary-backfill: #f5f8fc;
+    --primary-foreground: #ffffff;
+    --secondary: rgba(217, 217, 217, 0.55);
+    --secondary-foreground: #191919;
+    --white-15: rgba(255, 255, 255, 0.15);
+    --white-20: rgba(255, 255, 255, 0.2);
+    --white-30: rgba(255, 255, 255, 0.3);
+    --white-50: rgba(255, 255, 255, 0.5);
+    --white-60: rgba(255, 255, 255, 0.6);
+    --white-80: rgba(255, 255, 255, 0.8);
+    --black-15: rgba(0, 0, 0, 0.15);
+    --black-20: rgba(0, 0, 0, 0.2);
+    --black-30: rgba(0, 0, 0, 0.3);
+    --black-50: rgba(0, 0, 0, 0.5);
+    --black-60: rgba(0, 0, 0, 0.6);
+    --black-80: rgba(0, 0, 0, 0.8);
+    --white-foreground: rgba(0, 0, 0, 0.7);
+    --label: #1e2333;
+    --muted: #f4f4f5;
+    --muted-foreground: rgba(30, 35, 51, 0.6);
+    --accent: #ededed;
+    --accent-foreground: #405175;
+    --destructive: #e93d3d;
+    --destructive-foreground: #fafafa;
+    --border: #e5e5e6;
+    --border-primary: #47c2b1;
+    --input: #e5e5e6;
+    --ring: #191919;
+    --banner-purple: rgba(116, 30, 114, 0.72);
+    --positive-background: #f3faf3;
+    --positive-foreground: #4da77d;
+    --negative-background: #f7f2f0;
+    --negative-foreground: #d17e7e;
+    --neutral-background: #e8e8e8;
+    --neutral-foreground: #525252;
+    --modal-background: #ffffff;
+  }
+
+  .dark:root {
+    --wrapper: #1e2333;
+    --wrapper-primary: #23272f;
+    --background: #3b4254;
+    --foreground: #fafafa;
+    --card: #2b3141;
+    --card-foreground: #fafafa;
+    --popover: #0a0a0b;
+    --popover-foreground: #fafafa;
+    --primary: #0ad4d2;
+    --primary-backfill: #2b3141;
+    --primary-foreground: #ffffff;
+    --secondary: #282829;
+    --secondary-foreground: #fafafa;
+    --white-15: rgba(255, 255, 255, 0.15);
+    --white-20: rgba(255, 255, 255, 0.2);
+    --white-30: rgba(255, 255, 255, 0.3);
+    --white-50: rgba(255, 255, 255, 0.5);
+    --white-60: rgba(255, 255, 255, 0.6);
+    --white-80: rgba(255, 255, 255, 0.8);
+    --black-15: rgba(255, 255, 255, 0.15);
+    --black-20: rgba(255, 255, 255, 0.2);
+    --black-30: rgba(255, 255, 255, 0.3);
+    --black-50: rgba(255, 255, 255, 0.5);
+    --black-60: rgba(255, 255, 255, 0.6);
+    --black-80: rgba(255, 255, 255, 0.8);
+    --white-foreground: rgba(255, 255, 255, 0.7);
+    --label: #a6a8b1;
+    --muted: #2b3141;
+    --muted-foreground: rgba(255, 255, 255, 0.5);
+    --accent: #363b4d;
+    --accent-foreground: #ffffff;
+    --destructive: #cc1f1f;
+    --destructive-foreground: #fafafa;
+    --border: #3b4254;
+    --border-primary: #47c2b1;
+    --input: #3b4254;
+    --ring: #d5d5d6;
+    --banner-purple: rgba(116, 30, 114, 0.72);
+    --positive-background: #2f3838;
+    --positive-foreground: #7ccaa3;
+    --negative-background: #3d3639;
+    --negative-foreground: #b68f8f;
+    --neutral-background: #525252;
+    --neutral-foreground: #fafafa;
+    --modal-background: #2b3141;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

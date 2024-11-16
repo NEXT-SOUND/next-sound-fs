@@ -21,24 +21,24 @@ cssInterop(ReactNativeView, {
 export const View = React.forwardRef<
   React.ElementRef<typeof ReactNativeView>,
   ViewProps
->(({ children, className, edges = ["top", "bottom"], ...props }, ref) => {
+>(({ children, className, edges, ...props }, ref) => {
   const { top } = useSafeArea();
 
   return (
-    <SafeAreaView
+    <ReactNativeView
       ref={ref}
       className={cn(className)}
       style={edges?.reduce((acc, edge) => {
-        if (edge === "top") return { ...acc, paddingTop: top };
-        if (edge === "bottom") return { ...acc, paddingBottom: top };
-        if (edge === "left") return { ...acc, paddingLeft: top };
-        if (edge === "right") return { ...acc, paddingRight: top };
+        if (edge?.includes("top")) return { ...acc, paddingTop: top };
+        if (edge?.includes("bottom")) return { ...acc, paddingBottom: top };
+        if (edge?.includes("left")) return { ...acc, paddingLeft: top };
+        if (edge?.includes("right")) return { ...acc, paddingRight: top };
         return acc;
       }, {})}
       {...props}
     >
       {children}
-    </SafeAreaView>
+    </ReactNativeView>
   );
 });
 
