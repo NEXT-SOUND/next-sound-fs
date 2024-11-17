@@ -25,7 +25,7 @@ export const BackgroundImage = ({ src }: { src: string }) => {
   const { width, isDesktop, isMobile, isServer } = useWindowSize();
   const { top: safeAreaTop } = useSafeArea();
 
-  const top = IS_WEB ? (isDesktop ? 32 : 16) : safeAreaTop; //todo
+  const top = IS_WEB ? 32 : safeAreaTop; //todo
   const imageSize = Math.min(width * 0.3, isMobile ? width * 0.3 : 300); //232
   const backgroundImageHeight = imageSize * 2.75 + top;
   const backgroundImageContainerHeight = isMobile
@@ -62,7 +62,7 @@ export const BackgroundImage = ({ src }: { src: string }) => {
 
       <View
         className={cn(
-          "absolute top-0 z-50 flex flex-row container px-[16px]",
+          "absolute top-0 z-50 flex flex-row container px-[16px] pt-4 web:pt-2",
           "web:left-1/2 web:-translate-x-1/2",
         )}
         style={{ top, height: backgroundImageContainerHeight }}
