@@ -1,7 +1,5 @@
 import { Canvas, LinearGradient, Rect, vec } from "@shopify/react-native-skia";
-import React from "react";
 import type { GradientProps } from "./types";
-import { SCREEN_WIDTH } from "utils/screen";
 import { cssInterop } from "nativewind";
 
 const TwCanvas = cssInterop(Canvas, {
@@ -22,7 +20,7 @@ const Gradient = ({
     {...props}
     style={[
       {
-        width: width,
+        width,
         height,
         left: 0,
         right: 0,

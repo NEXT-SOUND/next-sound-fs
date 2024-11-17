@@ -9,7 +9,7 @@ import React from "react";
 import { useSafeArea } from "utils/safe-area";
 
 interface ViewProps extends RNViewProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
   edges?: ("top" | "bottom" | "left" | "right")[];
 }

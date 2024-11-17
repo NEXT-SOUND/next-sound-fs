@@ -1,9 +1,9 @@
-import { useColorScheme } from "../use-color-schema/useColorSchema";
-import ColorUtil from "../colorUtils";
+import { useColorScheme } from "./use-color-schema/useColorSchema";
+import ColorUtil from "./colorUtils";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import ImageColors from "react-native-image-colors";
 import { useSharedValue, withTiming } from "react-native-reanimated";
 import { NAV_THEME } from "utils/use-color-schema/constants";
+import { getImageColors } from "./fast-image-color";
 
 export interface Colors {
   background: string;
@@ -21,66 +21,18 @@ interface Options {
 }
 
 const cache: Record<string, Colors> = {};
-
 const fetchAverageColor = async (
   imageUrl: string,
   options?: Options,
-): Promise<Colors> =>
-  ImageColors.getColors(imageUrl, {
-    // NOTE: using customer cache due to performance issue
+): Promise<Colors> => {
+  return getImageColors(imageUrl, {
     fallback: options?.fallbackColors?.average,
-    quality: options?.quality ?? "low",
-  })
-    .then((colors) => {
-      if (colors.platform === "ios") {
-        const { background, primary, secondary, detail } = colors;
-        return {
-          background,
-          primary,
-          secondary,
-          detail,
-          average: ColorUtil.averageColor([
-            background,
-            primary,
-            secondary,
-            detail,
-          ]),
-        };
-      }
-      if (colors.platform === "android") {
-        const { dominant, darkVibrant, lightVibrant, average } = colors;
-
-        return {
-          background: dominant,
-          primary: average,
-          secondary: darkVibrant,
-          detail: lightVibrant,
-          average: ColorUtil.brightenColor(average, 30),
-        };
-      }
-      if (colors.platform === "web") {
-        const { dominant, vibrant, darkVibrant, lightVibrant, darkMuted } =
-          colors;
-        return {
-          background: vibrant,
-          primary: darkVibrant,
-          secondary: lightVibrant,
-          detail: darkMuted,
-          average: ColorUtil.averageColor([
-            vibrant,
-            dominant,
-            darkVibrant,
-            lightVibrant,
-            darkMuted,
-          ]),
-        };
-      }
-      throw new Error("Invalid platform");
-    })
-    .catch((e) => {
-      console.error(e);
-      throw e;
-    });
+    quality: options?.quality,
+  }).catch((e) => {
+    console.error(e);
+    throw e;
+  });
+};
 
 const DEFAULT_COLORS = {
   LIGHT: NAV_THEME.light.background,
@@ -110,19 +62,19 @@ const useAverageColor = (value = "", options?: Options) => {
     average: defaultColor,
   });
 
-  const sharedBackground = useSharedValue<string>(defaultColor);
+  const animatedBackgroundColor = useSharedValue<string>(defaultColor);
 
   const handleChangeColors = useCallback(
     (colors: Colors, caching = false) => {
       setColors(colors);
-      sharedBackground.value = withTiming(colors.average, {
+      animatedBackgroundColor.value = withTiming(colors.average, {
         duration: ANIMATION_DURATION,
       });
       if (caching) cache[value] = colors;
       setIsFetched(true);
       setIsLoading(false);
     },
-    [sharedBackground, value],
+    [animatedBackgroundColor, value],
   );
 
   useEffect(() => {
@@ -197,7 +149,7 @@ const useAverageColor = (value = "", options?: Options) => {
 
   return {
     colors: fastColors,
-    sharedBackground,
+    animatedBackgroundColor,
     isLoading,
     isFetched,
     cache,

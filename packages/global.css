@@ -4,8 +4,6 @@
 
 @layer base { 
   :root {
-    --wrapper: #f8f8fc;
-    --wrapper-primary: #f1f4f4;
     --background: #ffffff;
     --foreground: #0a0a0b;
     --card: #ffffff;
@@ -52,9 +50,7 @@
   }
 
   .dark:root {
-    --wrapper: #1e2333;
-    --wrapper-primary: #23272f;
-    --background: #3b4254;
+    --background: #000000;
     --foreground: #fafafa;
     --card: #2b3141;
     --card-foreground: #fafafa;

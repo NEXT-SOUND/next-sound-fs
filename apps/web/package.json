@@ -10,12 +10,13 @@
   },
   "dependencies": {
     "@expo/next-adapter": "^6.0.0",
+    "app": "*",
+    "fast-average-color": "^9.4.0",
+    "framer-motion": "^11.11.17",
     "next": "14.2.4",
     "react": "^18",
     "react-dom": "^18",
     "react-native-web": "^0.19.12",
-    "framer-motion": "^11.11.17",
-    "app": "*",
     "ui": "*"
   },
   "devDependencies": {
