@@ -9,7 +9,6 @@ export const getImageColors = async (
     quality?: "lowest" | "low" | "high" | "highest";
   },
 ): Promise<Colors> => {
-  console.log("isWeb?");
   return ImageColors.getColors(imageUrl, {
     fallback: options?.fallback,
     quality: options?.quality ?? "low",

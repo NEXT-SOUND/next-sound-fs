@@ -6,10 +6,10 @@ import { useSafeArea } from "utils/safe-area";
 import { SolitoImage } from "solito/image";
 import { BlurImage } from "ui/blur-image";
 import useAverageColor from "utils/useAverageColor";
-import { Text } from "ui/text";
+import { Text } from "@/ui/text";
 import { useColorScheme } from "utils/use-color-schema";
 import { Button } from "ui/button";
-import { cn } from "ui/utils/cn";
+import { cn } from "@/ui/utils/cn";
 
 export function ArtistInfo() {
   return (
@@ -34,7 +34,7 @@ export const BackgroundImage = ({ src }: { src: string }) => {
   const { colors, isFetched } = useAverageColor(src);
 
   return (
-    <View className="relative w-full h-full bg-background">
+    <View className="relative w-full h-full">
       <View className="overflow-x-hidden flex-1">
         <BlurImage
           alt="test"
@@ -75,8 +75,6 @@ export const BackgroundImage = ({ src }: { src: string }) => {
             zIndex: 100,
             borderColor: "white",
             borderWidth: isDesktop ? 8 : 3,
-            width: imageSize,
-            height: imageSize,
           }}
           contentFit="cover"
           alt="test"

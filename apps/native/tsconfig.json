@@ -1,8 +1,16 @@
 {
   "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "module": "esnext",
+    "jsx": "react"
+  },
   "include": [
     "**/*.ts",
     "**/*.tsx",
-    "nativewind-env.d.ts"
-  ]
+    "**/*.d.ts",
+    "nativewind-env.d.ts",
+    "global.d.ts"
+  ],
+  "esModuleInterop": true
 }

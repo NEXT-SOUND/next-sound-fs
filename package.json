@@ -29,6 +29,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "dependencies": {
+    "expo-localization": "^16.0.0",
     "react-native-web": "^0.19.13",
     "react-native-webview": "^13.12.3",
     "solito": "^4.3.0",

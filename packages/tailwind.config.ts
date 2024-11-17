@@ -1,86 +1,116 @@
-import tailwindAnimation from "tailwindcss-animate";
+// @ts-expect-error - no types
+import nativewind from "nativewind/preset";
+import { hairlineWidth } from "nativewind/theme";
 
 export default {
+  darkMode: "class",
   corePlugin: {
     backgroundOpacity: true,
   },
   content: ["./web/**/*.{js,jsx,ts,tsx}", "./native/**/*.{js,jsx,ts,tsx}"],
-  darkMode: "class",
   theme: {
-    container: {
-      center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1920px",
-      },
-    },
     extend: {
+      fontFamily: {
+        readexExtraLight: ["ReadexPro_200ExtraLight"],
+        readexLight: ["ReadexPro_300Light"],
+        readex: ["ReadexPro_400Regular"],
+        readexMedium: ["ReadexPro_500Medium"],
+        readexSemiBold: ["ReadexPro_600SemiBold"],
+        readexBold: ["ReadexPro_700Bold"],
+      },
       fontSize: {
         "3xs": ["8px", "12px"],
-        "2xs": ["10px", "14px"],
+        "2xs": ["10px", "16px"],
       },
       boxShadow: {
         xs: "0px 3px 8px rgba(0, 0, 0, 0.045)",
       },
       colors: {
-        test: "var(--red)",
         border: {
-          DEFAULT: "var(--border)",
-          primary: "var(--border-primary)",
+          DEFAULT: "hsl(var(--border))",
+          primary: "hsl(var(--border-primary))",
         },
-        input: "var(--input)",
-        ring: "var(--ring)",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        label: "hsl(var(--label))",
         wrapper: {
-          DEFAULT: "var(--wrapper)",
-          primary: "var(--wrapper-primary)",
+          DEFAULT: "hsl(var(--wrapper))",
+          primary: "hsl(var(--wrapper-primary))",
         },
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        translucent: "var(--translucent)",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        white: {
+          DEFAULT: "#fff",
+          15: "hsl(var(--white-15))",
+          20: "hsl(var(--white-20))",
+          30: "hsl(var(--white-30))",
+          50: "hsl(var(--white-50))",
+          60: "hsl(var(--white-60))",
+          80: "hsl(var(--white-80))",
+        },
+        black: {
+          DEFAULT: "#000",
+          15: "hsl(var(--black-15))",
+          20: "hsl(var(--black-20))",
+          30: "hsl(var(--black-30))",
+          50: "hsl(var(--black-50))",
+          60: "hsl(var(--black-60))",
+          80: "hsl(var(--black-80))",
+        },
+        translucent: {
+          DEFAULT: "hsl(var(--white-20))",
+          foreground: "hsl(var(--white-foreground))",
+        },
         primary: {
-          DEFAULT: "var(--primary)",
-          foreground: "var(--primary-foreground)",
-          backfill: "var(--primary-backfill)",
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+          backfill: "hsl(var(--primary-backfill))",
         },
         secondary: {
-          DEFAULT: "var(--secondary)",
-          foreground: "var(--secondary-foreground)",
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
         },
         destructive: {
-          DEFAULT: "var(--destructive)",
-          foreground: "var(--destructive-foreground)",
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
         },
         muted: {
-          DEFAULT: "var(--muted)",
-          foreground: "var(--muted-foreground)",
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
         },
         accent: {
-          DEFAULT: "var(--accent)",
-          foreground: "var(--accent-foreground)",
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
         },
         popover: {
-          DEFAULT: "var(--popover)",
-          foreground: "var(--popover-foreground)",
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
         },
         card: {
-          DEFAULT: "var(--card)",
-          foreground: "var(--card-foreground)",
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
         },
         banner: {
-          purple: "var(--banner-purple)",
+          purple: "hsl(var(--banner-purple))",
         },
         positive: {
-          DEFAULT: "var(--positive-background)",
-          foreground: "var(--positive-foreground)",
+          DEFAULT: "hsl(var(--positive-background))",
+          foreground: "hsl(var(--positive-foreground))",
         },
         negative: {
-          DEFAULT: "var(--negative-background)",
-          foreground: "var(--negative-foreground)",
+          DEFAULT: "hsl(var(--negative-background))",
+          foreground: "hsl(var(--negative-foreground))",
         },
         neutral: {
-          DEFAULT: "var(--neutral-background)",
-          foreground: "var(--neutral-foreground)",
+          DEFAULT: "hsl(var(--neutral-background))",
+          foreground: "hsl(var(--neutral-foreground))",
         },
+        modal: {
+          DEFAULT: "hsl(var(--modal-background))",
+        },
+      },
+      borderWidth: {
+        hairline: hairlineWidth(),
       },
       keyframes: {
         "accordion-down": {
@@ -98,5 +128,5 @@ export default {
       },
     },
   },
-  plugins: [tailwindAnimation],
+  plugins: [require("tailwindcss-animate")],
 } satisfies import("tailwindcss").Config;

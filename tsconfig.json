@@ -4,9 +4,9 @@
       "noUncheckedIndexedAccess": true,
       "baseUrl": "./packages",
       "paths": {
-        "ui/*": ["./ui/*"],
-        "app/*": ["./app/*"],
-        "utils/*": ["./utils/*"]
+        "@/ui/*": ["./ui/*"],
+        "@/app/*": ["./app/*"],
+        "@/utils/*": ["./utils/*"]
       },
       "jsx": "react-jsx"
     },
