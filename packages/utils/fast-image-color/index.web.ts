@@ -7,10 +7,10 @@ export const getImageColors = async (imageUrl: string): Promise<Colors> => {
   try {
     const mainColor = await fac.getColorAsync(imageUrl, {
       algorithm: "dominant",
-      left: 100,
+      left: 0,
       top: 0,
-      width: 100,
-      height: 100,
+      width: 400,
+      height: 400,
     });
     const darkerColor = await fac.getColorAsync(imageUrl, {
       algorithm: "dominant",

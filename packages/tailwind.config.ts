@@ -7,6 +7,13 @@ export default {
   content: ["./web/**/*.{js,jsx,ts,tsx}", "./native/**/*.{js,jsx,ts,tsx}"],
   darkMode: "class",
   theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1920px",
+      },
+    },
     extend: {
       fontSize: {
         "3xs": ["8px", "12px"],

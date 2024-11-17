@@ -2,6 +2,7 @@ import { Image, ImageContentFit } from "expo-image";
 import { BlurImageProps } from "./types";
 import { View } from "react-native";
 import Gradient from "ui/gradient";
+import { useColorScheme } from "utils/use-color-schema";
 
 export function BlurImage({
   src,
@@ -12,6 +13,8 @@ export function BlurImage({
   style,
   contentFit,
 }: BlurImageProps) {
+  const { isDarkColorScheme } = useColorScheme();
+
   return (
     <View style={{ width, height, overflow: "hidden" }}>
       <Image
@@ -22,13 +25,23 @@ export function BlurImage({
         contentFit={contentFit as ImageContentFit}
       />
       <Gradient
-        colors={[
-          "rgba(255,255,255,0)",
-          "rgba(255,255,255,0.2)",
-          "rgba(255,255,255,0.4)",
-          "rgba(255,255,255,0.8)",
-          "rgba(255,255,255,1)",
-        ]}
+        colors={
+          isDarkColorScheme
+            ? [
+                "rgba(0,0,0,0)",
+                "rgba(0,0,0,0.2)",
+                "rgba(0,0,0,0.4)",
+                "rgba(0,0,0,0.8)",
+                "rgba(0,0,0,1)",
+              ]
+            : [
+                "rgba(255,255,255,0)",
+                "rgba(255,255,255,0.2)",
+                "rgba(255,255,255,0.4)",
+                "rgba(255,255,255,0.8)",
+                "rgba(255,255,255,1)",
+              ]
+        }
         width={width}
         height={height * 1.06}
         positions={[0, 0.3, 0.5, 0.75, 1]}

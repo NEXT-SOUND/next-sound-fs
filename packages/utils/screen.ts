@@ -21,7 +21,7 @@ export const SCREEN_HEIGHT = IS_WEB
 export function useWindowSize() {
   const [width, setWidth] = useState(SCREEN_WIDTH);
   const [height, setHeight] = useState(SCREEN_HEIGHT);
-  const [isServer, setIsServer] = useState(true);
+  const [isServer, setIsServer] = useState(IS_WEB);
 
   useEffect(() => {
     if (!isServerRender() && IS_WEB) {
@@ -46,10 +46,10 @@ export function useWindowSize() {
     width: isServer ? 0 : width,
     height: isServer ? 0 : height,
     isServer,
-    isMobile: isServer ? false : width < 768,
-    isTablet: isServer ? false : width >= 768 && width < 1024,
+    isMobile: isServer ? false : width < 640,
+    isTablet: isServer ? false : width >= 640 && width < 1024,
     isDesktop: isServer ? false : width >= 1024,
     isLargeScreen: isServer ? false : width >= 1440,
-    isBigScreen: isServer ? false : width >= 1920,
+    is2XLargeScreen: isServer ? false : width >= 1920,
   };
 }
