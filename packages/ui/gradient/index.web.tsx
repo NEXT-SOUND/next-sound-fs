@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, MotiView } from "moti";
 import { GradientProps } from "./types";
 
 export default function Gradient({
@@ -20,11 +20,11 @@ export default function Gradient({
         .join(", ")
     : colors.join(", ");
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
+    <AnimatePresence>
+      <MotiView
         {...props}
         key={colors.join(",")}
-        initial={{ opacity: animated ? 0 : 1 }}
+        from={{ opacity: animated ? 0 : 1 }}
         animate={{
           opacity: animated ? 1 : 1,
           width,
@@ -40,5 +40,4 @@ export default function Gradient({
       />
     </AnimatePresence>
   );
-
 }

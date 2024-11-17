@@ -9,6 +9,12 @@ export default {
   },
   content: ["./web/**/*.{js,jsx,ts,tsx}", "./native/**/*.{js,jsx,ts,tsx}"],
   theme: {
+    container: {
+      center: true,
+      screens: {
+        "2xl": "1560px",
+      },
+    },
     extend: {
       fontFamily: {
         readexExtraLight: ["ReadexPro_200ExtraLight"],

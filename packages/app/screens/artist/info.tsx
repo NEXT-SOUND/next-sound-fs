@@ -10,6 +10,8 @@ import { Text } from "@/ui/text";
 import { useColorScheme } from "utils/use-color-schema";
 import { Button } from "ui/button";
 import { cn } from "@/ui/utils/cn";
+import { MotiView } from "moti";
+import { useTranslation } from "react-i18next";
 
 export function ArtistInfo() {
   return (
@@ -20,26 +22,28 @@ export function ArtistInfo() {
 }
 
 export const BackgroundImage = ({ src }: { src: string }) => {
-  const { width, isDesktop, isMobile } = useWindowSize();
+  const { width, isDesktop, isMobile, isServer } = useWindowSize();
   const { top: safeAreaTop } = useSafeArea();
 
-  const top = IS_WEB ? 32 : safeAreaTop;
-  const imageSize = Math.min(width * 0.3, isMobile ? width * 0.232 : 300);
+  const top = IS_WEB ? (isDesktop ? 32 : 16) : safeAreaTop; //todo
+  const imageSize = Math.min(width * 0.3, isMobile ? width * 0.3 : 300); //232
   const backgroundImageHeight = imageSize * 2.75 + top;
   const backgroundImageContainerHeight = isMobile
-    ? imageSize * 2.75 + top
+    ? imageSize * 2.25 + top
     : 535;
   const backgroundImageWidth = isDesktop ? width : width * 1.3;
 
   const { colors, isFetched } = useAverageColor(src);
 
+  const { t } = useTranslation("common");
+
   return (
     <View className="relative w-full h-full">
       <View className="overflow-x-hidden flex-1">
         <BlurImage
-          alt="test"
+          alt="background image"
           src={src}
-          blurRadius={isDesktop ? 30 : 16}
+          blurRadius={16}
           backgroundColor={isFetched ? colors.background : "transparent"}
           width={backgroundImageWidth}
           height={backgroundImageContainerHeight}
@@ -55,30 +59,54 @@ export const BackgroundImage = ({ src }: { src: string }) => {
           }}
         />
       </View>
+
       <View
         className={cn(
-          "absolute top-0 z-50 flex flex-row container",
-          IS_WEB && "left-1/2 -translate-x-1/2",
+          "absolute top-0 z-50 flex flex-row container px-[16px]",
+          "web:left-1/2 web:-translate-x-1/2",
         )}
         style={{ top, height: backgroundImageContainerHeight }}
       >
-        <Text className="text-white text-5xl font-bold lg:text-8xl">Rose</Text>
-        <SolitoImage
-          src={src}
-          width={imageSize}
-          height={imageSize}
+        <View className="flex flex-col">
+          <View>
+            <Text className="text-white text-5xl font-bold md:text-8xl sm:text-7xl">
+              Rose
+            </Text>
+            <Text className="text-white text-2xl font-bold">{t("artist")}</Text>
+          </View>
+        </View>
+        <MotiView
+          from={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+          }}
+          transition={{ duration: 300 }}
           style={{
-            borderRadius: 9999,
+            width: imageSize,
+            height: imageSize,
             position: "absolute",
             top: 16,
             right: 16,
-            zIndex: 100,
-            borderColor: "white",
-            borderWidth: isDesktop ? 8 : 3,
           }}
-          contentFit="cover"
-          alt="test"
-        />
+        >
+          <SolitoImage
+            src={src}
+            width={imageSize}
+            height={imageSize}
+            style={{
+              borderRadius: 9999,
+              zIndex: 100,
+              borderColor: "white",
+              borderWidth: isDesktop ? 8 : 3,
+            }}
+            contentFit="cover"
+            alt="cover image"
+            priority
+            transition={300}
+          />
+        </MotiView>
       </View>
     </View>
   );

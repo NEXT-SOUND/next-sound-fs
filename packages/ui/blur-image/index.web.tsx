@@ -23,7 +23,7 @@ export function BlurImage({
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.3 }}
         className="relative"
         style={{
           clipPath: "inset(0)",
@@ -63,7 +63,7 @@ export function BlurImage({
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.3 }}
         style={{
           width,
           height,
@@ -84,7 +84,7 @@ export function BlurImage({
             top: -height * 0.5,
             left: -width * 0.05,
             objectFit: contentFit,
-            filter: `blur(${blurRadius}px)`,
+            filter: `blur(${blurRadius - 8}px)`,
           }}
         />
       </motion.div>

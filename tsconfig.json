@@ -6,7 +6,8 @@
       "paths": {
         "@/ui/*": ["./ui/*"],
         "@/app/*": ["./app/*"],
-        "@/utils/*": ["./utils/*"]
+        "@/utils/*": ["./utils/*"],
+        "@/locales/*": ["./locales/*"]
       },
       "jsx": "react-jsx"
     },

@@ -21,7 +21,13 @@ export function BlurImage({
         source={src}
         alt={alt}
         blurRadius={blurRadius}
-        style={[{ width, height }, style]}
+        style={[
+          {
+            width,
+            height,
+          },
+          style,
+        ]}
         contentFit={contentFit as ImageContentFit}
       />
       <Gradient

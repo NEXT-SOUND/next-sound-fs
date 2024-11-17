@@ -3,7 +3,7 @@
   "main": "index.js",
   "version": "1.0.0",
   "scripts": {
-    "dev": "expo start",
+    "dev": "expo run:ios",
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web -c",
@@ -37,6 +37,7 @@
     "react-native-screens": "~4.0.0",
     "react-native-web": "~0.19.13",
     "tailwindcss": "^3.4.4",
+    "expo-localization": "^16.0.0",
     "ui": "*"
   },
   "devDependencies": {

@@ -2,7 +2,7 @@ import Head from "next/head";
 
 import "../global.css";
 import { AppProps } from "next/app";
-
+import "raf/polyfill";
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
