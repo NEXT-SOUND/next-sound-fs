@@ -15,28 +15,30 @@ export default function Gradient({
 }: GradientProps) {
   const gradientColors = positions
     ? colors
+        // @ts-expect-error
         .map((color, index) => `${color} ${positions[index] * 100}%`)
         .join(", ")
     : colors.join(", ");
-return (
-  <AnimatePresence mode="wait">
-    <motion.div
-      {...props}
-      key={colors.join(",")}
-      initial={{ opacity: animated ? 0 : 1 }}
-      animate={{
-        opacity: animated ? 1 : 1,
-        width,
-        height,
-      }}
-      exit={{ opacity: animated ? 0 : 1 }}
-      transition={{ duration: 0.5 }}
-      style={{
-        ...style,
-        background: `linear-gradient(${direction}, ${gradientColors})`,
-      }}
-    />
-  </AnimatePresence>
-);
+  return (
+    <AnimatePresence mode="wait">
+      <motion.div
+        {...props}
+        key={colors.join(",")}
+        initial={{ opacity: animated ? 0 : 1 }}
+        animate={{
+          opacity: animated ? 1 : 1,
+          width,
+          height,
+        }}
+        exit={{ opacity: animated ? 0 : 1 }}
+        transition={{ duration: 0.5 }}
+        style={{
+          // @ts-expect-error
+          ...style,
+          background: `linear-gradient(${direction}, ${gradientColors})`,
+        }}
+      />
+    </AnimatePresence>
+  );
 
 }

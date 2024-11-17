@@ -50,6 +50,7 @@ export function BlurImage({
             width={width}
             height={height}
             style={{
+              // @ts-expect-error
               ...style,
               objectFit: contentFit,
             }}
@@ -77,6 +78,7 @@ export function BlurImage({
           width={width}
           height={height}
           style={{
+            // @ts-expect-error
             ...style,
             position: "relative",
             top: -height * 0.5,

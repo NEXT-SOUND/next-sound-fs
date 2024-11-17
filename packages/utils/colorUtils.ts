@@ -42,7 +42,7 @@ function getRandomColor(): string {
   return color === "#FFFFFF" ? getRandomColor() : color;
 }
 
-function getBlindSafeColor(index: number): string {
+function getBlindSafeColor(index: number): string | undefined {
   return colorBlindSafeColors[index % colorBlindSafeColors.length];
 }
 
@@ -171,6 +171,7 @@ const isDarker = (color: string): boolean => {
       .split(",")
       .map(Number);
 
+    // @ts-expect-error
     color = rgbaToHex({ r, g, b, a });
   }
 
