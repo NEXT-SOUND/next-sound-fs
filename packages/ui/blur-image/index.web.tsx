@@ -21,9 +21,6 @@ export function BlurImage({
   if (isDesktop) {
     return (
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.3 }}
         className="relative"
         style={{
           clipPath: "inset(0)",
@@ -61,9 +58,6 @@ export function BlurImage({
   } else {
     return (
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.3 }}
         style={{
           width,
           height,

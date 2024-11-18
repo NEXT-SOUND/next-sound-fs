@@ -1,6 +1,6 @@
 import { Stack } from "expo-router";
 import "../global.css";
-import "@/utils/18n.native";
+import "@/utils/i18n/i18n.native";
 
 export default function RootLayout() {
   return (

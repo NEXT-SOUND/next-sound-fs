@@ -3,9 +3,16 @@
 const { withExpo } = require("@expo/next-adapter");
 const withTM = require("next-transpile-modules")(["moti"]);
 const withPlugins = require("next-compose-plugins");
+const { i18n } = require("./next-i18next.config");
 
 module.exports = withPlugins(
-  [withTM],
+  [
+    withTM,
+    {
+      i18n,
+    },
+  ],
+
   withExpo({
     reactStrictMode: true,
     images: {
