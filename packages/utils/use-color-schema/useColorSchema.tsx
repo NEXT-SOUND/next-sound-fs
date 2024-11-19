@@ -1,14 +1,14 @@
 import { useColorScheme as useNativewindColorScheme } from "nativewind";
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { IS_WEB } from "utils/screen";
 
-const DEFAULT_COLOR_SCHEME = "light";
+const DEFAULT_COLOR_SCHEME = "dark";
 
 export function useColorScheme() {
   const { colorScheme, setColorScheme, toggleColorScheme } =
     useNativewindColorScheme();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (IS_WEB) setColorScheme(colorScheme ?? DEFAULT_COLOR_SCHEME);
   }, [colorScheme]);
 

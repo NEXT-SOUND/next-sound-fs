@@ -15,7 +15,7 @@ import { useTranslation } from "@/utils/i18n";
 
 export function ArtistInfo() {
   return (
-    <View className="flex-1 bg-background">
+    <View className="flex-1 bg-background web:bg-black">
       <BackgroundImage src="https://i.scdn.co/image/ab6761610000e5eb727a1f1f508238a20ac9fdbf" />
     </View>
   );
