@@ -7,7 +7,7 @@
         "@/ui/*": ["./ui/*"],
         "@/app/*": ["./app/*"],
         "@/utils/*": ["./utils/*"],
-        "@/locales/*": ["./locales/*"]
+        "@/locales/*": ["../apps/web/public/locales/*"]
       },
       "jsx": "react-jsx"
     },

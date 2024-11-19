@@ -1,7 +1,0 @@
-{
-  "dataSources": {
-    "dataSources": "데이터 소스",
-    "description": "데이터 소스를 수정하려면 Chartmetric 웹 앱을 방문해주세요.",
-    "title": "{{name}}의 데이터 소스"
-  }
-}

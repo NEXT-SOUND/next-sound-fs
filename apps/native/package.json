@@ -37,6 +37,8 @@
     "react-native-web": "~0.19.13",
     "tailwindcss": "^3.4.4",
     "expo-localization": "^16.0.0",
+    "react-i18next": "^15.1.1",
+    "i18next": "^23.16.5",
     "ui": "*"
   },
   "devDependencies": {

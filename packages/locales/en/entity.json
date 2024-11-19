@@ -1,7 +1,0 @@
-{
-  "dataSources": {
-    "dataSources": "Data Sources",
-    "description": "To edit the data sources, please visit Chartmetric web app.",
-    "title": "{{name}}'s Data Sources"
-  }
-}

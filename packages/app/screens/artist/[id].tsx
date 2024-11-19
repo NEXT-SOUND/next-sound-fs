@@ -11,7 +11,7 @@ import { useColorScheme } from "utils/use-color-schema";
 import { Button } from "ui/button";
 import { cn } from "@/ui/utils/cn";
 import { MotiView } from "moti";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "@/utils/i18n";
 
 export function ArtistInfo() {
   return (

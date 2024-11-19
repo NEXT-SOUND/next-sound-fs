@@ -1,1 +1,1 @@
-export { ArtistInfo as default } from "app/screens/artist/info";
+export { ArtistInfo as default } from "@/app/screens/artist/[id]";

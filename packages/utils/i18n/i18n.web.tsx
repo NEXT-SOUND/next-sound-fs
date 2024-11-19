@@ -5,11 +5,12 @@ import i18nConfig from "../../../apps/web/next-i18next.config";
 
 const ns = ["common"];
 
-const resources = ns.reduce((acc, n) => {
+const resources = ns.reduce((acc: { [key: string]: any }, n) => {
   i18nConfig.i18n.locales.forEach((lng) => {
+    // @ts-ignore
     acc[lng] = {
       ...acc[lng],
-      [n]: require(`../../locales/${lng}/${n}.json`),
+      [n]: require(`../../../apps/web/public/locales/${lng}/${n}.json`),
     };
   });
   return acc;
