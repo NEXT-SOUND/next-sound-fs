@@ -8,10 +8,13 @@ import Head from "next/head";
 function Home() {
   const { t, ready, i18n } = useTranslation("common");
 
+  const title = t("title") || "Title Test";
+  const description = t("description") || "Description Test";
+
   return (
     <>
       <Head>
-        <title>{t("title")}</title>
+        <title>{title}</title>
         <meta
           property="og:image"
           content="https://i.scdn.co/image/ab6761610000e5eb727a1f1f508238a20ac9fdbf"
@@ -19,6 +22,8 @@ function Home() {
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:type" content="website" />
+        <meta property="og:title" content={`${title} | Instage`} />
+        <meta property="og:description" content={description} />
       </Head>
       <ArtistInfo />
     </>

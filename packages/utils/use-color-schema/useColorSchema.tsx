@@ -8,7 +8,7 @@ export function useColorScheme() {
   const { colorScheme, setColorScheme, toggleColorScheme } =
     useNativewindColorScheme();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (IS_WEB) setColorScheme(colorScheme ?? DEFAULT_COLOR_SCHEME);
   }, [colorScheme]);
 
