@@ -1,8 +1,8 @@
-import { useColorScheme } from "./use-color-schema/useColorSchema";
+import { useColorScheme } from "./theme/useColorSchema";
 import ColorUtil from "./colorUtils";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSharedValue, withTiming } from "react-native-reanimated";
-import { NAV_THEME } from "utils/use-color-schema/constants";
+import { NAV_THEME } from "utils/theme/constants";
 import { getImageColors } from "./fast-image-color";
 
 export interface Colors {

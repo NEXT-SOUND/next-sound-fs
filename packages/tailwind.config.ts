@@ -16,13 +16,21 @@ export default {
       },
     },
     extend: {
+      fontWeight: {
+        readexExtraLight: "200",
+        readexLight: "300",
+        readex: "400",
+        readexMedium: "500",
+        readexSemiBold: "600",
+        readexBold: "700",
+      },
       fontFamily: {
-        readexExtraLight: ["ReadexPro_200ExtraLight"],
-        readexLight: ["ReadexPro_300Light"],
-        readex: ["ReadexPro_400Regular"],
-        readexMedium: ["ReadexPro_500Medium"],
-        readexSemiBold: ["ReadexPro_600SemiBold"],
-        readexBold: ["ReadexPro_700Bold"],
+        readexExtraLight: ["ReadexPro_200ExtraLight", "var(--font-readex-pro)"],
+        readexLight: ["ReadexPro_300Light", "var(--font-readex-pro)"],
+        readex: ["ReadexPro_400Regular", "var(--font-readex-pro)"],
+        readexMedium: ["ReadexPro_500Medium", "var(--font-readex-pro)"],
+        readexSemiBold: ["ReadexPro_600SemiBold", "var(--font-readex-pro)"],
+        readexBold: ["ReadexPro_700Bold", "var(--font-readex-pro)"],
       },
       fontSize: {
         "3xs": ["8px", "12px"],

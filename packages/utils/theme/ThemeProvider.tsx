@@ -7,7 +7,7 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Platform } from "react-native";
 import { NAV_THEME } from "./constants";
-import { useColorScheme } from "../use-color-schema";
+import { useColorScheme } from ".";
 import { setAndroidNavigationBar } from "utils/android-navigation-bar";
 
 const LIGHT_THEME: Theme = {

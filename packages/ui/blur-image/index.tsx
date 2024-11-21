@@ -2,7 +2,7 @@ import { Image, ImageContentFit } from "expo-image";
 import { BlurImageProps } from "./types";
 import { View } from "react-native";
 import Gradient from "ui/gradient";
-import { useColorScheme } from "utils/use-color-schema";
+import { useColorScheme } from "@/utils/theme";
 
 export function BlurImage({
   src,

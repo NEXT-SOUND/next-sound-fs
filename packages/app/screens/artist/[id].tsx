@@ -7,7 +7,7 @@ import { SolitoImage } from "solito/image";
 import { BlurImage } from "ui/blur-image";
 import useAverageColor from "utils/useAverageColor";
 import { Text } from "@/ui/text";
-import { useColorScheme } from "utils/use-color-schema";
+import { useColorScheme } from "@/utils/theme";
 import { Button } from "ui/button";
 import { cn } from "@/ui/utils/cn";
 import { MotiView } from "moti";
@@ -15,7 +15,7 @@ import { useTranslation } from "@/utils/i18n";
 
 export function ArtistInfo() {
   return (
-    <View className="flex-1 bg-background web:bg-black">
+    <View className="flex-1 bg-background">
       <BackgroundImage src="https://i.scdn.co/image/ab6761610000e5eb727a1f1f508238a20ac9fdbf" />
     </View>
   );
@@ -25,8 +25,10 @@ export const BackgroundImage = ({ src }: { src: string }) => {
   const { width, isDesktop, isMobile, isServer } = useWindowSize();
   const { top: safeAreaTop } = useSafeArea();
 
-  const top = IS_WEB ? 32 : safeAreaTop; //todo
-  const imageSize = Math.min(width * 0.3, isMobile ? width * 0.3 : 300); //232
+  const { colorScheme, toggleColorScheme } = useColorScheme();
+
+  const top = IS_WEB ? 32 : safeAreaTop;
+  const imageSize = Math.min(width * 0.3, isMobile ? width * 0.3 : 300);
   const backgroundImageHeight = imageSize * 2.75 + top;
   const backgroundImageContainerHeight = isMobile
     ? imageSize * 2.25 + top
@@ -69,20 +71,22 @@ export const BackgroundImage = ({ src }: { src: string }) => {
       >
         <View className="flex flex-col">
           <View>
-            <Text className="text-white text-5xl font-bold md:text-8xl sm:text-7xl">
+            <Text className="text-white text-5xl md:text-8xl sm:text-7xl font-readexBold">
               Rose
             </Text>
-            <Text className="text-white text-2xl font-bold">{t("artist")}</Text>
+            <Text className="text-white-80 text-2xl font-semibold">@rose</Text>
           </View>
         </View>
         <MotiView
           from={{
             opacity: 0,
+            transform: [{ translateY: -8 }],
           }}
           animate={{
             opacity: 1,
+            transform: [{ translateY: 0 }],
           }}
-          transition={{ duration: 300 }}
+          transition={{ duration: 500 }}
           style={{
             width: imageSize,
             height: imageSize,
@@ -93,13 +97,13 @@ export const BackgroundImage = ({ src }: { src: string }) => {
         >
           <SolitoImage
             src={src}
-            width={imageSize}
-            height={imageSize}
+            width={300}
+            height={300}
             style={{
               borderRadius: 9999,
               zIndex: 100,
               borderColor: "white",
-              borderWidth: isDesktop ? 8 : 3,
+              borderWidth: isServer ? 0 : isDesktop ? 8 : 3,
             }}
             contentFit="cover"
             alt="cover image"

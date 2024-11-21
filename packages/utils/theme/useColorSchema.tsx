@@ -8,10 +8,6 @@ export function useColorScheme() {
   const { colorScheme, setColorScheme, toggleColorScheme } =
     useNativewindColorScheme();
 
-  useEffect(() => {
-    if (IS_WEB) setColorScheme(colorScheme ?? DEFAULT_COLOR_SCHEME);
-  }, [colorScheme]);
-
   return {
     colorScheme: colorScheme ?? DEFAULT_COLOR_SCHEME,
     isDarkColorScheme: colorScheme === "dark",
