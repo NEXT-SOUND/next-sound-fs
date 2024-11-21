@@ -10,7 +10,7 @@ export function useColorScheme() {
   };
 
   const setColorScheme = (scheme: ColorScheme) => {
-    setTheme(scheme);
+    setTheme(scheme === "system" ? (systemTheme ?? "dark") : scheme);
   };
 
   return {
