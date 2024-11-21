@@ -1,30 +1,21 @@
-import { useColorScheme as useNativewindColorScheme } from "nativewind";
-import { useEffect, useLayoutEffect } from "react";
-import { IS_WEB } from "utils/screen";
+import { useTheme } from "next-themes";
 
-const DEFAULT_COLOR_SCHEME = "dark";
+type ColorScheme = "light" | "dark" | "system";
 
 export function useColorScheme() {
-  const {
-    colorScheme,
-    setColorScheme: nativeSetColorScheme,
-    toggleColorScheme: nativeToggleColorScheme,
-  } = useNativewindColorScheme();
+  const { systemTheme, theme, setTheme } = useTheme();
 
   const toggleColorScheme = () => {
-    console.log(colorScheme);
-    localStorage.setItem("theme", colorScheme === "dark" ? "light" : "dark");
-    nativeToggleColorScheme();
+    setTheme(theme === "dark" ? "light" : "dark");
   };
 
-  const setColorScheme = (scheme: "light" | "dark") => {
-    localStorage.setItem("theme", scheme);
-    nativeSetColorScheme(scheme);
+  const setColorScheme = (scheme: ColorScheme) => {
+    setTheme(scheme);
   };
 
   return {
-    colorScheme: colorScheme ?? DEFAULT_COLOR_SCHEME,
-    isDarkColorScheme: colorScheme === "dark",
+    colorScheme: theme === "system" ? systemTheme : theme,
+    isDarkColorScheme: theme === "dark",
     setColorScheme,
     toggleColorScheme,
   };

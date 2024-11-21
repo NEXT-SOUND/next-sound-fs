@@ -7,7 +7,7 @@ import { SolitoImage } from "solito/image";
 import { BlurImage } from "ui/blur-image";
 import useAverageColor from "utils/useAverageColor";
 import { Text } from "@/ui/text";
-import { useColorScheme } from "@/utils/theme";
+import { ThemeToggle, useColorScheme } from "@/utils/theme";
 import { Button } from "ui/button";
 import { cn } from "@/ui/utils/cn";
 import { MotiView } from "moti";
@@ -39,8 +39,15 @@ export const BackgroundImage = ({ src }: { src: string }) => {
 
   const { t } = useTranslation("common");
 
+  const { setColorScheme } = useColorScheme();
+
   return (
     <View className="relative w-full h-full">
+      <div className="flex flex-row gap-2">
+        <Button onPress={() => setColorScheme("system")}>System</Button>
+        <Button onPress={() => setColorScheme("light")}>Light</Button>
+        <Button onPress={() => setColorScheme("dark")}>Dark</Button>
+      </div>
       <View className="overflow-x-hidden flex-1">
         <BlurImage
           alt="background image"
@@ -74,7 +81,7 @@ export const BackgroundImage = ({ src }: { src: string }) => {
             <Text className="text-white text-5xl md:text-8xl sm:text-7xl font-readexBold">
               Rose
             </Text>
-            <Text className="text-white-80 text-2xl font-semibold">@rose</Text>
+            <Text className="text-white-80 text-2xl font-readex">@rose</Text>
           </View>
         </View>
         <MotiView
