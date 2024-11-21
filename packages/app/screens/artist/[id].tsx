@@ -115,7 +115,7 @@ export const BackgroundImage = ({ src }: { src: string }) => {
             contentFit="cover"
             alt="cover image"
             priority
-            transition={300}
+            transition={500}
           />
         </MotiView>
       </View>

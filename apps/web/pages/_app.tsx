@@ -32,7 +32,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <main
           className={cn(
             readexPro.variable,
-            "transition duration-300 flex-1 bg-background",
+            "transition duration-500 flex-1 bg-background",
           )}
         >
           <Component {...pageProps} />
