@@ -9,7 +9,6 @@ import ThemeProvider from "@/utils/theme/ThemeProvider.web";
 import { cn } from "@/ui/utils/cn";
 import { Button } from "@/ui/button";
 import { useColorScheme } from "@/utils/theme/useColorSchema";
-import { ThemeToggle } from "@/utils/theme";
 
 const readexPro = Readex_Pro({
   subsets: ["latin"],
