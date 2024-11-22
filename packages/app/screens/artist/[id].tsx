@@ -7,7 +7,7 @@ import { SolitoImage } from "solito/image";
 import { BlurImage } from "ui/blur-image";
 import useAverageColor from "utils/useAverageColor";
 import { Text } from "@/ui/text";
-import { ThemeToggle, useColorScheme } from "@/utils/theme";
+import { useColorScheme } from "@/utils/theme";
 import { Button } from "ui/button";
 import { cn } from "@/ui/utils/cn";
 import { MotiView } from "moti";
@@ -15,7 +15,7 @@ import { useTranslation } from "@/utils/i18n";
 
 export function ArtistInfo() {
   return (
-    <View className="flex-1 bg-background">
+    <View className="flex-1 ">
       <BackgroundImage src="https://i.scdn.co/image/ab6761610000e5eb727a1f1f508238a20ac9fdbf" />
     </View>
   );
