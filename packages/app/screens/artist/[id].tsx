@@ -15,7 +15,7 @@ import { useTranslation } from "@/utils/i18n";
 
 export function ArtistInfo() {
   return (
-    <View className="flex-1 ">
+    <View className="flex-1 bg-background">
       <BackgroundImage src="https://i.scdn.co/image/ab6761610000e5eb727a1f1f508238a20ac9fdbf" />
     </View>
   );
@@ -43,11 +43,6 @@ export const BackgroundImage = ({ src }: { src: string }) => {
 
   return (
     <View className="relative w-full h-full">
-      <div className="flex flex-row gap-2">
-        <Button onPress={() => setColorScheme("system")}>System</Button>
-        <Button onPress={() => setColorScheme("light")}>Light</Button>
-        <Button onPress={() => setColorScheme("dark")}>Dark</Button>
-      </div>
       <View className="overflow-x-hidden flex-1">
         <BlurImage
           alt="background image"
@@ -104,8 +99,8 @@ export const BackgroundImage = ({ src }: { src: string }) => {
         >
           <SolitoImage
             src={src}
-            width={300}
-            height={300}
+            width={imageSize}
+            height={imageSize}
             style={{
               borderRadius: 9999,
               zIndex: 100,
