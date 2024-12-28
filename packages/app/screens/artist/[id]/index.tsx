@@ -13,13 +13,7 @@ import { MotiView } from "moti";
 import { useTranslation } from "@/utils/i18n";
 import { ProfileLayout } from "@/components/profile-layout";
 import { SectionTitle } from "@/ui/typography";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/ui/carousel";
+import { Carousel } from "@/ui/carousel";
 import { SolitoImage } from "solito/image";
 import { PopularTracks } from "./popular-tracks";
 export function ArtistInfo() {
