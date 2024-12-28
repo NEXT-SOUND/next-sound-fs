@@ -49,6 +49,7 @@ export const getImageColors = async (
         };
       }
       if (colors.platform === "android") {
+        // @ts-ignore
         const { dominant, darkVibrant, lightVibrant, average } = colors;
         return {
           background: dominant,
