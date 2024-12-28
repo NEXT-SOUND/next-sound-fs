@@ -8,6 +8,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 
 import { cn } from "@/ui/utils/cn";
 import { Button } from "@/ui/button";
+import { CarouselProps } from "./types";
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
@@ -252,16 +253,6 @@ const CarouselNext = React.forwardRef<
 });
 CarouselNext.displayName = "CarouselNext";
 
-interface CarouselProps<T> {
-  data: T[];
-  renderItem: ({
-    item,
-    index,
-  }: {
-    item: any;
-    index: number;
-  }) => React.ReactNode;
-}
 
 const Carousel = <T,>({ data, renderItem }: CarouselProps<T>) => {
   return (

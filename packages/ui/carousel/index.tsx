@@ -1,29 +1,8 @@
 import { View } from "moti";
+import { CarouselProps } from "./types";
 
-const Carousel = () => {
+const Carousel = <T,>({ data, renderItem }: CarouselProps<T>) => {
   return <View></View>;
 };
 
-const CarouselContent = () => {
-  return <View></View>;
-};
-
-const CarouselItem = () => {
-  return <View></View>;
-};
-
-const CarouselPrevious = () => {
-  return <View></View>;
-};
-
-const CarouselNext = () => {
-  return <View></View>;
-};
-
-export {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
-};
+export { Carousel };
