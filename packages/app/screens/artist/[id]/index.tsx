@@ -3,7 +3,6 @@ import Gradient from "components/gradient";
 import { View } from "ui/view";
 import { IS_WEB, useWindowSize } from "utils/screen";
 import { useSafeArea } from "utils/safe-area";
-import { SolitoImage } from "solito/image";
 import { BlurImage } from "components/blur-image";
 import useAverageColor from "utils/useAverageColor";
 import { Text } from "@/ui/text";
@@ -14,7 +13,15 @@ import { MotiView } from "moti";
 import { useTranslation } from "@/utils/i18n";
 import { ProfileLayout } from "@/components/profile-layout";
 import { SectionTitle } from "@/ui/typography";
-
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/ui/carousel";
+import { SolitoImage } from "solito/image";
+import { PopularTracks } from "./popular-tracks";
 export function ArtistInfo() {
   return (
     <ProfileLayout
@@ -35,8 +42,7 @@ export function ArtistInfo() {
     >
       {/* <SectionTitle>포스트들</SectionTitle> */}
       {/* <SectionTitle>최신 음악</SectionTitle> */}
-      <SectionTitle>가장 인기있는 음악들</SectionTitle>
-      <View></View>
+      <PopularTracks />
       {/* <SectionTitle>가장 인기있는 음악들</SectionTitle>
       <SectionTitle>오직 블링크를 위한</SectionTitle> */}
     </ProfileLayout>

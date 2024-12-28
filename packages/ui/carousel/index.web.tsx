@@ -14,7 +14,7 @@ type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
 type CarouselOptions = UseCarouselParameters[0];
 type CarouselPlugin = UseCarouselParameters[1];
 
-type CarouselProps = {
+type CarouselRootProps = {
   opts?: CarouselOptions;
   plugins?: CarouselPlugin;
   orientation?: "horizontal" | "vertical";
@@ -28,7 +28,7 @@ type CarouselContextProps = {
   scrollNext: () => void;
   canScrollPrev: boolean;
   canScrollNext: boolean;
-} & CarouselProps;
+} & CarouselRootProps;
 
 const CarouselContext = React.createContext<CarouselContextProps | null>(null);
 
@@ -42,9 +42,9 @@ function useCarousel() {
   return context;
 }
 
-const Carousel = React.forwardRef<
+const CarouselRoot = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & CarouselProps
+  React.HTMLAttributes<HTMLDivElement> & CarouselRootProps
 >(
   (
     {
@@ -148,7 +148,7 @@ const Carousel = React.forwardRef<
     );
   },
 );
-Carousel.displayName = "Carousel";
+CarouselRoot.displayName = "Carousel";
 
 const CarouselContent = React.forwardRef<
   HTMLDivElement,
@@ -252,11 +252,34 @@ const CarouselNext = React.forwardRef<
 });
 CarouselNext.displayName = "CarouselNext";
 
-export {
-  type CarouselApi,
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
+interface CarouselProps<T> {
+  data: T[];
+  renderItem: ({
+    item,
+    index,
+  }: {
+    item: any;
+    index: number;
+  }) => React.ReactNode;
+}
+
+const Carousel = <T,>({ data, renderItem }: CarouselProps<T>) => {
+  return (
+    <CarouselRoot className="mx-10">
+      <CarouselContent className="-ml-4">
+        {data.map((item, index) => (
+          <CarouselItem
+            key={index}
+            className="pl-4 basis-1/3 sm:basis-1/4 md:basis-1/5 lg:basis-[20%] xl:basis-[13%]"
+          >
+            {renderItem({ item, index })}
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      <CarouselPrevious />
+      <CarouselNext />
+    </CarouselRoot>
+  );
 };
+
+export { Carousel };

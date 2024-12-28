@@ -216,7 +216,7 @@ const SectionTitle = React.forwardRef<TextRef, SlottableTextProps>(
     return (
       <Component
         className={cn(
-          "text-lg md:text-2xl font-readexBold text-white web:select-text",
+          "text-lg md:text-2xl font-readexBold text-white web:select-text mb-4",
           className,
         )}
         ref={ref}

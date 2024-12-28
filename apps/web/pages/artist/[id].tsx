@@ -6,12 +6,8 @@ import Head from "next/head";
 
 //@ts-ignore: next-line
 function Home() {
-  const { t, ready, i18n } = useTranslation("common", {
-    lng: "en",
-  });
-  const { t: ogT } = useTranslation("common", {
-    lng: "kr",
-  });
+  const { t } = useTranslation("common");
+  const { t: ogT } = useTranslation("common");
 
   return (
     <>
@@ -34,7 +30,7 @@ function Home() {
 export async function getStaticProps({ locale }: { locale: string }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common"])),
+      ...(await serverSideTranslations(locale, ["common", "artist"])),
     },
   };
 }

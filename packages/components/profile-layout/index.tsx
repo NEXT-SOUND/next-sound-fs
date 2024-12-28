@@ -7,7 +7,7 @@ import useAverageColor from "@/utils/useAverageColor";
 import { MotiView } from "moti";
 import { SolitoImage } from "solito/image";
 import { BlurImage } from "../blur-image";
-import { Text } from "@/ui/text";
+import { ScrollView } from "react-native";
 
 interface Props {
   children: React.ReactNode;
@@ -95,7 +95,7 @@ export const ProfileLayout = ({ imageSrc, children, header }: Props) => {
           />
         </MotiView>
       </View>
-      <View
+      <ScrollView
         className={cn(
           "z-50 flex flex-col container px-[16px] pt-4 web:pt-2 absolute",
           "web:left-1/2 web:-translate-x-1/2",
@@ -103,7 +103,7 @@ export const ProfileLayout = ({ imageSrc, children, header }: Props) => {
         )}
       >
         {children}
-      </View>
+      </ScrollView>
     </>
   );
 };
