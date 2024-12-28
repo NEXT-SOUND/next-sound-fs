@@ -22,12 +22,12 @@ class Document extends NextDocument {
           <meta charSet="UTF-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         </Head>
-        <body>
+        <body className="bg-background">
           <Main />
           <NextScript />
         </body>
       </Html>
-    )
+    );
   }
 }
 

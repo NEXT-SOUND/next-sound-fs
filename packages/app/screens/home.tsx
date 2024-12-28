@@ -1,5 +1,5 @@
 import { Link, TextLink } from "solito/link";
-import Gradient from "ui/gradient";
+import Gradient from "components/gradient";
 import { Text } from "ui/text";
 import { View } from "ui/view";
 import { SCREEN_WIDTH, useWindowSize } from "utils/screen";

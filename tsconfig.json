@@ -4,6 +4,7 @@
       "noUncheckedIndexedAccess": true,
       "baseUrl": "./packages",
       "paths": {
+        "@/components/*": ["./components/*"],
         "@/ui/*": ["./ui/*"],
         "@/app/*": ["./app/*"],
         "@/utils/*": ["./utils/*"],

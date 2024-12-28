@@ -26,6 +26,7 @@
         <category android:name="android.intent.category.BROWSABLE"/>
         <data android:scheme="universal-app-starter"/>
         <data android:scheme="com.chartmetric.nextsound"/>
+        <data android:scheme="next-sound"/>
       </intent-filter>
     </activity>
   </application>

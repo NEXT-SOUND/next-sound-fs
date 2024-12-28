@@ -8,5 +8,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     tsconfigPaths: true,
     reactCompiler: true,
   },
+  newArchEnabled: true,
   plugins: [["expo-localization"]],
 });

@@ -27,7 +27,7 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>universal-app-starter</string>
+          <string>next-sound</string>
           <string>com.chartmetric.next-sound</string>
         </array>
       </dict>
