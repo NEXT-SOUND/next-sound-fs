@@ -111,7 +111,7 @@ const PopularTracks = () => {
               height={itemSize}
               alt={item.name}
             />
-            <Text className="text-white text-md font-readex mt-2 md:text-lg">
+            <Text className="text-white text-md font-readex mt-2 md:text-lg text-center">
               {item.name}
             </Text>
           </View>

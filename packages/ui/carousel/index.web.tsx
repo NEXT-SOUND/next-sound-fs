@@ -256,7 +256,7 @@ CarouselNext.displayName = "CarouselNext";
 
 const Carousel = <T,>({ data, renderItem }: CarouselProps<T>) => {
   return (
-    <CarouselRoot className="mx-10">
+    <CarouselRoot className="mx-10" opts={{ slidesToScroll: "auto" }}>
       <CarouselContent className="-ml-4">
         {data.map((item, index) => (
           <CarouselItem
