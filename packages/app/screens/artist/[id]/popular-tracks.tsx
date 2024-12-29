@@ -1,6 +1,7 @@
+import { Button } from "@/ui/button";
 import { Carousel } from "@/ui/carousel";
 import { Text } from "@/ui/text";
-import { SectionTitle } from "@/ui/typography";
+import { H1, SectionTitle } from "@/ui/typography";
 import { View } from "@/ui/view";
 import { useTranslation } from "@/utils/i18n";
 import { useWindowSize } from "@/utils/screen";
@@ -86,6 +87,7 @@ const PopularTracks = () => {
     useWindowSize();
 
   const [t] = useTranslation("artist");
+  const [commonT] = useTranslation("common");
 
   const itemSize = isLargeScreen
     ? width / 10
@@ -97,7 +99,12 @@ const PopularTracks = () => {
 
   return (
     <>
-      <SectionTitle>{t("mostPopularTracks")}</SectionTitle>
+      <View className="flex flex-row justify-between mb-4">
+        <SectionTitle>{t("mostPopularTracks")}</SectionTitle>
+        <Button variant="link">
+          <Text>{commonT("more")}</Text>
+        </Button>
+      </View>
       <Carousel
         data={[...DummyData, ...DummyData, ...DummyData]}
         renderItem={({ item }) => (
@@ -110,6 +117,8 @@ const PopularTracks = () => {
               width={itemSize}
               height={itemSize}
               alt={item.name}
+              // @ts-ignore
+              className="rounded-lg"
             />
             <Text className="text-white text-md font-readex mt-2 md:text-lg text-center">
               {item.name}

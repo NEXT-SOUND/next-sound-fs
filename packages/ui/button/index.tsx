@@ -1,29 +1,77 @@
-import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
-import { cva, type VariantProps } from "class-variance-authority";
+import { Text, TextClassContext } from "@/ui/text";
 import { cn } from "@/ui/utils/cn";
-
+import { type VariantProps, cva } from "class-variance-authority";
+import * as React from "react";
+import { ActivityIndicator, Pressable } from "react-native";
+import * as Slot from "@/ui/primitives/slot";
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "group flex flex-row gap-2 items-center justify-center web:ring-offset-background web:transition-colors web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2",
   {
     variants: {
       variant: {
-        default:
-          "bg-primary text-primary-foreground shadow hover:bg-primary/90",
-        destructive:
-          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+        default: "bg-primary web:hover:opacity-90 active:opacity-90",
+        destructive: "bg-destructive web:hover:opacity-90 active:opacity-90",
         outline:
-          "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
-        secondary:
-          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+          "border border-border web:hover:bg-accent web:hover:text-accent-foreground active:bg-accent",
+        outlinePrimary:
+          "border border-primary bg-primary-backfill web:hover:bg-accent web:hover:text-accent-foreground active:bg-accent",
+        secondary: "bg-secondary web:hover:opacity-80 active:opacity-80",
+        ghost:
+          "web:hover:bg-accent web:hover:text-accent-foreground active:bg-accent",
+        link: "web:underline-offset-4 web:hover:underline web:focus:underline ",
+        translucent: "bg-translucent active:opacity-80 border-white-30 border",
+        white: "bg-white-60 active:opacity-80 ",
       },
       size: {
-        default: "h-9 px-4 py-2",
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-10 rounded-md px-8",
-        icon: "h-9 w-9",
+        default: "h-10 px-4 py-2 native:h-10 native:px-5",
+        xs: "h-6 px-2",
+        sm: "h-8 px-3",
+        lg: "h-12 px-8 native:h-12 py-2 native:px-10",
+        xl: "h-14 px-8 native:h-16 py-2 native:px-10",
+        fit: "h-auto px-2 py-2 rounded-md",
+        icon: "h-8 w-8",
+      },
+      radius: {
+        sm: "rounded-sm",
+        lg: "rounded-lg",
+        xl: "rounded-xl",
+        md: "rounded-md",
+        none: "rounded-none",
+        full: "rounded-full",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+      radius: "xl",
+    },
+  },
+);
+
+const buttonTextVariants = cva(
+  "web:whitespace-nowrap text-base font-medium text-foreground web:transition-colors",
+  {
+    variants: {
+      variant: {
+        default: "text-primary-foreground",
+        destructive: "text-destructive-foreground",
+        outline: "text-foreground",
+        outlinePrimary: "group-active:text-primary text-primary",
+        secondary:
+          "text-secondary-foreground group-active:text-secondary-foreground",
+        ghost: "group-active:text-accent-foreground",
+        link: "text-foreground group-active:underline",
+        translucent: "text-white",
+        white: "text-white-foreground",
+      },
+      size: {
+        default: "text-base",
+        xs: "text-xs",
+        sm: "text-sm",
+        lg: "text-lg",
+        xl: "text-xl",
+        fit: "text-base",
+        icon: "text-base",
       },
     },
     defaultVariants: {
@@ -33,24 +81,61 @@ const buttonVariants = cva(
   },
 );
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean;
-}
+type ButtonProps = React.ComponentPropsWithoutRef<typeof Pressable> &
+  VariantProps<typeof buttonVariants> & {
+    loading?: boolean;
+    asChild?: boolean;
+  };
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button";
+const Button = React.forwardRef<
+  React.ElementRef<typeof Pressable>,
+  ButtonProps
+>(
+  (
+    { className, variant, size, radius, children, loading, asChild, ...props },
+    ref,
+  ) => {
+    const Component = asChild ? Slot.Pressable : Pressable;
     return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref}
-        {...props}
-      />
+      <TextClassContext.Provider
+        value={cn(
+          props.disabled && "web:pointer-events-none",
+          buttonTextVariants({ variant, size }),
+        )}
+      >
+        <Component
+          className={cn(
+            buttonVariants({ variant, size, radius }),
+            props.disabled && "opacity-35 web:pointer-events-none ",
+            className,
+          )}
+          ref={ref}
+          role="button"
+          {...props}
+        >
+          {loading ? (
+            <ActivityIndicator
+              className={cn(buttonTextVariants({ variant }))}
+            />
+          ) : Array.isArray(children) ? (
+            children.map((component, index) =>
+              typeof component === "string" ? (
+                <Text key={index}>{component}</Text>
+              ) : (
+                component
+              ),
+            )
+          ) : typeof children === "string" ? (
+            <Text key={children}>{children}</Text>
+          ) : (
+            children
+          )}
+        </Component>
+      </TextClassContext.Provider>
     );
   },
 );
 Button.displayName = "Button";
 
-export { Button, buttonVariants };
+export { Button, buttonTextVariants, buttonVariants };
+export type { ButtonProps };

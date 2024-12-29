@@ -1,4 +1,4 @@
-import * as Slot from "@/ui/primitives/slot/slot.native";
+import * as Slot from "@/ui/primitives/slot";
 import type { SlottableTextProps, TextRef } from "@/ui/primitives/types";
 import { cn } from "@/ui/utils/cn";
 import * as React from "react";
@@ -216,7 +216,7 @@ const SectionTitle = React.forwardRef<TextRef, SlottableTextProps>(
     return (
       <Component
         className={cn(
-          "text-lg md:text-2xl font-readexBold text-white web:select-text mb-4",
+          "text-lg md:text-2xl font-readexBold text-white web:select-text",
           className,
         )}
         ref={ref}

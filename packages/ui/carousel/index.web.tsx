@@ -4,7 +4,12 @@ import * as React from "react";
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+} from "lucide-react";
 
 import { cn } from "@/ui/utils/cn";
 import { Button } from "@/ui/button";
@@ -138,7 +143,7 @@ const CarouselRoot = React.forwardRef<
         <div
           ref={ref}
           onKeyDownCapture={handleKeyDown}
-          className={cn("relative", className)}
+          className={cn("relative group", className)}
           role="region"
           aria-roledescription="carousel"
           {...props}
@@ -155,10 +160,11 @@ const CarouselContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
-  const { carouselRef, orientation } = useCarousel();
+  const { carouselRef, orientation, canScrollPrev, canScrollNext } =
+    useCarousel();
 
   return (
-    <div ref={carouselRef} className="overflow-hidden">
+    <div ref={carouselRef} className="overflow-hidden relative">
       <div
         ref={ref}
         className={cn(
@@ -167,6 +173,20 @@ const CarouselContent = React.forwardRef<
           className,
         )}
         {...props}
+      />
+      <div
+        className={cn(
+          "absolute top-0 bottom-0 left-0 w-8 bg-gradient-to-r from-background to-transparent pointer-events-none",
+          orientation === "horizontal" ? "block" : "hidden",
+          !canScrollPrev && "!opacity-0",
+        )}
+      />
+      <div
+        className={cn(
+          "absolute top-0 bottom-0 right-0 w-8 bg-gradient-to-l from-background to-transparent pointer-events-none",
+          orientation === "horizontal" ? "block" : "hidden",
+          !canScrollNext && "!opacity-0",
+        )}
       />
     </div>
   );
@@ -203,21 +223,21 @@ const CarouselPrevious = React.forwardRef<
 
   return (
     <Button
-      ref={ref}
       variant={variant}
-      size={size}
+      size="icon"
       className={cn(
-        "absolute  h-8 w-8 rounded-full",
+        "absolute h-8 w-8 rounded-full bg-background cursor-pointer opacity-0 transition-opacity duration-300 group-hover:opacity-100",
         orientation === "horizontal"
-          ? "-left-12 top-1/2 -translate-y-1/2"
-          : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
+          ? "left-0 top-1/2 -translate-y-1/2"
+          : "top-4 left-1/2 -translate-x-1/2 rotate-90",
+        !canScrollPrev && "!opacity-0",
         className,
       )}
       disabled={!canScrollPrev}
-      onClick={scrollPrev}
+      onPress={scrollPrev}
       {...props}
     >
-      <ArrowLeft className="h-4 w-4" />
+      <ChevronLeftIcon className="h-4 w-4" />
       <span className="sr-only">Previous slide</span>
     </Button>
   );
@@ -232,36 +252,35 @@ const CarouselNext = React.forwardRef<
 
   return (
     <Button
-      ref={ref}
       variant={variant}
-      size={size}
+      size="icon"
       className={cn(
-        "absolute h-8 w-8 rounded-full",
+        "absolute h-8 w-8 rounded-full bg-background cursor-pointer opacity-0 transition-opacity duration-300 group-hover:opacity-100",
         orientation === "horizontal"
-          ? "-right-12 top-1/2 -translate-y-1/2"
-          : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
+          ? "right-4 top-1/2 -translate-y-1/2"
+          : "bottom-4 left-1/2 -translate-x-1/2 rotate-90",
+        !canScrollNext && "!opacity-0",
         className,
       )}
       disabled={!canScrollNext}
-      onClick={scrollNext}
+      onPress={scrollNext}
       {...props}
     >
-      <ArrowRight className="h-4 w-4" />
+      <ChevronRightIcon className="h-4 w-4" />
       <span className="sr-only">Next slide</span>
     </Button>
   );
 });
 CarouselNext.displayName = "CarouselNext";
 
-
 const Carousel = <T,>({ data, renderItem }: CarouselProps<T>) => {
   return (
-    <CarouselRoot className="mx-10" opts={{ slidesToScroll: "auto" }}>
+    <CarouselRoot opts={{ slidesToScroll: "auto" }}>
       <CarouselContent className="-ml-4">
         {data.map((item, index) => (
           <CarouselItem
             key={index}
-            className="pl-4 basis-1/3 sm:basis-1/4 md:basis-1/5 lg:basis-[20%] xl:basis-[13%]"
+            className="pl-4 basis-1/3 sm:basis-1/4 md:basis-1/5 lg:basis-[20%] xl:basis-[11%]"
           >
             {renderItem({ item, index })}
           </CarouselItem>
