@@ -1,3 +1,4 @@
+import { TrackCarouselItem } from "@/components/track-carousel-item.tsx";
 import { Button } from "@/ui/button";
 import { Carousel } from "@/ui/carousel";
 import { Text } from "@/ui/text";
@@ -7,14 +8,6 @@ import { useTranslation } from "@/utils/i18n";
 import { useWindowSize } from "@/utils/screen";
 import { SolitoImage } from "solito/image";
 
-type Track = {
-  id: string;
-  name: string;
-  description: string;
-  artists: { id: string; name: string }[];
-  imageUrl: string;
-};
-
 const DummyData = [
   {
     id: "1",
@@ -23,6 +16,8 @@ const DummyData = [
     artists: [{ id: "1", name: "test" }],
     imageUrl:
       "https://i.scdn.co/image/ab67616d0000b273f8c8297efc6022534f1357e1",
+    audioUrl:
+      "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/95/79/f5/9579f50e-ac47-1e43-acab-d422cbe17a21/mzaf_12002777810095615569.plus.aac.p.m4a",
   },
   {
     id: "2",
@@ -31,6 +26,8 @@ const DummyData = [
     artists: [{ id: "1", name: "test" }],
     imageUrl:
       "https://i.scdn.co/image/ab67616d0000b2731f4e52a9789b9fa4f30d16dc",
+    audioUrl:
+      "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/95/79/f5/9579f50e-ac47-1e43-acab-d422cbe17a21/mzaf_12002777810095615569.plus.aac.p.m4a",
   },
   {
     id: "3",
@@ -39,6 +36,8 @@ const DummyData = [
     artists: [{ id: "1", name: "test" }],
     imageUrl:
       "https://i.scdn.co/image/ab67616d0000b2735074bd0894cb1340b8d8a678",
+    audioUrl:
+      "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/95/79/f5/9579f50e-ac47-1e43-acab-d422cbe17a21/mzaf_12002777810095615569.plus.aac.p.m4a",
   },
   {
     id: "4",
@@ -47,6 +46,8 @@ const DummyData = [
     artists: [{ id: "1", name: "test" }],
     imageUrl:
       "https://i.scdn.co/image/ab67616d0000b273ff70b164939b70b696ddb8ae",
+    audioUrl:
+      "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/95/79/f5/9579f50e-ac47-1e43-acab-d422cbe17a21/mzaf_12002777810095615569.plus.aac.p.m4a",
   },
   {
     id: "5",
@@ -55,6 +56,8 @@ const DummyData = [
     artists: [{ id: "1", name: "test" }],
     imageUrl:
       "https://i.scdn.co/image/ab67616d0000b273ff70b164939b70b696ddb8ae",
+    audioUrl:
+      "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/95/79/f5/9579f50e-ac47-1e43-acab-d422cbe17a21/mzaf_12002777810095615569.plus.aac.p.m4a",
   },
   {
     id: "6",
@@ -63,6 +66,8 @@ const DummyData = [
     artists: [{ id: "1", name: "test" }],
     imageUrl:
       "https://i.scdn.co/image/ab6761610000e5eb727a1f1f508238a20ac9fdbf",
+    audioUrl:
+      "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/95/79/f5/9579f50e-ac47-1e43-acab-d422cbe17a21/mzaf_12002777810095615569.plus.aac.p.m4a",
   },
   {
     id: "7",
@@ -71,6 +76,8 @@ const DummyData = [
     artists: [{ id: "1", name: "test" }],
     imageUrl:
       "https://i.scdn.co/image/ab6761610000e5eb727a1f1f508238a20ac9fdbf",
+    audioUrl:
+      "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/95/79/f5/9579f50e-ac47-1e43-acab-d422cbe17a21/mzaf_12002777810095615569.plus.aac.p.m4a",
   },
   {
     id: "8",
@@ -79,6 +86,8 @@ const DummyData = [
     artists: [{ id: "1", name: "test" }],
     imageUrl:
       "https://i.scdn.co/image/ab6761610000e5eb727a1f1f508238a20ac9fdbf",
+    audioUrl:
+      "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/95/79/f5/9579f50e-ac47-1e43-acab-d422cbe17a21/mzaf_12002777810095615569.plus.aac.p.m4a",
   },
 ];
 
@@ -99,33 +108,15 @@ const PopularTracks = () => {
 
   return (
     <>
-      <View className="flex flex-row justify-between mb-4 items-center">
+      <View className="flex flex-row justify-between mb-1 md:mb-3">
         <SectionTitle>{t("mostPopularTracks")}</SectionTitle>
-        <Button variant="link">
-          <Text>{commonT("more")}</Text>
+        <Button variant="link" size="fit">
+          <Text className="text-sm md:text-base">{commonT("more")}</Text>
         </Button>
       </View>
       <Carousel
         data={[...DummyData, ...DummyData, ...DummyData]}
-        renderItem={({ item }) => (
-          <View
-            className="flex flex-col items-center cursor-pointer hover:scale-105 transition-all duration-300"
-            key={item.id}
-          >
-            <SolitoImage
-              src={item.imageUrl}
-              // NOTE: It's meaningless to set width and height here, but it's required for the image to work
-              width={1000}
-              height={1000}
-              alt={item.name}
-              // @ts-ignore
-              className="rounded-lg"
-            />
-            <Text className="text-white text-md font-readex mt-2 md:text-lg text-center">
-              {item.name}
-            </Text>
-          </View>
-        )}
+        renderItem={TrackCarouselItem}
       />
     </>
   );

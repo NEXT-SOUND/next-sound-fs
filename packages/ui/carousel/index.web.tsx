@@ -143,7 +143,7 @@ const CarouselRoot = React.forwardRef<
         <div
           ref={ref}
           onKeyDownCapture={handleKeyDown}
-          className={cn("relative group", className)}
+          className={cn("relative group/carousel", className)}
           role="region"
           aria-roledescription="carousel"
           {...props}
@@ -176,14 +176,14 @@ const CarouselContent = React.forwardRef<
       />
       <div
         className={cn(
-          "absolute top-0 bottom-0 left-0 w-8 bg-gradient-to-r from-background to-transparent pointer-events-none",
+          "absolute top-0 bottom-0 left-0 w-8 bg-gradient-to-r from-[#ffffff75] dark:from-background to-transparent pointer-events-none",
           orientation === "horizontal" ? "block" : "hidden",
           !canScrollPrev && "!opacity-0",
         )}
       />
       <div
         className={cn(
-          "absolute top-0 bottom-0 right-0 w-8 bg-gradient-to-l from-background to-transparent pointer-events-none",
+          "absolute top-0 bottom-0 right-0 w-8 bg-gradient-to-l from-[#ffffff75] dark:from-background to-transparent pointer-events-none",
           orientation === "horizontal" ? "block" : "hidden",
           !canScrollNext && "!opacity-0",
         )}
@@ -226,7 +226,7 @@ const CarouselPrevious = React.forwardRef<
       variant={variant}
       size="icon"
       className={cn(
-        "absolute h-8 w-8 rounded-full bg-background cursor-pointer opacity-0 group-hover:opacity-100",
+        "absolute h-8 w-8 rounded-full bg-background cursor-pointer opacity-0 group-hover/carousel:opacity-100 hidden sm:flex",
         orientation === "horizontal"
           ? "left-0 top-1/2 -translate-y-1/2"
           : "top-0 left-1/2 -translate-x-1/2 rotate-90",
@@ -255,7 +255,7 @@ const CarouselNext = React.forwardRef<
       variant={variant}
       size="icon"
       className={cn(
-        "absolute h-8 w-8 rounded-full bg-background cursor-pointer opacity-0 group-hover:opacity-100",
+        "absolute h-8 w-8 rounded-full bg-background cursor-pointer opacity-0 group-hover/carousel:opacity-100 hidden sm:flex",
         orientation === "horizontal"
           ? "right-0 top-1/2 -translate-y-1/2"
           : "bottom-0 left-1/2 -translate-x-1/2 rotate-90",
@@ -280,7 +280,7 @@ const Carousel = <T,>({ data, renderItem }: CarouselProps<T>) => {
         {data.map((item, index) => (
           <CarouselItem
             key={index}
-            className="pl-4 basis-1/4 sm:basis-1/4 md:basis-1/5 lg:basis-[20%] xl:basis-[11%]"
+            className="pl-4 basis-1/5 sm:basis-1/4 md:basis-1/5 lg:basis-[20%] xl:basis-[11%]"
           >
             {renderItem({ item, index })}
           </CarouselItem>

@@ -5,7 +5,7 @@ import * as React from "react";
 import { ActivityIndicator, Pressable } from "react-native";
 import * as Slot from "@/ui/primitives/slot";
 const buttonVariants = cva(
-  "group flex flex-row gap-2 items-center justify-center web:ring-offset-background web:transition-colors web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2",
+  "group flex flex-row gap-2 items-center justify-center web:ring-offset-background web:transition-all web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2",
   {
     variants: {
       variant: {
@@ -28,7 +28,7 @@ const buttonVariants = cva(
         sm: "h-8 px-3",
         lg: "h-12 px-8 native:h-12 py-2 native:px-10",
         xl: "h-14 px-8 native:h-16 py-2 native:px-10",
-        fit: "h-auto px-2 py-2 rounded-md",
+        fit: "h-auto px-2 py-1 rounded-md",
         icon: "h-8 w-8",
       },
       radius: {
@@ -49,7 +49,7 @@ const buttonVariants = cva(
 );
 
 const buttonTextVariants = cva(
-  "web:whitespace-nowrap text-base font-medium text-foreground web:transition-colors",
+  "web:whitespace-nowrap text-base font-medium text-foreground web:transition-all",
   {
     variants: {
       variant: {
@@ -60,7 +60,7 @@ const buttonTextVariants = cva(
         secondary:
           "text-secondary-foreground group-active:text-secondary-foreground",
         ghost: "group-active:text-accent-foreground",
-        link: "text-foreground group-active:underline",
+        link: "text-black-80 group-active:underline",
         translucent: "text-white",
         white: "text-white-foreground",
       },
