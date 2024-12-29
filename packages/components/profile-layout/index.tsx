@@ -30,8 +30,6 @@ export const ProfileLayout = ({ imageSrc, children, header }: Props) => {
 
   const { colors, isFetched } = useAverageColor(imageSrc);
 
-  const { t } = useTranslation("common");
-
   return (
     <>
       <BlurImage

@@ -2,8 +2,10 @@ import { Text, TextClassContext } from "@/ui/text";
 import { cn } from "@/ui/utils/cn";
 import { type VariantProps, cva } from "class-variance-authority";
 import * as React from "react";
-import { ActivityIndicator, Pressable } from "react-native";
+import { Pressable } from "react-native";
 import * as Slot from "@/ui/primitives/slot";
+import { Loader } from "lucide-react";
+
 const buttonVariants = cva(
   "group flex flex-row gap-2 items-center justify-center web:ring-offset-background web:transition-all web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2",
   {
@@ -13,8 +15,6 @@ const buttonVariants = cva(
         destructive: "bg-destructive web:hover:opacity-90 active:opacity-90",
         outline:
           "border border-border web:hover:bg-accent web:hover:text-accent-foreground active:bg-accent",
-        outlinePrimary:
-          "border border-primary bg-primary-backfill web:hover:bg-accent web:hover:text-accent-foreground active:bg-accent",
         secondary: "bg-secondary web:hover:opacity-80 active:opacity-80",
         ghost:
           "web:hover:bg-accent web:hover:text-accent-foreground active:bg-accent",
@@ -56,7 +56,6 @@ const buttonTextVariants = cva(
         default: "text-primary-foreground",
         destructive: "text-destructive-foreground",
         outline: "text-foreground",
-        outlinePrimary: "group-active:text-primary text-primary",
         secondary:
           "text-secondary-foreground group-active:text-secondary-foreground",
         ghost: "group-active:text-accent-foreground",
@@ -114,8 +113,8 @@ const Button = React.forwardRef<
           {...props}
         >
           {loading ? (
-            <ActivityIndicator
-              className={cn(buttonTextVariants({ variant }))}
+            <Loader
+              className={cn(buttonTextVariants({ variant }), "animate-spin")}
             />
           ) : Array.isArray(children) ? (
             children.map((component, index) =>
