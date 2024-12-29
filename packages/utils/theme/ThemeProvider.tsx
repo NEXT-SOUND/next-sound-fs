@@ -24,13 +24,14 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 
   React.useEffect(() => {
     (async () => {
-      const theme = await AsyncStorage.getItem("theme");
-      if (!theme) {
-        setAndroidNavigationBar(colorScheme);
-        AsyncStorage.setItem("theme", colorScheme);
-        return;
-      }
-      const colorTheme = theme === "dark" ? "dark" : "light";
+      // const theme = await AsyncStorage.getItem("theme");
+      // if (!theme) {
+      //   setAndroidNavigationBar(colorScheme);
+      //   AsyncStorage.setItem("theme", colorScheme);
+      //   return;
+      // }
+      // const colorTheme = theme === "dark" ? "dark" : "light";
+      const colorTheme = "dark";
       setAndroidNavigationBar(colorTheme);
       if (colorTheme !== colorScheme) {
         setColorScheme(colorTheme);

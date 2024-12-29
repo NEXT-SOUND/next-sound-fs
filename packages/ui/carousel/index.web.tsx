@@ -176,7 +176,6 @@ const CarouselContent = React.forwardRef<
       />
       <div
         className={cn(
-          // TODO: from-[#ffffff75] light mode gradient bug
           "absolute top-0 bottom-0 left-0 w-8 bg-gradient-to-r from-background to-transparent pointer-events-none",
           orientation === "horizontal" ? "block" : "hidden",
           !canScrollPrev && "!opacity-0",
