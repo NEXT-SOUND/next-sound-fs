@@ -99,7 +99,7 @@ const PopularTracks = () => {
 
   return (
     <>
-      <View className="flex flex-row justify-between mb-4">
+      <View className="flex flex-row justify-between mb-4 items-center">
         <SectionTitle>{t("mostPopularTracks")}</SectionTitle>
         <Button variant="link">
           <Text>{commonT("more")}</Text>

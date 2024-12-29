@@ -226,10 +226,10 @@ const CarouselPrevious = React.forwardRef<
       variant={variant}
       size="icon"
       className={cn(
-        "absolute h-8 w-8 rounded-full bg-background cursor-pointer opacity-0 transition-opacity duration-300 group-hover:opacity-100",
+        "absolute h-8 w-8 rounded-full bg-background cursor-pointer opacity-0 group-hover:opacity-100",
         orientation === "horizontal"
           ? "left-0 top-1/2 -translate-y-1/2"
-          : "top-4 left-1/2 -translate-x-1/2 rotate-90",
+          : "top-0 left-1/2 -translate-x-1/2 rotate-90",
         !canScrollPrev && "!opacity-0",
         className,
       )}
@@ -255,10 +255,10 @@ const CarouselNext = React.forwardRef<
       variant={variant}
       size="icon"
       className={cn(
-        "absolute h-8 w-8 rounded-full bg-background cursor-pointer opacity-0 transition-opacity duration-300 group-hover:opacity-100",
+        "absolute h-8 w-8 rounded-full bg-background cursor-pointer opacity-0 group-hover:opacity-100",
         orientation === "horizontal"
-          ? "right-4 top-1/2 -translate-y-1/2"
-          : "bottom-4 left-1/2 -translate-x-1/2 rotate-90",
+          ? "right-0 top-1/2 -translate-y-1/2"
+          : "bottom-0 left-1/2 -translate-x-1/2 rotate-90",
         !canScrollNext && "!opacity-0",
         className,
       )}

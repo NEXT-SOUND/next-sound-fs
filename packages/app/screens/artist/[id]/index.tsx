@@ -6,15 +6,9 @@ import { useSafeArea } from "utils/safe-area";
 import { BlurImage } from "components/blur-image";
 import useAverageColor from "utils/useAverageColor";
 import { Text } from "@/ui/text";
-import { useColorScheme } from "@/utils/theme";
-import { Button } from "ui/button";
-import { cn } from "@/ui/utils/cn";
-import { MotiView } from "moti";
-import { useTranslation } from "@/utils/i18n";
+
 import { ProfileLayout } from "@/components/profile-layout";
-import { SectionTitle } from "@/ui/typography";
-import { Carousel } from "@/ui/carousel";
-import { SolitoImage } from "solito/image";
+
 import { PopularTracks } from "./popular-tracks";
 export function ArtistInfo() {
   return (

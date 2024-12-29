@@ -55,12 +55,7 @@ const Text = React.forwardRef<TextRef, TextProps>(
         ref={ref}
         // IMPORTANT
         allowFontScaling={false}
-        style={[
-          props.style,
-          {
-            includeFontPadding: false,
-          },
-        ]}
+        style={props.style}
       />
     );
   },
