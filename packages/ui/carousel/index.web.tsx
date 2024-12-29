@@ -280,7 +280,7 @@ const Carousel = <T,>({ data, renderItem }: CarouselProps<T>) => {
         {data.map((item, index) => (
           <CarouselItem
             key={index}
-            className="pl-4 basis-1/3 sm:basis-1/4 md:basis-1/5 lg:basis-[20%] xl:basis-[11%]"
+            className="pl-4 basis-1/4 sm:basis-1/4 md:basis-1/5 lg:basis-[20%] xl:basis-[11%]"
           >
             {renderItem({ item, index })}
           </CarouselItem>

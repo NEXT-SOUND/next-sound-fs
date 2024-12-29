@@ -89,13 +89,13 @@ const PopularTracks = () => {
   const [t] = useTranslation("artist");
   const [commonT] = useTranslation("common");
 
-  const itemSize = isLargeScreen
-    ? width / 10
-    : isDesktop
-      ? width / 6
-      : isTablet || isMobile
-        ? width / 3
-        : width / 5;
+  // const itemSize = isLargeScreen
+  //   ? width / 10
+  //   : isDesktop
+  //     ? width / 6
+  //     : isTablet || isMobile
+  //       ? width / 4
+  //       : width / 5;
 
   return (
     <>
@@ -114,8 +114,9 @@ const PopularTracks = () => {
           >
             <SolitoImage
               src={item.imageUrl}
-              width={itemSize}
-              height={itemSize}
+              // NOTE: It's meaningless to set width and height here, but it's required for the image to work
+              width={1000}
+              height={1000}
               alt={item.name}
               // @ts-ignore
               className="rounded-lg"
