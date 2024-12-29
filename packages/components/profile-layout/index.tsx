@@ -99,7 +99,7 @@ export const ProfileLayout = ({ imageSrc, children, header }: Props) => {
         className={cn(
           "z-50 flex flex-col container px-[16px] pt-4 web:pt-2 absolute",
           "web:left-1/2 web:-translate-x-1/2",
-          "lg:top-[420px] md:top-[380px] sm:top-[300px] top-[250px]",
+          "lg:top-[420px] md:top-[380px] top-[220px]",
         )}
       >
         {children}

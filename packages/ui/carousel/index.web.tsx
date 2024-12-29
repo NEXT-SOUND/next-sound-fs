@@ -176,14 +176,15 @@ const CarouselContent = React.forwardRef<
       />
       <div
         className={cn(
-          "absolute top-0 bottom-0 left-0 w-8 bg-gradient-to-r from-[#ffffff75] dark:from-background to-transparent pointer-events-none",
+          // TODO: from-[#ffffff75] light mode gradient bug
+          "absolute top-0 bottom-0 left-0 w-8 bg-gradient-to-r from-background to-transparent pointer-events-none",
           orientation === "horizontal" ? "block" : "hidden",
           !canScrollPrev && "!opacity-0",
         )}
       />
       <div
         className={cn(
-          "absolute top-0 bottom-0 right-0 w-8 bg-gradient-to-l from-[#ffffff75] dark:from-background to-transparent pointer-events-none",
+          "absolute top-0 bottom-0 right-0 w-8 bg-gradient-to-l from-background to-transparent pointer-events-none",
           orientation === "horizontal" ? "block" : "hidden",
           !canScrollNext && "!opacity-0",
         )}
