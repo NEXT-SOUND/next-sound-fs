@@ -46,6 +46,7 @@ const TrackCarouselItem = ({ item }: { item: TTrack }) => {
           width={1000}
           height={1000}
           alt={item.name}
+          transition={500}
           // @ts-ignore
           className="rounded-lg transition-transform duration-300 group-hover:scale-105"
         />
