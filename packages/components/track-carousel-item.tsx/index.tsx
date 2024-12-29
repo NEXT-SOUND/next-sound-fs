@@ -54,15 +54,23 @@ const TrackCarouselItem = ({ item }: { item: TTrack }) => {
           onPress={isPlaying ? pauseAudio : playAudio}
           size="icon"
           className={cn(
-            "absolute bottom-2 right-2 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 bg-background",
+            "absolute bottom-2 right-2 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 bg-green-600 size-8 md:size-10 shadow-lg",
             isPlaying && "!opacity-100 !translate-y-0",
           )}
           radius="full"
         >
           {isPlaying ? (
-            <Pause className="size-4 md:size-5 text-foreground" />
+            <Pause
+              className="size-4 md:size-6 text-foreground"
+              fill="#000"
+              stroke="#000"
+            />
           ) : (
-            <Play className="size-4 md:size-5 text-foreground" />
+            <Play
+              className="size-4  text-foreground"
+              fill="#000"
+              stroke="#000"
+            />
           )}
         </Button>
       </View>
