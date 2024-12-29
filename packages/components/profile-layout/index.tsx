@@ -99,8 +99,11 @@ export const ProfileLayout = ({ imageSrc, children, header }: Props) => {
         className={cn(
           "z-50 flex flex-col container px-[16px] pt-4 web:pt-2 absolute",
           "web:left-1/2 web:-translate-x-1/2",
-          "lg:top-[420px] md:top-[380px] top-[220px]",
+          // "lg:top-[420px] md:top-[380px] sm:top-[270px] top-[200px]",
         )}
+        style={{
+          top: backgroundImageContainerHeight * 0.9 - 75,
+        }}
       >
         {children}
       </ScrollView>

@@ -66,7 +66,7 @@ const TrackCarouselItem = ({ item }: { item: TTrack }) => {
           )}
         </Button>
       </View>
-      <Text className="text-md font-readex mt-2 md:text-lg text-center">
+      <Text className="text-xs md:text-sm lg:text-base xl:text-lg font-readex mt-2 text-center">
         {item.name}
       </Text>
     </View>
