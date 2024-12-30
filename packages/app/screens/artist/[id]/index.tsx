@@ -60,7 +60,7 @@ export function ArtistProfileLayout() {
                 <SectionTitle>
                   {t("onlyForFans", { fanName: "블링크" })}
                 </SectionTitle>
-                <Text className="text-white-50 text-lg font-readex mt-1">
+                <Text className="text-white-50 text-base sm:text-lg font-readex mt-1">
                   블링크가 되면 Rose의 특별한 소식을 볼 수 있어요.
                 </Text>
                 <Button className="mt-4 w-36">블링크 되기</Button>

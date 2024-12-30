@@ -1,10 +1,10 @@
 {
   "mostPopularTracks": "가장 인기 있는 음악들",
   "overview": "둘러보기",
-  "tracks": "음악들",
-  "allTracks": "{{artist}}의 모든 음악들",
-  "allPosts": "{{artist}}의 포스트들",
+  "tracks": "음악",
+  "allTracks": "{{artist}}의 모든 음악",
+  "allPosts": "{{artist}}의 포스트",
   "forFans": "{{fanName}}를 위한",
   "onlyForFans": "오직 {{fanName}}를 위한",
-  "posts": "포스트들"
+  "posts": "포스트"
 }
