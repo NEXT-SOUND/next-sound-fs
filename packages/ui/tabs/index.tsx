@@ -14,7 +14,7 @@ const Tabs: React.FC<{ tabs: TabProps[] }> = ({ tabs }) => {
 
   return (
     <div>
-      <div className="border-b border-white-15 pb-3 gap-5 flex flex-row mb-6">
+      <div className="border-b border-white-15 pb-3 gap-5 flex flex-row mb-4 md:mb-6">
         {tabs.map((tab, index) => (
           <Pressable
             key={index}
