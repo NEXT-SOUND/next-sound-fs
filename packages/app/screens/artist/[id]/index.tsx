@@ -13,6 +13,7 @@ import { PopularTracks } from "./popular-tracks";
 import Tabs from "@/ui/tabs";
 import { SectionTitle } from "@/ui/typography";
 import { useTranslation } from "next-i18next";
+import { Button } from "@/ui/button";
 
 export function ArtistProfileLayout() {
   const { t } = useTranslation("artist");
@@ -55,7 +56,15 @@ export function ArtistProfileLayout() {
           {
             label: t("forFans", { fanName: "블링크" }),
             content: (
-              <SectionTitle>{t("forFans", { fanName: "블링크" })}</SectionTitle>
+              <View>
+                <SectionTitle>
+                  {t("onlyForFans", { fanName: "블링크" })}
+                </SectionTitle>
+                <Text className="text-white-50 text-lg font-readex mt-1">
+                  블링크가 되면 Rose의 특별한 소식을 볼 수 있어요.
+                </Text>
+                <Button className="mt-4 w-36">블링크 되기</Button>
+              </View>
             ),
           },
         ]}

@@ -5,6 +5,7 @@
   "allTracks": "{{artist}}'s All Tracks",
   "allPosts": "{{artist}}'s All Posts",
   "forFans": "For {{fanName}}",
+  "onlyForFans": "Only For {{fanName}}",
   "posts": "Posts"
 }
 
