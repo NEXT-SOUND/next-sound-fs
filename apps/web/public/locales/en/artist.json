@@ -1,4 +1,10 @@
 {
-  "mostPopularTracks": "Most Popular Tracks"
+  "mostPopularTracks": "Most Popular Tracks",
+  "overview": "Overview",
+  "tracks": "Tracks",
+  "allTracks": "{{artist}}'s All Tracks",
+  "allPosts": "{{artist}}'s All Posts",
+  "forFans": "For {{fanName}}",
+  "posts": "Posts"
 }
 

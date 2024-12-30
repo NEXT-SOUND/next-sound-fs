@@ -1,1 +1,1 @@
-export { ArtistInfo as default } from "@/app/screens/artist/[id]";
+export { ArtistProfileLayout as default } from "@/app/screens/artist/[id]";

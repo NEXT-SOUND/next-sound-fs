@@ -101,7 +101,7 @@ export const ProfileLayout = ({ imageSrc, children, header }: Props) => {
         )}
         style={{
           visibility: !isServer ? "visible" : "hidden",
-          top: backgroundImageContainerHeight * 0.9 - 75,
+          top: backgroundImageContainerHeight * 0.87 - 75,
         }}
       >
         {children}

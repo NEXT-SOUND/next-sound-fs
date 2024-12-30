@@ -10,7 +10,12 @@ import { Text } from "@/ui/text";
 import { ProfileLayout } from "@/components/profile-layout";
 
 import { PopularTracks } from "./popular-tracks";
-export function ArtistInfo() {
+import Tabs from "@/ui/tabs";
+import { SectionTitle } from "@/ui/typography";
+import { useTranslation } from "next-i18next";
+
+export function ArtistProfileLayout() {
+  const { t } = useTranslation("artist");
   return (
     <ProfileLayout
       imageSrc="https://i.scdn.co/image/ab6761610000e5eb727a1f1f508238a20ac9fdbf"
@@ -28,9 +33,36 @@ export function ArtistInfo() {
         </View>
       }
     >
+      <Tabs
+        tabs={[
+          { label: t("overview"), content: <PopularTracks /> },
+          {
+            label: t("tracks"),
+            content: (
+              <>
+                <SectionTitle>
+                  {t("allTracks", { artist: "Rose" })}
+                </SectionTitle>
+              </>
+            ),
+          },
+          {
+            label: t("posts"),
+            content: (
+              <SectionTitle>{t("allPosts", { artist: "Rose" })}</SectionTitle>
+            ),
+          },
+          {
+            label: t("forFans", { fanName: "블링크" }),
+            content: (
+              <SectionTitle>{t("forFans", { fanName: "블링크" })}</SectionTitle>
+            ),
+          },
+        ]}
+      />
       {/* <SectionTitle>포스트들</SectionTitle> */}
       {/* <SectionTitle>최신 음악</SectionTitle> */}
-      <PopularTracks />
+
       {/* <SectionTitle>가장 인기있는 음악들</SectionTitle>
       <SectionTitle>오직 블링크를 위한</SectionTitle> */}
     </ProfileLayout>

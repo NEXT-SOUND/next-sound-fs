@@ -1,8 +1,8 @@
 import React from "react";
-import { ArtistInfo } from "@/app/screens/artist/[id]";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
+import { ArtistProfileLayout } from "@/app/screens/artist/[id]";
 
 //@ts-ignore: next-line
 function Home() {
@@ -22,7 +22,7 @@ function Home() {
         <meta property="og:type" content="website" />
         <meta property="og:title" content={`${ogT("title")}`} />
       </Head>
-      <ArtistInfo />
+      <ArtistProfileLayout />
     </>
   );
 }

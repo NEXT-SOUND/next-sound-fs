@@ -1,4 +1,9 @@
 {
-  "track": "트랙",
-  "mostPopularTracks": "가장 인기 있는 트랙들"
+  "mostPopularTracks": "가장 인기 있는 음악들",
+  "overview": "톺아보기",
+  "tracks": "음악들",
+  "allTracks": "{{artist}}의 모든 음악들",
+  "allPosts": "{{artist}}의 포스트들",
+  "forFans": "{{fanName}}를 위한",
+  "posts": "포스트들"
 }
