@@ -174,7 +174,7 @@ const CarouselContent = React.forwardRef<
         )}
         {...props}
       />
-      <div
+      {/* <div
         className={cn(
           "absolute top-0 bottom-0 left-0 w-8 bg-gradient-to-r from-background to-transparent pointer-events-none",
           orientation === "horizontal" ? "block" : "hidden",
@@ -187,7 +187,7 @@ const CarouselContent = React.forwardRef<
           orientation === "horizontal" ? "block" : "hidden",
           !canScrollNext && "!opacity-0",
         )}
-      />
+      /> */}
     </div>
   );
 });
@@ -237,7 +237,7 @@ const CarouselPrevious = React.forwardRef<
       onPress={scrollPrev}
       {...props}
     >
-      <ChevronLeftIcon className="h-4 w-4" />
+      <ChevronLeftIcon className="h-4 w-4 text-foreground" />
       <span className="sr-only">Previous slide</span>
     </Button>
   );
@@ -266,7 +266,7 @@ const CarouselNext = React.forwardRef<
       onPress={scrollNext}
       {...props}
     >
-      <ChevronRightIcon className="h-4 w-4" />
+      <ChevronRightIcon className="h-4 w-4 text-foreground" />
       <span className="sr-only">Next slide</span>
     </Button>
   );
