@@ -107,7 +107,7 @@ const PopularTracks = () => {
   //       : width / 5;
 
   return (
-    <>
+    <View className="flex flex-col">
       <View className="flex flex-row justify-between mb-1 md:mb-3">
         <SectionTitle>{t("mostPopularTracks")}</SectionTitle>
         <Button variant="link" size="fit">
@@ -118,7 +118,7 @@ const PopularTracks = () => {
         data={[...DummyData, ...DummyData, ...DummyData]}
         renderItem={TrackCarouselItem}
       />
-    </>
+    </View>
   );
 };
 

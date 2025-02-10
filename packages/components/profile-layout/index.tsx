@@ -1,6 +1,5 @@
 import { cn } from "@/ui/utils/cn";
 import { View } from "@/ui/view";
-import { useTranslation } from "@/utils/i18n";
 import { useSafeArea } from "@/utils/safe-area";
 import { useWindowSize, IS_WEB } from "@/utils/screen";
 import useAverageColor from "@/utils/useAverageColor";

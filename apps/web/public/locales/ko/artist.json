@@ -3,8 +3,9 @@
   "overview": "둘러보기",
   "tracks": "음악",
   "allTracks": "{{artist}}의 모든 음악",
-  "allPosts": "{{artist}}의 포스트",
+  "allFeeds": "{{artist}}의 모든 피드",
   "forFans": "{{fanName}}를 위한",
   "onlyForFans": "오직 {{fanName}}를 위한",
-  "posts": "포스트"
+  "feeds": "피드",
+  "recentFeeds": "최근 피드"
 }
