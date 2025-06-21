@@ -3,9 +3,9 @@
   "overview": "Overview",
   "tracks": "Tracks",
   "allTracks": "{{artist}}'s All Tracks",
-  "allPosts": "{{artist}}'s All Posts",
+  "allFeeds": "{{artist}}'s All Feeds",
   "forFans": "For {{fanName}}",
   "onlyForFans": "Only For {{fanName}}",
-  "posts": "Posts"
+  "feeds": "Feeds",
+  "recentFeeds": "Recent Feeds"
 }
-

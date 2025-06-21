@@ -14,7 +14,7 @@ const Tabs: React.FC<{ tabs: TabProps[] }> = ({ tabs }) => {
 
   return (
     <div>
-      <div className="border-b border-white-15 pb-3 gap-5 flex flex-row mb-4 md:mb-6">
+      <div className="border-b dark:border-white-15 border-black-15 pb-3 gap-5 flex flex-row mb-4 md:mb-6">
         {tabs.map((tab, index) => (
           <Pressable
             key={index}
@@ -23,8 +23,8 @@ const Tabs: React.FC<{ tabs: TabProps[] }> = ({ tabs }) => {
           >
             <Text
               className={cn(
-                "text-white-50 text-base font-medium hover:text-white transition-all duration-150 capitalize",
-                activeTab === index ? "text-white" : "",
+                "dark:text-white-50 text-black-50 text-base font-medium dark:hover:text-white hover:text-black transition-all duration-150 capitalize",
+                activeTab === index ? "dark:text-white text-black" : "",
               )}
             >
               {tab.label}
@@ -32,7 +32,7 @@ const Tabs: React.FC<{ tabs: TabProps[] }> = ({ tabs }) => {
           </Pressable>
         ))}
       </div>
-      <div className="tab-content">{tabs[activeTab]?.content}</div>
+      <section>{tabs[activeTab]?.content}</section>
     </div>
   );
 };

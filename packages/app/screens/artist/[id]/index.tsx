@@ -9,11 +9,12 @@ import { Text } from "@/ui/text";
 
 import { ProfileLayout } from "@/components/profile-layout";
 
-import { PopularTracks } from "./popular-tracks";
+import { PopularTracks } from "./overview/popular-tracks";
 import Tabs from "@/ui/tabs";
 import { SectionTitle } from "@/ui/typography";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "@/utils/i18n";
 import { Button } from "@/ui/button";
+import ArtistOverview from "./overview";
 
 export function ArtistProfileLayout() {
   const { t } = useTranslation("artist");
@@ -36,7 +37,7 @@ export function ArtistProfileLayout() {
     >
       <Tabs
         tabs={[
-          { label: t("overview"), content: <PopularTracks /> },
+          { label: t("overview"), content: <ArtistOverview /> },
           {
             label: t("tracks"),
             content: (
@@ -48,9 +49,9 @@ export function ArtistProfileLayout() {
             ),
           },
           {
-            label: t("posts"),
+            label: t("feeds"),
             content: (
-              <SectionTitle>{t("allPosts", { artist: "Rose" })}</SectionTitle>
+              <SectionTitle>{t("allFeeds", { artist: "Rose" })}</SectionTitle>
             ),
           },
           {
@@ -60,7 +61,7 @@ export function ArtistProfileLayout() {
                 <SectionTitle>
                   {t("onlyForFans", { fanName: "블링크" })}
                 </SectionTitle>
-                <Text className="text-white-50 text-base sm:text-lg font-readex mt-1">
+                <Text className="dark:text-white-50 text-black-50 text-base sm:text-lg font-readex mt-1">
                   블링크가 되면 Rose의 특별한 소식을 볼 수 있어요.
                 </Text>
                 <Button className="mt-4 w-36">블링크 되기</Button>

@@ -74,7 +74,7 @@ const TrackCarouselItem = ({ item }: { item: TTrack }) => {
           )}
         </Button>
       </View>
-      <Text className="text-xs md:text-sm lg:text-base xl:text-lg font-readex mt-2 text-center">
+      <Text className="text-xs md:text-sm lg:text-base mt-2 text-center font-medium dark:text-white text-black-80">
         {item.name}
       </Text>
     </View>

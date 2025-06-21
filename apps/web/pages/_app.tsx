@@ -21,10 +21,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <ThemeProvider>
         <Head>
-          <title>Instage</title>
+          <title>Onstage</title>
           <meta
             name="Someone get inspired by your music"
-            content="Instage is a platform for artists to showcase their work and connect with fans."
+            content="Onstage is a platform for artists to showcase their work and connect with fans."
           />
           <link rel="icon" href="/favicon.ico" />
         </Head>
