@@ -1,17 +1,23 @@
 {
-    "$schema": "https://turbo.build/schema.json",
-    "tasks": {
-      "build": {
-        "outputs": [".next/**", "!.next/cache/**"],
-        "dependsOn": ["^build"]
-      },
-      "dev": {
-        "cache": false,
-        "persistent": true
-      },
-      "lint": {},
-      "clean": {
-        "cache": false
-      }
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["**/.env.*local"],
+  "tasks": {
+    "build": {
+      "outputs": [".next/**", "!.next/cache/**", "dist/**", "build/**"],
+      "dependsOn": ["^build"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "start": {
+      "cache": false,
+      "persistent": true
+    },
+    "lint": {},
+    "clean": {
+      "cache": false
     }
-  }
+  },
+  "globalEnv": ["NODE_ENV", "NEXT_PUBLIC_*", "DATABASE_URL", "JWT_SECRET"]
+}
