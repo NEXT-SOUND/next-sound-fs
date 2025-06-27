@@ -2,12 +2,15 @@
   "name": "universal-app-starter",
   "private": true,
   "scripts": {
-    "build": "turbo run build --filter=!backend",
+    "build": "turbo run build",
     "dev": "turbo run dev",
     "web": "cd apps/web && yarn start",
     "ios": "cd apps/native && yarn ios",
     "prebuild": "cd apps/native && expo prebuild",
     "android": "cd apps/native && yarn android",
+    "backend": "cd apps/backend && yarn dev",
+    "backend:offline": "cd apps/backend && yarn sls:offline",
+    "backend:ddb": "cd apps/backend && yarn ddb:start",
     "clean": "turbo run clean && rm -rf node_modules",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
@@ -35,6 +38,7 @@
     "dayjs": "^1.11.13",
     "lucide-react": "^0.469.0",
     "moti": "^0.29.0",
+    "react-i18next": "^15.5.3",
     "solito": "^4.3.0",
     "tailwindcss-animate": "^1.0.7",
     "zustand": "^5.0.1"

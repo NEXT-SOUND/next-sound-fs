@@ -31,9 +31,5 @@ export function transformDateFilters(
     );
   }
 
-  if (node.operands?.length === 0) {
-    return undefined as unknown as WeaviateFilter['where'];
-  }
-
   return node;
 }

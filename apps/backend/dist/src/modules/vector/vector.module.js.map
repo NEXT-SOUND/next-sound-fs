@@ -1,1 +1,0 @@
-{"version":3,"file":"vector.module.js","sourceRoot":"","sources":["../../../../src/modules/vector/vector.module.ts"],"names":[],"mappings":";;;;;;;;;AAAA,2CAAwC;AAExC,2DAAuD;AACvD,qDAAmD;AAM5C,IAAM,YAAY,GAAlB,MAAM,YAAY;CAAG,CAAA;AAAf,oCAAY;uBAAZ,YAAY;IAJxB,IAAA,eAAM,EAAC;QACN,WAAW,EAAE,CAAC,oCAAgB,CAAC;QAC/B,SAAS,EAAE,CAAC,gCAAe,CAAC;KAC7B,CAAC;GACW,YAAY,CAAG"}

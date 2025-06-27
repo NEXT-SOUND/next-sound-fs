@@ -1,22 +1,21 @@
 // src/vector/pinecone.service.ts
-import { ChatOpenAI, OpenAIEmbeddings } from "@langchain/openai";
-import { WeaviateFilter, WeaviateStore } from "@langchain/weaviate";
-import dayjs from "dayjs";
-import timezone from "dayjs/plugin/timezone";
-import utc from "dayjs/plugin/utc";
-import { createStuffDocumentsChain } from "langchain/chains/combine_documents";
-import { createRetrievalChain } from "langchain/chains/retrieval";
-import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
-import { isEmpty } from "lodash";
-import OpenAI from "openai";
-import { ChatCompletionMessageParam } from "openai/resources/chat/completions";
-import weaviate, { ApiKey, WeaviateClient } from "weaviate-ts-client";
+import { ChatOpenAI, OpenAIEmbeddings } from '@langchain/openai';
+import { WeaviateFilter, WeaviateStore } from '@langchain/weaviate';
+import dayjs from 'dayjs';
+import timezone from 'dayjs/plugin/timezone';
+import utc from 'dayjs/plugin/utc';
+import { createStuffDocumentsChain } from 'langchain/chains/combine_documents';
+import { createRetrievalChain } from 'langchain/chains/retrieval';
+import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
+import OpenAI from 'openai';
+import { ChatCompletionMessageParam } from 'openai/resources/chat/completions';
+import weaviate, { ApiKey, WeaviateClient } from 'weaviate-ts-client';
 
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 
-import { QA_PROMPT, SELF_QUERY_PROMPT } from "./templat";
-import { SelfQueryResult, VectorMetadata } from "./types";
-import { transformDateFilters } from "./utils";
+import { QA_PROMPT, SELF_QUERY_PROMPT } from './templat';
+import { SelfQueryResult, VectorMetadata } from './types';
+import { transformDateFilters } from './utils';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -28,12 +27,12 @@ export class WeaviateService {
 
   constructor() {
     this.client = weaviate.client({
-      scheme: "https",
+      scheme: 'https',
       host: process.env.WEAVIATE_HOST!, // e.g. weaviate-next-sound.fly.dev
       apiKey: new ApiKey(process.env.WEAVIATE_API_KEY!),
     });
     this.embeddings = new OpenAIEmbeddings({
-      model: "text-embedding-3-large",
+      model: 'text-embedding-3-large',
       openAIApiKey: process.env.OPENAI_API_KEY,
     });
   }
@@ -106,21 +105,21 @@ export class WeaviateService {
     const splitter = new RecursiveCharacterTextSplitter({
       chunkSize: 1000,
       chunkOverlap: 100,
-      separators: ["\n\n", "\n", " ", ""],
+      separators: ['\n\n', '\n', ' ', ''],
       keepSeparator: true,
     });
 
     const tenant = metadata.userId;
 
     // 테넌트 존재 여부 확인
-    const tenants = await this.client.schema.tenantsGetter("Document").do();
+    const tenants = await this.client.schema.tenantsGetter('Document').do();
 
     const tenantExists = tenants.some((t) => t.name === tenant);
 
     // 테넌트가 존재하지 않으면 생성
     if (!tenantExists) {
       await this.client.schema
-        .tenantsCreator("Document", [{ name: tenant }])
+        .tenantsCreator('Document', [{ name: tenant }])
         .do();
     }
 
@@ -130,24 +129,23 @@ export class WeaviateService {
 
     await WeaviateStore.fromDocuments(docs, this.embeddings, {
       client: this.client,
-      indexName: "Document",
+      indexName: 'Document',
       tenant,
     });
 
-    return { message: "Text embedded successfully", chunkCount: docs.length };
+    return { message: 'Text embedded successfully', chunkCount: docs.length };
   }
 
-  // For test only
   async searchText(
     query: string,
     userId: string,
-    filter?: WeaviateFilter["where"],
+    filter?: WeaviateFilter['where'],
   ) {
     const vectorStore = await WeaviateStore.fromExistingIndex(this.embeddings, {
       client: this.client,
-      indexName: "Document",
+      indexName: 'Document',
       tenant: userId,
-      metadataKeys: ["title", "timestamp"],
+      metadataKeys: ['title', 'timestamp'],
     });
 
     const results = await vectorStore.similaritySearch(query, 5, {
@@ -161,10 +159,10 @@ export class WeaviateService {
 
   async refineQuery(query: string, timezone: string) {
     const messages = await SELF_QUERY_PROMPT.formatMessages({
-      today: new Date().toLocaleString("en-US", { timeZone: timezone }),
-      todayWeek: new Date().toLocaleString("en-US", {
+      today: new Date().toLocaleString('en-US', { timeZone: timezone }),
+      todayWeek: new Date().toLocaleString('en-US', {
         timeZone: timezone,
-        weekday: "long",
+        weekday: 'long',
       }),
       timezone,
       query,
@@ -173,7 +171,7 @@ export class WeaviateService {
     const openaiMessages = messages.map((msg) => {
       const dict = msg.toDict();
       return {
-        role: dict.type === "human" ? "user" : dict.type,
+        role: dict.type === 'human' ? 'user' : dict.type,
         content: dict.data.content,
       };
     });
@@ -181,7 +179,7 @@ export class WeaviateService {
     // OpenAI API 호출
     const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
     const res = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
+      model: 'gpt-4o-mini',
       messages: openaiMessages as ChatCompletionMessageParam[],
       temperature: 0,
     });
@@ -197,50 +195,42 @@ export class WeaviateService {
         filter: transformedFilter,
       };
     } catch (error) {
-      console.error(error, "응답을 JSON으로 파싱하는 데 실패했습니다.");
+      console.error(error, '응답을 JSON으로 파싱하는 데 실패했습니다.');
       return result;
     }
   }
 
   async answerQuestion(query: string, userId: string, timezone: string) {
-    console.time("질문 분석");
+    console.time('질문 분석');
     const { filter } = await this.refineQuery(query, timezone);
-    console.timeEnd("질문 분석");
+    console.timeEnd('질문 분석');
 
-    console.time("벡터 스토어 생성");
+    console.log(JSON.stringify(filter, null, 2), 'filter');
+
+    console.time('벡터 스토어 생성');
     const vectorStore = await WeaviateStore.fromExistingIndex(this.embeddings, {
       client: this.client,
-      indexName: "Document",
+      indexName: 'Document',
       tenant: userId,
-      metadataKeys: ["title", "timestamp"],
+      metadataKeys: ['title', 'timestamp'],
     });
-    console.timeEnd("벡터 스토어 생성");
+    console.timeEnd('벡터 스토어 생성');
 
-    console.time("LLM 모델 초기화");
+    console.time('LLM 모델 초기화');
     const model = new ChatOpenAI({
       temperature: 0.1,
-      modelName: "gpt-4o",
+      modelName: 'gpt-4o',
     });
-    console.timeEnd("LLM 모델 초기화");
+    console.timeEnd('LLM 모델 초기화');
 
-    console.time("문서 결합 체인 생성");
+    console.time('문서 결합 체인 생성');
     const combineDocsChain = await createStuffDocumentsChain({
       llm: model,
       prompt: QA_PROMPT,
     });
-    console.timeEnd("문서 결합 체인 생성");
+    console.timeEnd('문서 결합 체인 생성');
 
-    console.log(filter, "filter", filter?.operands);
-
-    console.log(
-      isEmpty(filter?.operands)
-        ? {
-            where: filter,
-          }
-        : undefined,
-    );
-
-    console.time("Retrieval 체인 생성");
+    console.time('Retrieval 체인 생성');
     const chain = await createRetrievalChain({
       retriever: vectorStore.asRetriever({
         k: 3,
@@ -250,11 +240,11 @@ export class WeaviateService {
       }),
       combineDocsChain,
     });
-    console.timeEnd("Retrieval 체인 생성");
+    console.timeEnd('Retrieval 체인 생성');
 
-    console.time("질문에 대한 응답 생성");
+    console.time('질문에 대한 응답 생성');
     const response = await chain.invoke({ input: query });
-    console.timeEnd("질문에 대한 응답 생성");
+    console.timeEnd('질문에 대한 응답 생성');
 
     return {
       answer: response.answer,

@@ -6,9 +6,7 @@ import { useSafeArea } from "utils/safe-area";
 import { BlurImage } from "components/blur-image";
 import useAverageColor from "utils/useAverageColor";
 import { Text } from "@/ui/text";
-
 import { ProfileLayout } from "@/components/profile-layout";
-
 import { PopularTracks } from "./overview/popular-tracks";
 import Tabs from "@/ui/tabs";
 import { SectionTitle } from "@/ui/typography";
