@@ -9,6 +9,8 @@ import ThemeProvider from "@/utils/theme/ThemeProvider.web";
 import { cn } from "@/ui/utils/cn";
 import { Button } from "@/ui/button";
 import { useColorScheme } from "@/utils/theme/useColorSchema";
+import { Toaster } from "react-hot-toast";
+import { AuthProvider } from "../contexts/AuthContext";
 
 const readexPro = Readex_Pro({
   subsets: ["latin"],
@@ -20,22 +22,25 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <ThemeProvider>
-        <Head>
-          <title>Onstage</title>
-          <meta
-            name="Someone get inspired by your music"
-            content="Onstage is a platform for artists to showcase their work and connect with fans."
-          />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <main
-          className={cn(
-            readexPro.variable,
-            "transition duration-500 flex-1 bg-background overflow-x-hidden",
-          )}
-        >
-          <Component {...pageProps} />
-        </main>
+        <AuthProvider>
+          <Head>
+            <title>Onstage</title>
+            <meta
+              name="Someone get inspired by your music"
+              content="Onstage is a platform for artists to showcase their work and connect with fans."
+            />
+            <link rel="icon" href="/favicon.ico" />
+          </Head>
+          <main
+            className={cn(
+              readexPro.variable,
+              "transition duration-500 flex-1 bg-background overflow-x-hidden",
+            )}
+          >
+            <Component {...pageProps} />
+          </main>
+          <Toaster />
+        </AuthProvider>
       </ThemeProvider>
     </>
   );
