@@ -7,15 +7,21 @@ import utc from 'dayjs/plugin/utc';
 import { createStuffDocumentsChain } from 'langchain/chains/combine_documents';
 import { createRetrievalChain } from 'langchain/chains/retrieval';
 import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
+import { isEmpty } from 'lodash';
 import OpenAI from 'openai';
 import { ChatCompletionMessageParam } from 'openai/resources/chat/completions';
 import weaviate, { ApiKey, WeaviateClient } from 'weaviate-ts-client';
 
+
+
 import { Injectable } from '@nestjs/common';
+
+
 
 import { QA_PROMPT, SELF_QUERY_PROMPT } from './templat';
 import { SelfQueryResult, VectorMetadata } from './types';
 import { transformDateFilters } from './utils';
+
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -28,7 +34,7 @@ export class WeaviateService {
   constructor() {
     this.client = weaviate.client({
       scheme: 'https',
-      host: process.env.WEAVIATE_HOST!, // e.g. weaviate-next-sound.fly.dev
+      host: process.env.WEAVIATE_HOST!, // e.g. weaviate-second-brain.fly.dev
       apiKey: new ApiKey(process.env.WEAVIATE_API_KEY!),
     });
     this.embeddings = new OpenAIEmbeddings({
@@ -136,6 +142,7 @@ export class WeaviateService {
     return { message: 'Text embedded successfully', chunkCount: docs.length };
   }
 
+  // For test only
   async searchText(
     query: string,
     userId: string,
@@ -205,8 +212,6 @@ export class WeaviateService {
     const { filter } = await this.refineQuery(query, timezone);
     console.timeEnd('질문 분석');
 
-    console.log(JSON.stringify(filter, null, 2), 'filter');
-
     console.time('벡터 스토어 생성');
     const vectorStore = await WeaviateStore.fromExistingIndex(this.embeddings, {
       client: this.client,
@@ -229,6 +234,16 @@ export class WeaviateService {
       prompt: QA_PROMPT,
     });
     console.timeEnd('문서 결합 체인 생성');
+
+    console.log(filter, 'filter', filter?.operands);
+
+    console.log(
+      isEmpty(filter?.operands)
+        ? {
+            where: filter,
+          }
+        : undefined,
+    );
 
     console.time('Retrieval 체인 생성');
     const chain = await createRetrievalChain({

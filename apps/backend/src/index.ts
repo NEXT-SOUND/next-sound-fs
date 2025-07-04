@@ -1,26 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import serverlessExpress from '@vendia/serverless-express';
-import {
-  APIGatewayEventRequestContext,
-  APIGatewayProxyEvent,
-  APIGatewayProxyHandler,
-  APIGatewayProxyResult,
-  Context,
-  Handler,
-} from 'aws-lambda';
+import { APIGatewayEventRequestContext, APIGatewayProxyEvent, APIGatewayProxyHandler, APIGatewayProxyResult, Context, Handler } from 'aws-lambda';
 import * as AWS from 'aws-sdk';
+import cookieParser from 'cookie-parser';
 import express from 'express';
-
-
 
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
 
-
-
 import { AppModule } from './app.module';
-
 
 // WebSocket 이벤트 컨텍스트 타입 확장
 interface WebSocketEventContext extends APIGatewayEventRequestContext {
@@ -50,7 +39,13 @@ const bootstrapServer = async (): Promise<Handler> => {
     new ExpressAdapter(expressApp),
   );
   app.useGlobalPipes(new ValidationPipe({ forbidUnknownValues: true }));
-  app.enableCors();
+  expressApp.use(cookieParser());
+  app.enableCors({
+    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+  });
   await app.init();
   return serverlessExpress({
     app: expressApp,
