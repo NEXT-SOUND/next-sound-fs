@@ -21,6 +21,7 @@ type SlottablePressableProps = ComponentPropsWithAsChild<typeof Pressable> & {
 };
 type SlottableTextProps = ComponentPropsWithAsChild<typeof Text> & {
   children?: React.ReactNode;
+  className?: string;
 };
 
 interface Insets {
