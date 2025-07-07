@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import CONFIG from 'src/config/configuration';
 
 
 
@@ -10,7 +11,6 @@ import { User } from '../user/types';
 import { AuthService } from './auth.service';
 import { AuthResponse } from './dto/auth.response';
 import { RegisterInput } from './dto/register.input';
-import { GithubAuthGuard } from './guards/github-auth.guard';
 import { GoogleAuthGuard } from './guards/google-auth.guard';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { SessionAuthGuard } from './guards/session-auth.guard';
@@ -65,29 +65,7 @@ export class AuthController {
       req.user.accessToken,
       req.user.refreshToken,
     );
-    res.redirect(`${process.env.FRONTEND_URL}/auth/callback`);
-  }
-
-  @Get('github')
-  @UseGuards(GithubAuthGuard)
-  async githubAuth(): Promise<void> {
-    // GitHub OAuth 시작
-  }
-
-  @Get('github/callback')
-  @UseGuards(GithubAuthGuard)
-  async githubAuthCallback(
-    @Req() req: RequestWithUser,
-    @Res() res: Response,
-  ): Promise<void> {
-    await this.authService.handleOAuthLogin(
-      req.user,
-      'github',
-      res,
-      req.user.accessToken,
-      req.user.refreshToken,
-    );
-    res.redirect(`${process.env.FRONTEND_URL}/auth/callback`);
+    res.redirect(`${CONFIG.FRONTEND_URL}/auth/callback`);
   }
 
   @Get('verify-email')

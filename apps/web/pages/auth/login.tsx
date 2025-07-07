@@ -4,7 +4,8 @@ import Link from 'next/link';
 
 import { useAuth } from '../../contexts/AuthContext';
 
-import { Eye, EyeOff, Github } from 'lucide-react';
+import { Eye, EyeOff } from "lucide-react";
+import GLOBAL_ENV from "constants/globalEnv";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -61,11 +62,7 @@ const LoginPage = () => {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/auth/google`;
-  };
-
-  const handleGithubLogin = () => {
-    window.location.href = `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/auth/github`;
+    window.location.href = `${GLOBAL_ENV.BACKEND_URL}/auth/google`;
   };
 
   return (
@@ -93,16 +90,6 @@ const LoginPage = () => {
               <div className="w-5 h-5 bg-red-500 rounded-full" />
               <span>Google로 계속하기</span>
             </button>
-            
-            <button
-              type="button"
-              onClick={handleGithubLogin}
-              disabled={isLoading}
-              className="w-full h-12 px-4 py-2 bg-background border border-border rounded-lg hover:bg-accent transition-colors flex items-center justify-center gap-3 disabled:opacity-50"
-            >
-              <Github className="w-5 h-5" />
-              <span>GitHub로 계속하기</span>
-            </button>
           </div>
 
           {/* 구분선 */}
@@ -111,9 +98,7 @@ const LoginPage = () => {
               <div className="w-full border-t border-border" />
             </div>
             <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-card px-2 text-muted-foreground">
-                또는
-              </span>
+              <span className="bg-card px-2 text-muted-foreground">또는</span>
             </div>
           </div>
 
@@ -126,7 +111,7 @@ const LoginPage = () => {
               <input
                 type="email"
                 value={formData.email}
-                onChange={(e) => handleInputChange('email', e.target.value)}
+                onChange={(e) => handleInputChange("email", e.target.value)}
                 placeholder="your@email.com"
                 className="w-full h-12 px-3 py-2 bg-background border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground"
               />
@@ -141,9 +126,11 @@ const LoginPage = () => {
               </label>
               <div className="relative">
                 <input
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   value={formData.password}
-                  onChange={(e) => handleInputChange('password', e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("password", e.target.value)
+                  }
                   placeholder="••••••••"
                   className="w-full h-12 px-3 py-2 pr-12 bg-background border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground"
                 />
@@ -160,12 +147,17 @@ const LoginPage = () => {
                 </button>
               </div>
               {errors.password && (
-                <p className="text-sm text-destructive mt-1">{errors.password}</p>
+                <p className="text-sm text-destructive mt-1">
+                  {errors.password}
+                </p>
               )}
             </div>
 
             <div className="flex justify-end">
-              <Link href="/auth/forgot-password" className="text-sm text-primary hover:underline">
+              <Link
+                href="/auth/forgot-password"
+                className="text-sm text-primary hover:underline"
+              >
                 비밀번호를 잊으셨나요?
               </Link>
             </div>
@@ -175,15 +167,18 @@ const LoginPage = () => {
               className="w-full h-12 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium"
               disabled={isLoading}
             >
-              {isLoading ? '로그인 중...' : '로그인'}
+              {isLoading ? "로그인 중..." : "로그인"}
             </button>
           </form>
 
           {/* 회원가입 링크 */}
           <div className="mt-6 text-center">
             <p className="text-muted-foreground">
-              계정이 없으신가요?{' '}
-              <Link href="/auth/register" className="text-primary font-semibold hover:underline">
+              계정이 없으신가요?{" "}
+              <Link
+                href="/auth/register"
+                className="text-primary font-semibold hover:underline"
+              >
                 회원가입
               </Link>
             </p>

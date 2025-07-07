@@ -4,11 +4,11 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "web": "cd apps/web && yarn start",
+    "web": "cd apps/web && yarn run dev",
     "ios": "cd apps/native && yarn ios",
     "prebuild": "cd apps/native && expo prebuild",
     "android": "cd apps/native && yarn android",
-    "backend": "cd apps/backend && yarn dev",
+    "backend": "cd apps/backend && yarn dev --watch",
     "backend:offline": "cd apps/backend && yarn sls:offline",
     "backend:ddb": "cd apps/backend && yarn ddb:start",
     "clean": "turbo run clean && rm -rf node_modules",

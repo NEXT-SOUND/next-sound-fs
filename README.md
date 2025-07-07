@@ -61,8 +61,8 @@ yarn deploy
 
 ### GraphQL Endpoints
 
-- Local: http://localhost:3000/graphql
-- Offline: http://localhost:3000/dev/graphql
+- Local: http://localhost:5024/graphql
+- Offline: http://localhost:5024/dev/graphql
 - AWS: https://<your-deployment-id>.execute-api.<region>.amazonaws.com/dev/graphql
 
 ## Project Structure

@@ -1,5 +1,9 @@
-export default () => ({
+import GLOBAL_ENV from '../../../../packages/constants/globalEnv';
+
+const CONFIG = {
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
-  BACKEND_URL: process.env.BACKEND_URL,
-});
+  ...GLOBAL_ENV,
+};
+
+export default CONFIG;

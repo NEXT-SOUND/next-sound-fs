@@ -2,7 +2,7 @@ import { DynamooseModule } from 'nestjs-dynamoose';
 
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigFactory, ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
@@ -14,7 +14,7 @@ import * as modules from './modules';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [configuration],
+      load: [configuration as unknown as ConfigFactory],
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,

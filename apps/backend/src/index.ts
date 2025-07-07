@@ -5,11 +5,16 @@ import * as AWS from 'aws-sdk';
 import cookieParser from 'cookie-parser';
 import express from 'express';
 
+
+
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
 
+
+
 import { AppModule } from './app.module';
+import CONFIG from './config/configuration';
 
 // WebSocket 이벤트 컨텍스트 타입 확장
 interface WebSocketEventContext extends APIGatewayEventRequestContext {
@@ -41,7 +46,7 @@ const bootstrapServer = async (): Promise<Handler> => {
   app.useGlobalPipes(new ValidationPipe({ forbidUnknownValues: true }));
   expressApp.use(cookieParser());
   app.enableCors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+    origin: CONFIG.FRONTEND_URL,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],

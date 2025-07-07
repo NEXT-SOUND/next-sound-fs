@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+import GLOBAL_ENV from "../../../packages/constants/globalEnv";
+
+const API_BASE_URL = GLOBAL_ENV.BACKEND_URL;
 
 // API 클라이언트 설정
 export const apiClient = axios.create({
