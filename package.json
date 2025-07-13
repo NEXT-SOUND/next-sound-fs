@@ -8,7 +8,7 @@
     "ios": "cd apps/native && yarn ios",
     "prebuild": "cd apps/native && expo prebuild",
     "android": "cd apps/native && yarn android",
-    "backend": "cd apps/backend && yarn dev --watch",
+    "backend": "cd apps/backend && npm run start:online",
     "backend:offline": "cd apps/backend && yarn sls:offline",
     "backend:ddb": "cd apps/backend && yarn ddb:start",
     "clean": "turbo run clean && rm -rf node_modules",
