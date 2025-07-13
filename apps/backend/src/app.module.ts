@@ -22,9 +22,18 @@ import * as modules from './modules';
         () => ({
           GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
           GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
-          BACKEND_URL: process.env.BACKEND_URL,
-          FRONTEND_URL: process.env.FRONTEND_URL,
-          COOKIE_DOMAIN: process.env.COOKIE_DOMAIN,
+          BACKEND_URL: {
+            production: 'https://fm3ylhigv7.execute-api.us-east-1.amazonaws.com/dev/',
+            development: 'http://localhost:5024',
+          }[process.env.NODE_ENV || 'development'],
+          FRONTEND_URL: {
+            production: 'https://next-sound-fe-web.vercel.app/',
+            development: 'http://localhost:3000',
+          }[process.env.NODE_ENV || 'development'],
+          COOKIE_DOMAIN: {
+            production: 'next-sound-fe-web.vercel.app',
+            development: 'localhost',
+          }[process.env.NODE_ENV || 'development'],
         }),
       ],
     }),
