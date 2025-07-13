@@ -15,12 +15,14 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ forbidUnknownValues: true }));
   app.use(cookieParser());
   app.enableCors({
-    origin: process.env.FRONTEND_URL,
+    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
   });
-  const port = process.env.PORT || 5024;
-  await app.listen(port);
+  if (!process.env.PORT) {
+    throw new Error('PORT is not set');
+  }
+  await app.listen(process.env.PORT);
 }
 bootstrap();

@@ -1,7 +1,5 @@
 import { DynamooseModule } from 'nestjs-dynamoose';
 
-
-
 import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 
@@ -12,7 +10,6 @@ import { SessionSchema } from './schema/session.schema';
 import { SessionService } from './session.service';
 import { GoogleStrategy } from './strategies/google.strategy';
 import { LocalStrategy } from './strategies/local.strategy';
-
 
 @Module({
   imports: [

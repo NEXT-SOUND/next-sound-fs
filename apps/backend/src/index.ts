@@ -5,8 +5,6 @@ import * as AWS from 'aws-sdk';
 import cookieParser from 'cookie-parser';
 import express from 'express';
 
-
-
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
@@ -43,7 +41,7 @@ const bootstrapServer = async (): Promise<Handler> => {
   app.useGlobalPipes(new ValidationPipe({ forbidUnknownValues: true }));
   expressApp.use(cookieParser());
   app.enableCors({
-    origin: process.env.FRONTEND_URL,
+    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],

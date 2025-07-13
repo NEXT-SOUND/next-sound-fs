@@ -3,4 +3,4 @@ import { NotificationModule } from './notification/notification.module';
 import { UsersModule } from './user/user.module';
 
 
-export { AuthModule, NotificationModule,  UsersModule };
+export { AuthModule, NotificationModule, UsersModule };

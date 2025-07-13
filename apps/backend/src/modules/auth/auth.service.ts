@@ -18,7 +18,6 @@ import { RegisterInput } from './dto/register.input';
 import { EmailVerificationRequiredException } from './exceptions/email-verification-required.exception';
 import { SessionService } from './session.service';
 
-
 @Injectable()
 export class AuthService {
   private sesClient: SESClient;
