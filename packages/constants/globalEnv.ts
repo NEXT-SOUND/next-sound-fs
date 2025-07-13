@@ -3,6 +3,10 @@ const GLOBAL_ENV = {
     BACKEND_URL: "https://fm3ylhigv7.execute-api.us-east-1.amazonaws.com/dev/",
     FRONTEND_URL: "https://next-sound-fe-web.vercel.app/",
   },
+  test: {
+    BACKEND_URL: "https://fm3ylhigv7.execute-api.us-east-1.amazonaws.com/dev/",
+    FRONTEND_URL: "https://next-sound-fe-web.vercel.app/",
+  },
   development: {
     BACKEND_URL: "http://localhost:5024",
     FRONTEND_URL: "http://localhost:3000",
