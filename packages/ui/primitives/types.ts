@@ -19,7 +19,10 @@ type SlottablePressableProps = ComponentPropsWithAsChild<typeof Pressable> & {
    */
   onKeyUp?: (ev: React.KeyboardEvent) => void;
 };
-type SlottableTextProps = ComponentPropsWithAsChild<typeof Text>;
+type SlottableTextProps = ComponentPropsWithAsChild<typeof Text> & {
+  children?: React.ReactNode;
+  className?: string;
+};
 
 interface Insets {
   top?: number;
