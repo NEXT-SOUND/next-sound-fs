@@ -1,5 +1,7 @@
 import { DynamooseModule } from 'nestjs-dynamoose';
 
+
+
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
@@ -7,14 +9,24 @@ import { APP_GUARD } from '@nestjs/core';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 
-import configuration from './config/configuration';
+
+
 import * as modules from './modules';
+
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [configuration],
+      load: [
+        () => ({
+          GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+          GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+          BACKEND_URL: process.env.BACKEND_URL,
+          FRONTEND_URL: process.env.FRONTEND_URL,
+          COOKIE_DOMAIN: process.env.COOKIE_DOMAIN,
+        }),
+      ],
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,

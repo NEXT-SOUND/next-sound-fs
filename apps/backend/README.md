@@ -140,8 +140,8 @@ $ npm run test:e2e
 
 ## GraphQL Endpoint Test
 
-- offline: http://localhost:3000/dev/graphql
-- local: http://localhost:3000/graphql
+- offline: http://localhost:5024/dev/graphql
+- local: http://localhost:5024/graphql
 - AWS: https://<your_aws_deployment_id>.execute-api.<your_aws_region>.amazonaws.com/dev/graphql
 
 ```graphql
@@ -198,21 +198,21 @@ mutation {
 > Please remove `/dev` from path if test using local nestjs mode
 
 ```
-curl -X POST 'http://localhost:3000/dev/notification' \
+curl -X POST 'http://localhost:5024/dev/notification' \
   -H 'Content-Type: application/json' \
   --data-raw '{ "targetId": "device1", "userId": "user1", "content": "Hello" }'
 ```
 
 ```
-curl -X GET 'http://localhost:3000/dev/notification?targetId=device1'
+curl -X GET 'http://localhost:5024/dev/notification?targetId=device1'
 ```
 
 ```
-curl -X GET 'http://localhost:3000/dev/notification?userId=user1'
+curl -X GET 'http://localhost:5024/dev/notification?userId=user1'
 ```
 
 ```
-curl -X PATCH 'http://localhost:3000/dev/notification/a30f7101-2434-4443-87fa-493c9d9d3358' \
+curl -X PATCH 'http://localhost:5024/dev/notification/a30f7101-2434-4443-87fa-493c9d9d3358' \
   -H 'Content-Type: application/json' \
   --data-raw '{ "status": "Deleted" }'
 ```

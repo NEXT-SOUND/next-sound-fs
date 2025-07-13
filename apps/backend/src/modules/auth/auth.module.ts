@@ -1,5 +1,7 @@
 import { DynamooseModule } from 'nestjs-dynamoose';
 
+
+
 import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 
@@ -8,9 +10,9 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { SessionSchema } from './schema/session.schema';
 import { SessionService } from './session.service';
-import { GithubStrategy } from './strategies/github.strategy';
 import { GoogleStrategy } from './strategies/google.strategy';
 import { LocalStrategy } from './strategies/local.strategy';
+
 
 @Module({
   imports: [
@@ -23,13 +25,7 @@ import { LocalStrategy } from './strategies/local.strategy';
       },
     ]),
   ],
-  providers: [
-    AuthService,
-    SessionService,
-    LocalStrategy,
-    GoogleStrategy,
-    GithubStrategy,
-  ],
+  providers: [AuthService, SessionService, LocalStrategy, GoogleStrategy],
   controllers: [AuthController],
   exports: [AuthService],
 })

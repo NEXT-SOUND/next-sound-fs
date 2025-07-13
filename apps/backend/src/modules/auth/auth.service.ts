@@ -8,6 +8,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
+
+
 import { UsersService } from '../user/service/user.service';
 import { User } from '../user/types';
 import { UserProvider } from '../user/types';
@@ -15,6 +17,7 @@ import { AuthResponse } from './dto/auth.response';
 import { RegisterInput } from './dto/register.input';
 import { EmailVerificationRequiredException } from './exceptions/email-verification-required.exception';
 import { SessionService } from './session.service';
+
 
 @Injectable()
 export class AuthService {
@@ -140,7 +143,7 @@ export class AuthService {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'lax',
-        domain: process.env.COOKIE_DOMAIN,
+        domain: this.configService.get('COOKIE_DOMAIN'),
         maxAge: 24 * 60 * 60 * 1000, // 24시간
       });
     }
