@@ -1,8 +1,8 @@
-service: next-sound
+service: aws-nestjs-starter
 
 provider:
   name: aws
-  runtime: nodejs16.x
+  runtime: nodejs20.x
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, 'us-east-1'}
   environment:
@@ -28,11 +28,13 @@ provider:
           Resource: arn:aws:dynamodb:${self:provider.region}:*:*
 
 plugins:
-  - serverless-plugin-typescript
-  - serverless-dynamodb
+  - serverless-dynamodb-local
   - serverless-offline
+  - serverless-dotenv-plugin
 
 custom:
+  dotenv:
+    path: .env.${opt:stage, 'dev'}
   dynamodb:
     stages:
       - ${self:provider.stage}
@@ -41,6 +43,10 @@ custom:
       inMemory: true
       migrate: true
       seed: false
+
+package:
+  individually: true
+
 
 functions:
   index-function:
@@ -72,3 +78,9 @@ functions:
 
 resources:
   - ${file(resource/dynamodb.yml)}
+
+build:
+  esbuild:
+    keepNames: true
+    external:
+      - 'class-transformer/storage'

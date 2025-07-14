@@ -1,7 +1,16 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import {
+  ApiGatewayManagementApiClient,
+  PostToConnectionCommand,
+} from '@aws-sdk/client-apigatewaymanagementapi';
 import serverlessExpress from '@vendia/serverless-express';
-import { APIGatewayEventRequestContext, APIGatewayProxyEvent, APIGatewayProxyHandler, APIGatewayProxyResult, Context, Handler } from 'aws-lambda';
-import * as AWS from 'aws-sdk';
+import {
+  APIGatewayEventRequestContext,
+  APIGatewayProxyEvent,
+  APIGatewayProxyHandler,
+  APIGatewayProxyResult,
+  Context,
+  Handler,
+} from 'aws-lambda';
 import cookieParser from 'cookie-parser';
 import express from 'express';
 
@@ -55,9 +64,8 @@ const bootstrapServer = async (): Promise<Handler> => {
 // WebSocket 연결 핸들러
 export const connect: APIGatewayProxyHandler = async (
   _event: APIGatewayProxyEvent,
-  _context,
-  _callback,
-) => {
+  _context: Context,
+): Promise<APIGatewayProxyResult> => {
   try {
     // 연결 성공 시 200 상태 코드와 함께 빈 객체 반환
     return {
@@ -96,18 +104,17 @@ export const handlerSocket = async (
   event: WebSocketEvent,
   _context: Context,
 ): Promise<APIGatewayProxyResult> => {
-  const client = new AWS.ApiGatewayManagementApi({
+  const client = new ApiGatewayManagementApiClient({
     apiVersion: '2018-11-29',
     endpoint: `https://${event.requestContext.domainName}/${event.requestContext.stage}`,
   });
 
   try {
-    await client
-      .postToConnection({
-        ConnectionId: event.requestContext.connectionId,
-        Data: `default route received: ${event.body}`,
-      })
-      .promise();
+    const command = new PostToConnectionCommand({
+      ConnectionId: event.requestContext.connectionId,
+      Data: `default route received: ${event.body}`,
+    });
+    await client.send(command);
 
     return {
       statusCode: 200,

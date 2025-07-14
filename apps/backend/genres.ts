@@ -34,7 +34,7 @@ async function main() {
       // use the filename without extention as tablename
       const fileNameExt = file.split(/[\\\/]/).pop()!;
       const fileName = fileNameExt.split('.').shift()!;
-      const tableName = fileName.charAt(0).toUpperCase() + fileName.slice(1);
+      const tableName = pascalCase(fileName);
 
       // dynamic import the typescript file
       const exports = await import(`.${path.sep}${file}`);
@@ -68,6 +68,18 @@ async function main() {
   await fs.promises.writeFile(outputFile, yamlReources);
   console.log(`Serverless resources file generated at ${outputFile}`);
   process.exit(0);
+}
+
+function pascalCase(input: string): string {
+  // Replace any non-alphanumeric characters with a space.
+  // Then split the string into words, filter out any empty words,
+  // and convert each word to have an uppercase first letter followed by lowercase letters.
+  return input
+    .replace(/([^\w]|_)+/g, ' ')
+    .split(' ')
+    .filter((word) => word.trim().length > 0)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join('');
 }
 
 main();

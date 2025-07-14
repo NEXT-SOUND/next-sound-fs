@@ -1,14 +1,14 @@
 import { SESClient, SendEmailCommand } from '@aws-sdk/client-ses';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import { Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 
-
-
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-
-
+import {
+  Inject,
+  Injectable,
+  InternalServerErrorException,
+  forwardRef,
+} from '@nestjs/common';
 
 import { UsersService } from '../user/service/user.service';
 import { User } from '../user/types';
@@ -24,12 +24,12 @@ export class AuthService {
   private readonly RESEND_COOLDOWN = 3 * 60 * 1000; // 3분
 
   constructor(
+    @Inject(forwardRef(() => UsersService))
     private usersService: UsersService,
     private sessionService: SessionService,
-    private configService: ConfigService,
   ) {
     this.sesClient = new SESClient({
-      region: this.configService.get('REGION'),
+      region: process.env.REGION,
     });
   }
 
@@ -37,8 +37,8 @@ export class AuthService {
     email: string,
     verificationToken: string,
   ): Promise<void> {
-    const verificationLink = `${this.configService.get('FRONTEND_URL')}/verify-email?token=${verificationToken}`;
-    const sourceEmail = this.configService.get('SMTP_FROM');
+    const verificationLink = `${process.env.FRONTEND_URL}/verify-email?token=${verificationToken}`;
+    const sourceEmail = process.env.SMTP_FROM;
 
     const params = {
       Source: `Second Brain <${sourceEmail}>`,
@@ -142,7 +142,7 @@ export class AuthService {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'lax',
-        domain: this.configService.get('COOKIE_DOMAIN'),
+        domain: process.env.COOKIE_DOMAIN,
         maxAge: 24 * 60 * 60 * 1000, // 24시간
       });
     }

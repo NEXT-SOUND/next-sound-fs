@@ -1,16 +1,11 @@
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import { InjectModel, Model } from 'nestjs-dynamoose';
 import { v4 as uuidv4 } from 'uuid';
 
-
-
 import { Injectable } from '@nestjs/common';
-
-
 
 import { CreateUserInput } from '../model/create-user.input';
 import { User, UserKey } from '../model/user.model';
-
 
 @Injectable()
 export class UsersService {

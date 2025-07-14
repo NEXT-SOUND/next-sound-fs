@@ -1,27 +1,20 @@
 import { Strategy, VerifyCallback } from 'passport-google-oauth20';
 
-
-
-import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { Inject, Injectable, forwardRef } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 
-
-
 import { AuthService } from '../auth.service';
-
 
 @Injectable()
 export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
   constructor(
-    // @ts-expect-error - ConfigService is not defined in the global scope
-    private _configService: ConfigService,
+    @Inject(forwardRef(() => AuthService))
     private authService: AuthService,
   ) {
     super({
-      clientID: _configService.get('GOOGLE_CLIENT_ID')!,
-      clientSecret: _configService.get('GOOGLE_CLIENT_SECRET')!,
-      callbackURL: `${_configService.get('BACKEND_URL')}/auth/google/callback`,
+      clientID: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      callbackURL: `${process.env.BACKEND_URL}/auth/google/callback`,
       scope: ['email', 'profile'],
       passReqToCallback: true,
     });
