@@ -11,6 +11,7 @@ import { Button } from "@/ui/button";
 import { useColorScheme } from "@/utils/theme/useColorSchema";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "../contexts/AuthContext";
+import { AppProviders } from "../providers/music-player-provider";
 
 const readexPro = Readex_Pro({
   subsets: ["latin"],
@@ -23,23 +24,25 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <ThemeProvider>
         <AuthProvider>
-          <Head>
-            <title>Onstage</title>
-            <meta
-              name="Someone get inspired by your music"
-              content="Onstage is a platform for artists to showcase their work and connect with fans."
-            />
-            <link rel="icon" href="/favicon.ico" />
-          </Head>
-          <main
-            className={cn(
-              readexPro.variable,
-              "transition duration-500 flex-1 bg-background overflow-x-hidden",
-            )}
-          >
-            <Component {...pageProps} />
-          </main>
-          <Toaster />
+          <AppProviders>
+            <Head>
+              <title>MusicApp</title>
+              <meta
+                name="Modern music streaming experience"
+                content="MusicApp is a modern music streaming platform with Spotify-like design."
+              />
+              <link rel="icon" href="/favicon.ico" />
+            </Head>
+            <main
+              className={cn(
+                readexPro.variable,
+                "transition duration-500 flex-1 bg-background overflow-x-hidden",
+              )}
+            >
+              <Component {...pageProps} />
+            </main>
+            <Toaster />
+          </AppProviders>
         </AuthProvider>
       </ThemeProvider>
     </>
