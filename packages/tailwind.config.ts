@@ -122,6 +122,15 @@ export default {
         modal: {
           DEFAULT: "hsl(var(--modal-background))",
         },
+        spotify: {
+          green: "hsl(var(--spotify-green))",
+          "green-hover": "hsl(var(--spotify-green-hover))",
+          black: "hsl(var(--spotify-black))",
+          "dark-gray": "hsl(var(--spotify-dark-gray))",
+          gray: "hsl(var(--spotify-gray))",
+          "light-gray": "hsl(var(--spotify-light-gray))",
+          white: "hsl(var(--spotify-white))",
+        },
       },
       borderWidth: {
         hairline: hairlineWidth(),

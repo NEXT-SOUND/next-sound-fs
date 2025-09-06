@@ -1,21 +1,28 @@
 import * as React from 'react';
-import { useRouter } from 'next/router';
-import { useAuth } from '../../contexts/AuthContext';
+import { useRouter } from 'expo-router';
 import { LoginScreen } from 'app/screens/auth/login';
 
 const LoginPage = () => {
   const router = useRouter();
-  const { login, isLoading, isAuthenticated } = useAuth();
-
-  React.useEffect(() => {
-    if (isAuthenticated) {
-      router.push('/');
-    }
-  }, [isAuthenticated, router]);
+  
+  // Mock auth functions - replace with actual auth implementation
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const handleLogin = async (email: string, password: string) => {
-    await login(email, password);
-    router.push('/');
+    setIsLoading(true);
+    try {
+      // Implement actual login logic here
+      console.log('Login attempt:', { email, password });
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Navigate to home screen after successful login
+      router.replace('/(tabs)/');
+    } catch (error) {
+      console.error('Login error:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleNavigateToRegister = () => {
@@ -32,7 +39,7 @@ const LoginPage = () => {
       onNavigateToRegister={handleNavigateToRegister}
       onNavigateToForgotPassword={handleNavigateToForgotPassword}
       isLoading={isLoading}
-      isWeb={true}
+      isWeb={false}
     />
   );
 };
