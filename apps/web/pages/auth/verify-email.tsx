@@ -11,15 +11,7 @@ const VerifyEmailPage = () => {
   const [isResending, setIsResending] = React.useState(false);
   const [email, setEmail] = React.useState('');
 
-  React.useEffect(() => {
-    const { token } = router.query;
-    
-    if (token && typeof token === 'string') {
-      verifyEmailToken(token);
-    }
-  }, [router.query]);
-
-  const verifyEmailToken = async (token: string) => {
+  const verifyEmailToken = React.useCallback(async (token: string) => {
     setVerificationStatus('verifying');
     
     try {
@@ -37,7 +29,15 @@ const VerifyEmailPage = () => {
       const errorMessage = error.response?.data?.message || '이메일 인증에 실패했습니다.';
       toast.error(errorMessage);
     }
-  };
+  }, [router]);
+
+  React.useEffect(() => {
+    const { token } = router.query;
+    
+    if (token && typeof token === 'string') {
+      verifyEmailToken(token);
+    }
+  }, [router.query, verifyEmailToken]);
 
   const handleResendEmail = async () => {
     if (!email.trim()) {

@@ -37,7 +37,9 @@ export const TextVariants = cva(`tracking-tight`, {
   },
 });
 
-export type TextProps = SlottableTextProps & VariantProps<typeof TextVariants>;
+export type TextProps = SlottableTextProps & VariantProps<typeof TextVariants> & {
+  children?: React.ReactNode;
+};
 
 const Text = React.forwardRef<TextRef, TextProps>(
   ({ className, asChild = false, ...props }, ref) => {
