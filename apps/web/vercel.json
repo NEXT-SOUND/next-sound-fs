@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "pages/**/*.js": {
+      "runtime": "nodejs18.x"
+    },
+    ".next/server/**/*.js": {
+      "runtime": "nodejs18.x"
+    }
+  }
+}

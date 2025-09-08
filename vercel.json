@@ -1,12 +1,14 @@
 {
-  "version": 2,
-  "buildCommand": "npx turbo run build --filter=web",
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "yarn turbo run build --filter=web",
   "outputDirectory": "apps/web/.next",
-  "installCommand": "yarn install --frozen-lockfile",
-  "ignoreCommand": "git diff --quiet HEAD^ HEAD ./apps/web",
+  "installCommand": "yarn install",
   "framework": null,
   "functions": {
-    "apps/web/pages/api/**/*.ts": {
+    "apps/web/pages/**/*.js": {
+      "runtime": "nodejs18.x"
+    },
+    "apps/web/.next/server/**/*.js": {
       "runtime": "nodejs18.x"
     }
   }

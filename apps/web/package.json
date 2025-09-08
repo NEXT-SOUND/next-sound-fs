@@ -8,6 +8,9 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "dependencies": {
     "@expo/next-adapter": "^6.0.0",
     "app": "*",
@@ -21,10 +24,8 @@
     "i18next-http-backend": "^2.6.2",
     "lucide-react": "^0.525.0",
     "next": "14.2.4",
-    "next-compose-plugins": "^2.2.1",
     "next-i18next": "^15.3.1",
     "next-themes": "^0.4.3",
-    "next-transpile-modules": "^10.0.1",
     "raf": "^3.4.1",
     "react": "^18",
     "react-dom": "^18",
