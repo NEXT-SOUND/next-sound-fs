@@ -32,7 +32,8 @@
     "react-hot-toast": "^2.5.2",
     "react-i18next": "^15.5.3",
     "react-native-web": "^0.19.12",
-    "ui": "*"
+    "ui": "*",
+    "design-system": "*"
   },
   "devDependencies": {
     "@types/node": "^20",

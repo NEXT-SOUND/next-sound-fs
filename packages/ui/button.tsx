@@ -21,6 +21,7 @@ const buttonVariants = cva(
         link: "web:underline-offset-4 web:hover:underline web:focus:underline ",
         translucent: "bg-translucent active:opacity-80 border-white-30 border",
         white: "bg-white-60 active:opacity-80 ",
+        spotify: "bg-spotify-green web:hover:bg-spotify-green-hover active:bg-spotify-green-hover",
       },
       size: {
         default: "h-10 px-4 py-2 native:h-10 native:px-5",
@@ -62,6 +63,7 @@ const buttonTextVariants = cva(
         link: "text-black-80 group-active:underline",
         translucent: "text-white",
         white: "text-white-foreground",
+        spotify: "text-black",
       },
       size: {
         default: "text-base",

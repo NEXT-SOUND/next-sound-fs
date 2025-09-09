@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Home } from "app/screens/home";
 import AuthButton from '../components/AuthButton';
+import { MusicPlayerDemo } from '../components/MusicPlayerDemo';
 
 const HomePage = () => {
   return (
@@ -16,8 +17,15 @@ const HomePage = () => {
       </header>
       
       {/* 메인 콘텐츠 */}
-      <main>
-        <Home />
+      <main className="max-w-6xl mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div>
+            <Home />
+          </div>
+          <div>
+            <MusicPlayerDemo />
+          </div>
+        </div>
       </main>
     </div>
   );
