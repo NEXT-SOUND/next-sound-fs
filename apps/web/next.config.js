@@ -6,6 +6,9 @@ const { i18n } = require("./next-i18next.config");
 module.exports = withExpo({
   i18n,
   reactStrictMode: true,
+  // output: "export", // Full-Stack 모드에서는 주석 처리
+  // trailingSlash: true,
+  // distDir: "out",
   images: {
     remotePatterns: [
       {

@@ -1,60 +1,64 @@
 import * as React from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { authApi } from '../../lib/api';
+import { authApi, useAuth } from "lib/api";
 import toast from 'react-hot-toast';
 import { Mail, CheckCircle, AlertCircle, RotateCcw } from 'lucide-react';
 
 const VerifyEmailPage = () => {
   const router = useRouter();
-  const [verificationStatus, setVerificationStatus] = React.useState<'pending' | 'verifying' | 'success' | 'error'>('pending');
-  const [isResending, setIsResending] = React.useState(false);
-  const [email, setEmail] = React.useState('');
+  const [verificationStatus, setVerificationStatus] = React.useState<
+    "pending" | "verifying" | "success" | "error"
+  >("pending");
+  const [email, setEmail] = React.useState("");
 
-  const verifyEmailToken = React.useCallback(async (token: string) => {
-    setVerificationStatus('verifying');
-    
-    try {
-      const response = await authApi.verifyEmail(token);
-      setVerificationStatus('success');
-      toast.success(response.message || '이메일 인증이 완료되었습니다.');
-      
-      // 3초 후 로그인 페이지로 리다이렉트
-      setTimeout(() => {
-        router.push('/auth/login');
-      }, 3000);
-      
-    } catch (error: any) {
-      setVerificationStatus('error');
-      const errorMessage = error.response?.data?.message || '이메일 인증에 실패했습니다.';
-      toast.error(errorMessage);
-    }
-  }, [router]);
+  // TanStack Query hooks 사용
+  const { verifyEmailMutation, resendVerificationMutation } = useAuth();
+
+  const verifyEmailToken = React.useCallback(
+    async (token: string) => {
+      setVerificationStatus("verifying");
+
+      try {
+        const response = await verifyEmailMutation.mutateAsync(token);
+        setVerificationStatus("success");
+        toast.success(response.message || "이메일 인증이 완료되었습니다.");
+
+        // 3초 후 로그인 페이지로 리다이렉트
+        setTimeout(() => {
+          router.push("/auth/login");
+        }, 3000);
+      } catch (error: any) {
+        setVerificationStatus("error");
+        const errorMessage =
+          error.response?.data?.message || "이메일 인증에 실패했습니다.";
+        toast.error(errorMessage);
+      }
+    },
+    [router, verifyEmailMutation],
+  );
 
   React.useEffect(() => {
     const { token } = router.query;
-    
-    if (token && typeof token === 'string') {
+
+    if (token && typeof token === "string") {
       verifyEmailToken(token);
     }
   }, [router.query, verifyEmailToken]);
 
   const handleResendEmail = async () => {
     if (!email.trim()) {
-      toast.error('이메일을 입력해주세요.');
+      toast.error("이메일을 입력해주세요.");
       return;
     }
 
-    setIsResending(true);
-    
     try {
-      const response = await authApi.resendVerification(email);
-      toast.success(response.message || '인증 이메일을 다시 발송했습니다.');
+      const response = await resendVerificationMutation.mutateAsync(email);
+      toast.success(response.message || "인증 이메일을 다시 발송했습니다.");
     } catch (error: any) {
-      const errorMessage = error.response?.data?.message || '이메일 발송에 실패했습니다.';
+      const errorMessage =
+        error.response?.data?.message || "이메일 발송에 실패했습니다.";
       toast.error(errorMessage);
-    } finally {
-      setIsResending(false);
     }
   };
 
@@ -107,7 +111,8 @@ const VerifyEmailPage = () => {
               인증 실패
             </h1>
             <p className="text-muted-foreground mb-6">
-              이메일 인증에 실패했습니다. 인증 링크가 유효하지 않거나 만료되었을 수 있습니다.
+              이메일 인증에 실패했습니다. 인증 링크가 유효하지 않거나 만료되었을
+              수 있습니다.
             </p>
             <div className="space-y-4">
               <div>
@@ -121,12 +126,14 @@ const VerifyEmailPage = () => {
               </div>
               <button
                 onClick={handleResendEmail}
-                disabled={isResending}
+                disabled={resendVerificationMutation.isPending}
                 className="w-full h-12 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium"
               >
-                {isResending ? '발송 중...' : '인증 이메일 다시 받기'}
+                {resendVerificationMutation.isPending
+                  ? "발송 중..."
+                  : "인증 이메일 다시 받기"}
               </button>
-              <Link 
+              <Link
                 href="/auth/login"
                 className="block text-center text-primary hover:underline"
               >
@@ -146,7 +153,8 @@ const VerifyEmailPage = () => {
               이메일을 확인하세요
             </h1>
             <p className="text-muted-foreground mb-6">
-              회원가입이 완료되었습니다. 이메일로 발송된 인증 링크를 클릭하여 계정을 활성화하세요.
+              회원가입이 완료되었습니다. 이메일로 발송된 인증 링크를 클릭하여
+              계정을 활성화하세요.
             </p>
             <div className="space-y-4">
               <div>
@@ -160,12 +168,14 @@ const VerifyEmailPage = () => {
               </div>
               <button
                 onClick={handleResendEmail}
-                disabled={isResending}
+                disabled={resendVerificationMutation.isPending}
                 className="w-full h-12 px-4 py-2 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium"
               >
-                {isResending ? '발송 중...' : '인증 이메일 다시 받기'}
+                {resendVerificationMutation.isPending
+                  ? "발송 중..."
+                  : "인증 이메일 다시 받기"}
               </button>
-              <Link 
+              <Link
                 href="/auth/login"
                 className="block text-center text-primary hover:underline"
               >
