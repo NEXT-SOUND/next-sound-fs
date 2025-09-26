@@ -2,7 +2,7 @@ import * as dynamoose from 'dynamoose';
 import { Schema } from 'dynamoose/dist/Schema';
 import { TableOptionsOptional } from 'dynamoose/dist/Table';
 import * as fs from 'fs';
-import * as glob from 'glob-promise';
+import { glob } from 'glob';
 import * as yaml from 'js-yaml';
 import * as path from 'path';
 
@@ -26,7 +26,7 @@ async function main() {
   const slsResources: { Resources: Record<string, any> } = { Resources: {} };
 
   // find all the files that match the given pattern
-  const files = await glob.promise(matchPattern);
+  const files = await glob(matchPattern);
   await Promise.all(
     files.map(async (file) => {
       console.log('detected:', file);

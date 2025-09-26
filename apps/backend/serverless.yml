@@ -1,10 +1,10 @@
-service: aws-nestjs-starter
+service: ${env:SERVICE_NAME, 'aws-nestjs-starter'}
 
 provider:
   name: aws
   runtime: nodejs20.x
-  stage: ${opt:stage, 'dev'}
-  region: ${opt:region, 'us-east-1'}
+  stage: ${env:STAGE, 'dev'}
+  region: ${env:REGION, 'us-east-1'}
   environment:
     SERVICE: ${self:service}
     STAGE: ${self:provider.stage}
@@ -34,7 +34,7 @@ plugins:
 
 custom:
   dotenv:
-    path: .env.${opt:stage, 'dev'}
+    path: .env.${env:STAGE, 'dev'}
   dynamodb:
     stages:
       - ${self:provider.stage}

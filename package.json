@@ -26,8 +26,7 @@
   },
   "resolutions": {
     "react": "18.3.1",
-    "react-native": "0.76.2",
-    "react-native-web": "~0.19.13",
+    "react-dom": "18.3.1",
     "tailwindcss": "^3.4.1",
     "tailwindcss-animate": "^1.0.7"
   },
@@ -35,9 +34,7 @@
     "class-variance-authority": "^0.7.1",
     "dayjs": "^1.11.13",
     "lucide-react": "^0.469.0",
-    "moti": "^0.29.0",
     "react-i18next": "^15.5.3",
-    "solito": "^4.3.0",
     "tailwindcss-animate": "^1.0.7",
     "zustand": "^5.0.1"
   }

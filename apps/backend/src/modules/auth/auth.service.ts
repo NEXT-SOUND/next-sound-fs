@@ -3,12 +3,16 @@ import * as bcrypt from 'bcryptjs';
 import { Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 
+
+
 import {
   Inject,
   Injectable,
   InternalServerErrorException,
   forwardRef,
 } from '@nestjs/common';
+
+
 
 import { UsersService } from '../user/service/user.service';
 import { User } from '../user/types';
@@ -17,6 +21,10 @@ import { AuthResponse } from './dto/auth.response';
 import { RegisterInput } from './dto/register.input';
 import { EmailVerificationRequiredException } from './exceptions/email-verification-required.exception';
 import { SessionService } from './session.service';
+
+
+
+
 
 @Injectable()
 export class AuthService {
@@ -41,13 +49,13 @@ export class AuthService {
     const sourceEmail = process.env.SMTP_FROM;
 
     const params = {
-      Source: `Second Brain <${sourceEmail}>`,
+      Source: `inStage <${sourceEmail}>`,
       Destination: {
         ToAddresses: [email],
       },
       Message: {
         Subject: {
-          Data: '🧠 Second Brain - 이메일 인증',
+          Data: '🥁 inStage - 이메일 인증',
           Charset: 'UTF-8',
         },
         Body: {
@@ -138,13 +146,19 @@ export class AuthService {
     const sessionId = await this.sessionService.createSession(user.id);
 
     if (response) {
-      response.cookie('sessionId', sessionId, {
+      const cookieOptions: any = {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'lax',
-        domain: process.env.COOKIE_DOMAIN,
         maxAge: 24 * 60 * 60 * 1000, // 24시간
-      });
+      };
+
+      // 프로덕션 환경에서만 도메인 설정
+      if (process.env.NODE_ENV === 'production' && process.env.COOKIE_DOMAIN) {
+        cookieOptions.domain = process.env.COOKIE_DOMAIN;
+      }
+
+      response.cookie('sessionId', sessionId, cookieOptions);
     }
 
     return {
