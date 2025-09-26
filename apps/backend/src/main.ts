@@ -1,3 +1,5 @@
+import cookieParser from 'cookie-parser';
+
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 
@@ -6,6 +8,9 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe({ forbidUnknownValues: true }));
+
+  // 쿠키 파싱 미들웨어 설정
+  app.use(cookieParser());
 
   // CORS 설정 - credentials를 포함한 요청 허용
   app.enableCors({
@@ -17,4 +22,5 @@ async function bootstrap() {
 
   await app.listen(5024);
 }
+
 bootstrap();

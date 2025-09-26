@@ -5,12 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 
 
-import {
-  Inject,
-  Injectable,
-  InternalServerErrorException,
-  forwardRef,
-} from '@nestjs/common';
+import { Inject, Injectable, InternalServerErrorException, forwardRef } from '@nestjs/common';
 
 
 
@@ -149,12 +144,13 @@ export class AuthService {
       const cookieOptions: any = {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        sameSite: 'lax',
+        sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax',
         maxAge: 24 * 60 * 60 * 1000, // 24시간
+        path: '/',
       };
 
-      // 프로덕션 환경에서만 도메인 설정
-      if (process.env.NODE_ENV === 'production' && process.env.COOKIE_DOMAIN) {
+      // 도메인 설정
+      if (process.env.COOKIE_DOMAIN) {
         cookieOptions.domain = process.env.COOKIE_DOMAIN;
       }
 

@@ -21,18 +21,26 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = React.useState<User | null>(null);
   const [isLoading, setIsLoading] = React.useState(true);
+  const [isCheckingAuth, setIsCheckingAuth] = React.useState(false);
 
   const checkAuth = async () => {
+    // 이미 체크 중이면 중복 호출 방지
+    if (isCheckingAuth) return;
+    
     try {
+      setIsCheckingAuth(true);
       setIsLoading(true);
-      const isValid = await authApi.checkSession();
-      if (!isValid) {
+      const response = await authApi.checkSession();
+      if (response && response.user) {
+        setUser(response.user);
+      } else {
         setUser(null);
       }
     } catch (error) {
       setUser(null);
     } finally {
       setIsLoading(false);
+      setIsCheckingAuth(false);
     }
   };
 

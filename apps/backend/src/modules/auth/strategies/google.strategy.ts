@@ -1,9 +1,17 @@
 import { Strategy, VerifyCallback } from 'passport-google-oauth20';
 
+
+
 import { Inject, Injectable, forwardRef } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 
+
+
 import { AuthService } from '../auth.service';
+
+
+
+
 
 @Injectable()
 export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
@@ -21,18 +29,32 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
   }
 
   async validate(
+    req: any,
     accessToken: string,
     refreshToken: string,
     profile: any,
     done: VerifyCallback,
   ): Promise<any> {
-    const result = await this.authService.handleOAuthLogin(
-      profile,
-      'google',
-      undefined,
-      accessToken,
-      refreshToken,
-    );
-    done(null, result);
+    try {
+      const result = await this.authService.handleOAuthLogin(
+        profile,
+        'google',
+        undefined,
+        accessToken,
+        refreshToken,
+      );
+
+      // 사용자 정보와 토큰을 함께 반환
+      const userWithTokens = {
+        ...result.user,
+        accessToken,
+        refreshToken,
+      };
+
+      done(null, userWithTokens);
+    } catch (error) {
+      console.error('Google validation error:', error);
+      done(error, null);
+    }
   }
 }

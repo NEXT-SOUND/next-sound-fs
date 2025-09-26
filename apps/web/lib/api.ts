@@ -41,29 +41,29 @@ export interface AuthResponse {
 export const authApi = {
   // 로그인
   login: async (data: LoginData): Promise<AuthResponse> => {
-    const response = await apiClient.post('/auth/login', data);
+    const response = await apiClient.post("/auth/login", data);
     return response.data;
   },
 
   // 회원가입
   register: async (data: RegisterData): Promise<{ message: string }> => {
-    const response = await apiClient.post('/auth/register', data);
+    const response = await apiClient.post("/auth/register", data);
     return response.data;
   },
 
   // 로그아웃
   logout: async (): Promise<{ message: string }> => {
-    const response = await apiClient.post('/auth/logout');
+    const response = await apiClient.post("/auth/logout");
     return response.data;
   },
 
   // 세션 확인
-  checkSession: async (): Promise<boolean> => {
+  checkSession: async (): Promise<AuthResponse | null> => {
     try {
-      const response = await apiClient.get('/auth/check-session');
+      const response = await apiClient.get("/auth/check-session");
       return response.data;
     } catch {
-      return false;
+      return null;
     }
   },
 
@@ -75,7 +75,9 @@ export const authApi = {
 
   // 인증 이메일 재전송
   resendVerification: async (email: string): Promise<{ message: string }> => {
-    const response = await apiClient.post('/auth/resend-verification', { email });
+    const response = await apiClient.post("/auth/resend-verification", {
+      email,
+    });
     return response.data;
   },
 };

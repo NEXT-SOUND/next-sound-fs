@@ -10,54 +10,85 @@ import GLOBAL_ENV from "constants/globalEnv";
 const LoginPage = () => {
   const router = useRouter();
   const { login, isLoading, isAuthenticated } = useAuth();
-  
+
   const [formData, setFormData] = React.useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
   const [showPassword, setShowPassword] = React.useState(false);
   const [errors, setErrors] = React.useState<Record<string, string>>({});
 
   React.useEffect(() => {
     if (isAuthenticated) {
-      router.push('/');
+      router.push("/");
     }
   }, [isAuthenticated, router]);
 
+  // URL 파라미터에서 오류 메시지 처리
+  React.useEffect(() => {
+    const { error } = router.query;
+    if (error) {
+      let errorMessage = "";
+      switch (error) {
+        case "cancelled":
+          errorMessage = "로그인이 취소되었습니다.";
+          break;
+        case "oauth_failed":
+          errorMessage = "OAuth 로그인에 실패했습니다. 다시 시도해주세요.";
+          break;
+        case "login_failed":
+          errorMessage = "로그인 처리 중 오류가 발생했습니다.";
+          break;
+        default:
+          errorMessage = "로그인 중 오류가 발생했습니다.";
+      }
+
+      // 토스트 메시지 표시 (react-hot-toast가 설치되어 있다면)
+      if (typeof window !== "undefined") {
+        import("react-hot-toast").then(({ default: toast }) => {
+          toast.error(errorMessage);
+        });
+      }
+
+      // URL에서 error 파라미터 제거
+      router.replace("/auth/login", undefined, { shallow: true });
+    }
+  }, [router]);
+
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
-    
+
     if (!formData.email) {
-      newErrors.email = '이메일을 입력해주세요.';
+      newErrors.email = "이메일을 입력해주세요.";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = '올바른 이메일 형식을 입력해주세요.';
+      newErrors.email = "올바른 이메일 형식을 입력해주세요.";
     }
-    
+
     if (!formData.password) {
-      newErrors.password = '비밀번호를 입력해주세요.';
+      newErrors.password = "비밀번호를 입력해주세요.";
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) return;
-    
+
     try {
       await login(formData.email, formData.password);
-      router.push('/');
+      router.push("/");
     } catch (error) {
       // 에러는 useAuth에서 토스트로 처리됨
     }
   };
 
   const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) {
-      setErrors(prev => ({ ...prev, [field]: '' }));
+      setErrors((prev) => ({ ...prev, [field]: "" }));
     }
   };
 

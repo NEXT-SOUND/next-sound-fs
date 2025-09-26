@@ -15,6 +15,10 @@ import { GoogleAuthGuard } from './guards/google-auth.guard';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { SessionAuthGuard } from './guards/session-auth.guard';
 
+
+
+
+
 interface RequestWithUser extends Request {
   user: Omit<User, 'password'>;
 }
@@ -58,14 +62,24 @@ export class AuthController {
     @Req() req: RequestWithUser,
     @Res() res: Response,
   ): Promise<void> {
-    await this.authService.handleOAuthLogin(
-      req.user,
-      'google',
-      res,
-      req.user.accessToken,
-      req.user.refreshToken,
-    );
-    res.redirect(`${process.env.FRONTEND_URL}/auth/callback`);
+    try {
+      if (!req.user) {
+        res.redirect(
+          `${process.env.FRONTEND_URL}/auth/login?error=oauth_failed`,
+        );
+        return;
+      }
+
+      const user = req.user as any;
+
+      // Strategy에서 이미 OAuth 처리가 완료되었으므로 세션만 생성
+      await this.authService.login(user, res);
+
+      res.redirect(`${process.env.FRONTEND_URL}/auth/callback`);
+    } catch (error) {
+      console.error('Google auth callback error:', error);
+      res.redirect(`${process.env.FRONTEND_URL}/auth/login?error=oauth_failed`);
+    }
   }
 
   @Get('github')
@@ -107,7 +121,10 @@ export class AuthController {
 
   @UseGuards(SessionAuthGuard)
   @Get('check-session')
-  async checkSession(): Promise<boolean> {
-    return true;
+  async checkSession(@Req() req: RequestWithUser): Promise<AuthResponse> {
+    // SessionAuthGuard에서 이미 사용자 정보를 검증했으므로 반환
+    return {
+      user: req.user,
+    };
   }
 }
