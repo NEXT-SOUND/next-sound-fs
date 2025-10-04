@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Home } from "app/screens/home";
+import { Home } from "@/app/home";
 import AuthButton from '../components/AuthButton';
 
 const HomePage = () => {

@@ -1,9 +1,9 @@
 import React from "react";
-import Gradient from "components/gradient";
+import Gradient from "@/ui/gradient";
 import { View } from "ui/view";
 import { IS_WEB, useWindowSize } from "utils/screen";
 import { useSafeArea } from "utils/safe-area";
-import { BlurImage } from "components/blur-image";
+import { BlurImage } from "@/ui/blur-image";
 import useAverageColor from "utils/useAverageColor";
 import { Text } from "@/ui/text";
 import { ProfileLayout } from "@/components/profile-layout";

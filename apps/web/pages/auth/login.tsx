@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useAuth } from '../../contexts/AuthContext';
 
 import { Eye, EyeOff } from "lucide-react";
-import GLOBAL_ENV from "constants/globalEnv";
+import GLOBAL_ENV from "constants/global-env";
 
 const LoginPage = () => {
   const router = useRouter();

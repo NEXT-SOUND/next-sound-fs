@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import GLOBAL_ENV from "../../../packages/constants/globalEnv";
+import GLOBAL_ENV from "../../../packages/constants/global-env";
 
 const API_BASE_URL = GLOBAL_ENV.BACKEND_URL;
 

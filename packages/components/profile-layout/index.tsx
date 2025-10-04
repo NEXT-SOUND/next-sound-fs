@@ -5,7 +5,7 @@ import { useWindowSize, IS_WEB } from "@/utils/screen";
 import useAverageColor from "@/utils/useAverageColor";
 import { MotiView } from "moti";
 import { SolitoImage } from "solito/image";
-import { BlurImage } from "../blur-image";
+import { BlurImage } from "../../ui/blur-image";
 import { ScrollView } from "react-native";
 
 interface Props {

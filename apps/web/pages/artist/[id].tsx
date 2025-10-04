@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
-import { ArtistProfileLayout } from "@/app/screens/artist/[id]";
+import { ArtistProfileLayout } from "app/[id]";
 
 //@ts-ignore: next-line
 function Home() {
