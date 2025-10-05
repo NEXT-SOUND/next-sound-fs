@@ -1,0 +1,42 @@
+scalar Date
+
+type User {
+  id: ID!
+  email: String!
+  name: String!
+  provider: UserProvider!
+  isEmailVerified: Boolean!
+  createdAt: Date!
+  updatedAt: Date!
+}
+
+enum UserProvider {
+  local
+  google
+  github
+}
+
+type AuthResponse {
+  user: User!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+input RegisterInput {
+  email: String!
+  password: String!
+  name: String!
+}
+
+type Query {
+  checkSession: AuthResponse!
+}
+
+type Mutation {
+  login(input: LoginInput!): AuthResponse!
+  register(input: RegisterInput!): String!
+  logout: String!
+}

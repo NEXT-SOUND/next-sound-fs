@@ -1,1 +1,1 @@
-export { ArtistProfileLayout as default } from "@/app/[id]";
+export { ArtistProfileLayout as default } from "@/app/artist/[id]";

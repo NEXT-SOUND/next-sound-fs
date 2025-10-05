@@ -3,15 +3,22 @@ import { DocumentNode } from "graphql";
 import {
   useQueryClient,
   useQuery as useTanstackQuery,
+  useSuspenseQuery as useTanstackSuspenseQuery,
   useMutation as useTanstackMutation,
   QueryObserverOptions,
   UseMutationOptions,
 } from "@tanstack/react-query";
-import { OperationVariables, FetchResult, ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
+import {
+  OperationVariables,
+  FetchResult,
+  ApolloClient,
+  HttpLink,
+  InMemoryCache,
+} from "@apollo/client";
 import { useCallback } from "react";
-import PUBLIC_PAGES from 'constants/public-pages';
-import { queryClient } from './query-client';
-import GLOBAL_ENV from 'constants/global-env';
+import PUBLIC_PAGES from "constants/public-pages";
+import { queryClient } from "./query-client";
+import GLOBAL_ENV from "constants/global-env";
 
 const createApolloClient = () =>
   new ApolloClient({
@@ -21,7 +28,7 @@ const createApolloClient = () =>
     cache: new InMemoryCache(),
   });
 
-export type ApolloQueryResult<T> = {
+export type ApolloQueryResult<T, R = any> = {
   data?: T | null | undefined;
   loading?: boolean;
   networkStatus?: number;
@@ -48,9 +55,9 @@ const handle401Error = () => {
 
   const currentPath = window.location.pathname + window.location.search;
   if (!currentPath.includes("/sign-in") && !currentPath.includes("/sign-up")) {
-      localStorage.setItem("redirect", currentPath);
+    localStorage.setItem("redirect", currentPath);
     //   TODO:
-      window.location.href = "/sign-in";
+    window.location.href = "/sign-in";
     // history.push("/sign-in");
   }
 };
@@ -70,7 +77,7 @@ const getGql = async <TResult, TVariables extends OperationVariables>(
   const client = createApolloClient();
   const result = await client.query<TResult, TVariables>({
     query,
-    variables: variables as TVariables, 
+    variables: variables as TVariables,
     fetchPolicy: "network-only",
   });
 
@@ -248,6 +255,90 @@ const useQuery = <
   return { ...props, queryKey, setData };
 };
 
+const useSuspenseQuery = <
+  TResult,
+  TVariables extends OperationVariables,
+  TSelectData = ApolloQueryResult<TResult>,
+>(
+  query: DocumentNode,
+  options?: QueryHookOptions<
+    ApolloQueryResult<TResult>,
+    TVariables,
+    TSelectData
+  >,
+) => {
+  const queryKey = getQueryKey(query, options?.variables);
+
+  const props = useTanstackSuspenseQuery<
+    Readonly<ApolloQueryResult<TResult>>,
+    TVariables,
+    TSelectData
+  >({
+    queryKey,
+    queryFn: async ({ signal }) => {
+      const client = createApolloClient();
+      const result = await client
+        .query<TResult, TVariables>({
+          query,
+          variables: options?.variables as TVariables,
+          context: {
+            fetchOptions: {
+              signal,
+            },
+          },
+          fetchPolicy: "no-cache",
+          errorPolicy: "all",
+        })
+        .catch((error: any) => {
+          if (
+            error?.errors?.[0]?.errorType === "UnauthorizedException" ||
+            error?.message?.includes("Token has expired") ||
+            error?.statusCode === 401
+          ) {
+            handle401Error();
+          }
+          throw error;
+        });
+
+      return result as Readonly<ApolloQueryResult<TResult>>;
+    },
+    staleTime: 600000,
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
+    retry: (failureCount, error: any) => {
+      // Retry only if the error is a system overload (429) and the failure count is less than 3.
+      if (error.response?.status === 429 && failureCount < 3) {
+        console.log(`Attempt ${failureCount + 1}: Throttled. Retrying...`);
+        return true;
+      }
+      // All other errors result in an immediate failure.
+      return false;
+    },
+    // `retryDelay` option: Determines the wait time between retries.
+    retryDelay: (_attemptIndex, error: any) => {
+      // Prefer the time specified by the server in the 'retry-after' header, default to 5 seconds if not provided.
+      const retryAfterSeconds = error.response?.headers?.["retry-after"]
+        ? parseInt(error.response.headers["retry-after"], 10)
+        : 5;
+
+      const delay = retryAfterSeconds * 1000; // Convert to milliseconds
+
+      // Show a toast notification to the user before starting the retry.
+      return delay;
+    },
+    ...options,
+  });
+
+  const setData = useCallback(
+    (updater: TResult | ((oldData: TResult | undefined) => TResult)) => {
+      queryClient.setQueryData(queryKey, updater);
+    },
+    [queryKey],
+  );
+
+  return { ...props, queryKey, setData };
+};
+
 const useMutation = <TResult, TInput extends OperationVariables = any>(
   mutation: DocumentNode,
   options?: MutationHookOptions<TResult, TInput>,
@@ -335,5 +426,43 @@ type LazyQueryHookOptions<TData, TVariables, TSelectData = TData> = {
   "queryKey" | "queryFn" | "enabled"
 >;
 
-export { useQuery, useMutation, useLazyQuery, getGql };
-export type { QueryHookOptions, MutationHookOptions, LazyQueryHookOptions };
+type SuspenseQueryHookOptions<TData, TVariables, TSelectData = TData> = {
+  variables?: TVariables;
+  queryKey?: readonly unknown[];
+} & Omit<QueryObserverOptions<TData, any, TSelectData>, "queryKey" | "queryFn">;
+
+type MutationFunction<TResult, TVariables extends OperationVariables> = (
+  variables: TVariables,
+) => Promise<ApolloQueryResult<TResult>>;
+
+type MutationResult<TResult> = {
+  data?: TResult | null | undefined;
+  errors?: any[];
+};
+
+type BaseMutationOptions<TResult, TVariables extends OperationVariables> = {
+  variables: TVariables;
+};
+
+type SkipToken = never;
+const skipToken: SkipToken = null as never;
+
+export {
+  useQuery,
+  useMutation,
+  useLazyQuery,
+  useSuspenseQuery,
+  getGql,
+  skipToken,
+};
+export type {
+  ApolloQueryResult as QueryResult,
+  QueryHookOptions,
+  MutationHookOptions,
+  LazyQueryHookOptions,
+  SuspenseQueryHookOptions,
+  MutationFunction,
+  MutationResult,
+  BaseMutationOptions,
+  SkipToken,
+};

@@ -1,0 +1,19 @@
+overwrite: true
+schema: "packages/services/schema.graphql"
+documents: "packages/services/gql/**/*.ts"
+generates:
+  packages/services/types/generated.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+    config:
+      withHooks: true
+      withComponent: false
+      withHOC: false
+      apolloReactHooksImportFrom: "@/services/fetcher"
+      scalars:
+        Date: string
+        DateTime: string
+      skipTypename: false
+      withResultType: true

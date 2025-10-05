@@ -4,7 +4,7 @@ import "../global.css";
 import { AppProps } from "next/app";
 import "raf/polyfill";
 import "@/utils/i18n/i18n.web";
-import { Readex_Pro } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import ThemeProvider from "@/utils/theme/ThemeProvider.web";
 import { cn } from "@/ui/utils/cn";
 import { Button } from "@/ui/button";
@@ -12,10 +12,10 @@ import { useColorScheme } from "@/utils/theme/useColorSchema";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "../contexts/AuthContext";
 
-const readexPro = Readex_Pro({
+const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["200", "300", "400", "500", "600", "700"],
-  variable: "--font-readex-pro",
+  variable: "--font-montserrat",
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -24,16 +24,16 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ThemeProvider>
         <AuthProvider>
           <Head>
-            <title>Onstage</title>
+            <title>Instage</title>
             <meta
               name="Someone get inspired by your music"
-              content="Onstage is a platform for artists to showcase their work and connect with fans."
+              content="Instage is a platform for artists to showcase their work and connect with fans."
             />
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <main
             className={cn(
-              readexPro.variable,
+              montserrat.variable,
               "transition duration-500 flex-1 bg-background overflow-x-hidden",
             )}
           >

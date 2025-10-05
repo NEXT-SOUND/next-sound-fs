@@ -6,6 +6,7 @@ import { PassportModule } from '@nestjs/passport';
 import { UsersModule } from '../user/user.module';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
+import { AuthResolver } from './resolver/auth.resolver';
 import { SessionSchema } from './schema/session.schema';
 import { SessionService } from './session.service';
 import { GithubStrategy } from './strategies/github.strategy';
@@ -26,6 +27,7 @@ import { LocalStrategy } from './strategies/local.strategy';
   providers: [
     AuthService,
     SessionService,
+    AuthResolver,
     LocalStrategy,
     GoogleStrategy,
     GithubStrategy,

@@ -9,7 +9,8 @@
         "@/app/*": ["./app/*"],
         "@/utils/*": ["./utils/*"],
         "@/locales/*": ["../apps/web/public/locales/*"],
-        "@/lib/*": ["./lib/*"]
+        "@/lib/*": ["./lib/*"],
+        "@/services/*": ["./services/*"]
       },
       "jsx": "react-jsx"
     },

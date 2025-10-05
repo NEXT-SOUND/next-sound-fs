@@ -1,18 +1,25 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 
-
-
-import { CreateUserInput } from './create-user.input';
-
-
 export type UserKey = {
   id: string;
 };
 
-@ObjectType({ implements: CreateUserInput })
-export class User extends CreateUserInput {
-  @Field(/* istanbul ignore next */ () => ID)
+@ObjectType()
+export class User {
+  @Field(() => ID)
   id: string;
+
+  @Field()
+  email: string;
+
+  @Field()
+  name: string;
+
+  @Field()
+  provider: string;
+
+  @Field()
+  isEmailVerified: boolean;
 
   @Field()
   createdAt: Date;
@@ -20,12 +27,9 @@ export class User extends CreateUserInput {
   @Field()
   updatedAt: Date;
 
-  @Field()
-  isEmailVerified: boolean;
-
-  @Field()
+  @Field({ nullable: true })
   verificationToken?: string;
 
-  @Field()
+  @Field({ nullable: true })
   verificationTokenExpiresAt?: Date;
 }
