@@ -1,5 +1,5 @@
+import { useEffect, useState } from "react";
 import { Dimensions, Platform } from "react-native";
-import { useState, useEffect } from "react";
 import { isServerRender } from "./next-js";
 
 export const IS_WEB = Platform.OS === "web";
@@ -40,6 +40,7 @@ export function useWindowSize() {
 
       return () => window.removeEventListener("resize", observer);
     }
+    return;
   }, []);
 
   return {
