@@ -9,9 +9,8 @@ import { Inject, Injectable, InternalServerErrorException, forwardRef } from '@n
 
 
 
+import { User, UserProvider } from '../user/model/user.model';
 import { UsersService } from '../user/service/user.service';
-import { User } from '../user/types';
-import { UserProvider } from '../user/types';
 import { AuthResponse } from './dto/auth.response';
 import { RegisterInput } from './dto/register.input';
 import { EmailVerificationRequiredException } from './exceptions/email-verification-required.exception';

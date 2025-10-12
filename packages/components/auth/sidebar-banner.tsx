@@ -1,0 +1,64 @@
+import * as React from "react";
+import { SIDE_BANNER_ASSETS } from "constants/side-banner-aseets";
+import { View } from "@/ui/view";
+import { Text } from "@/ui/text";
+import Gradient from "@/ui/gradient";
+import { SolitoImage } from "solito/image";
+import { useWindowSize } from '@/utils/screen';
+import { H1, H4, H5, Large, P } from "@/ui/typography";
+import Logo from "../logo";
+import { MotiView } from "moti";
+
+interface SidebarBannerProps {
+  className?: string;
+}
+
+export function SidebarBanner({ className }: SidebarBannerProps) {
+  const [{ colors, image, title, name }] = React.useState(() => {
+    const randomIndex = Math.floor(Math.random() * SIDE_BANNER_ASSETS.length);
+    return SIDE_BANNER_ASSETS[randomIndex]!;
+  });
+
+  const { width, height } = useWindowSize();
+
+  return (
+    <View className={`relative overflow-hidden h-screen ${className || ""}`}>
+      <MotiView
+        from={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1000 }}
+        style={{ flex: 1 }}
+      >
+        <Gradient
+          colors={colors || ["#5D7A97", "#000"]}
+          width={width}
+          height={height}
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            width: "100%",
+            height: "100%",
+          }}
+        />
+        <View className="flex items-center justify-between flex-1 mt-[25%]">
+          <View className="flex flex-col items-center justify-center gap-2">
+            <H1 className="text-center">{title?.replace("<br/>", "\n")}</H1>
+            <Logo />
+          </View>
+          <SolitoImage
+            src={image || "/side-banner-1.png"}
+            alt="background"
+            height={0}
+            width={width}
+          />
+          <H5 className="absolute bottom-4 right-4 font-montBold text-beige-600">
+            {name}
+          </H5>
+        </View>
+      </MotiView>
+    </View>
+  );
+}

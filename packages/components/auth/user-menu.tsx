@@ -1,7 +1,7 @@
 import * as React from "react";
-import Link from "next/link";
-// import { useAuth } from "../contexts/AuthContext";
 import { User, LogOut, LogIn } from "lucide-react";
+import { useAuth } from "@/services/auth/use-user";
+import { Link } from "solito/link";
 
 const AuthButton = () => {
   const { user, isAuthenticated, logout, isLoading } = useAuth();
@@ -44,7 +44,7 @@ const AuthButton = () => {
   return (
     <div className="flex items-center space-x-2">
       <Link
-        href="/auth/login"
+        href="/auth/sign-in"
         className="flex items-center space-x-1 px-4 py-2 text-sm bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
       >
         <LogIn className="w-4 h-4" />
@@ -52,7 +52,7 @@ const AuthButton = () => {
       </Link>
 
       <Link
-        href="/auth/register"
+        href="/auth/sign-up"
         className="flex items-center space-x-1 px-4 py-2 text-sm bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80 transition-colors"
       >
         <User className="w-4 h-4" />

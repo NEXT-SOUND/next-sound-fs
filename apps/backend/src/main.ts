@@ -20,7 +20,7 @@ async function bootstrap() {
     allowedHeaders: ['Content-Type', 'Authorization'],
   });
 
-  await app.listen(5024);
+  await app.listen(5027);
 }
 
 bootstrap();

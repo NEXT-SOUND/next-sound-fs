@@ -4,8 +4,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import { ArtistProfileLayout } from "@/app/artist/[id]";
 
-//@ts-ignore: next-line
-function Home() {
+function ArtistPage() {
   const { t } = useTranslation("common");
   const { t: ogT } = useTranslation("common");
 
@@ -42,4 +41,4 @@ export async function getStaticPaths() {
   };
 }
 
-export default Home;
+export default ArtistPage;

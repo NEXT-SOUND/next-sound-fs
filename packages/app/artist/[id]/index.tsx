@@ -22,12 +22,12 @@ export function ArtistProfileLayout() {
       header={
         <View className="flex flex-col">
           <View>
-            <Text className="text-white text-5xl md:text-8xl sm:text-7xl font-readexBold">
+            <Text className="text-white text-5xl md:text-8xl sm:text-7xl font-montBold">
               Rose
             </Text>
-            <Text className="text-white-80 text-2xl font-readex">@rose</Text>
+            <Text className="text-white-80 text-2xl font-mont">@rose</Text>
           </View>
-          <Text className="text-white-50 text-lg font-readex mt-4">
+          <Text className="text-white-50 text-lg font-mont mt-4">
             YG Entertainment
           </Text>
         </View>
@@ -59,7 +59,7 @@ export function ArtistProfileLayout() {
                 <SectionTitle>
                   {t("onlyForFans", { fanName: "블링크" })}
                 </SectionTitle>
-                <Text className="dark:text-white-50 text-black-50 text-base sm:text-lg font-readex mt-1">
+                <Text className="dark:text-white-50 text-black-50 text-base sm:text-lg font-mont mt-1">
                   블링크가 되면 Rose의 특별한 소식을 볼 수 있어요.
                 </Text>
                 <Button className="mt-4 w-36">블링크 되기</Button>

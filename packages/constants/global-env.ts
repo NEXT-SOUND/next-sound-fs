@@ -9,7 +9,7 @@ const GLOBAL_ENV = {
     FRONTEND_URL: "https://next-sound-fe-web.vercel.app/",
   },
   development: {
-    BACKEND_URL: "http://localhost:5024",
+    BACKEND_URL: "http://localhost:5027",
     FRONTEND_URL: "http://localhost:3000",
   },
 }[process.env.NODE_ENV || "development"]!;

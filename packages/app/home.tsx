@@ -2,7 +2,7 @@ import { Link, TextLink } from "solito/link";
 import Gradient from "@/ui/gradient";
 import { Text } from "@/ui/text";
 import { View } from "ui/view";
-import { SCREEN_WIDTH, useWindowSize } from "utils/screen";
+import { useWindowSize } from "utils/screen";
 
 export function Home() {
   const { width } = useWindowSize();

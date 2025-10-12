@@ -49,6 +49,10 @@
     --neutral-background: 0, 0%, 91%;
     --neutral-foreground: 0, 0%, 32%;
     --modal-background: 0, 0%, 100%;
+    --beige-400: 0, 0%, 85%;
+    --beige-500: 21, 10%, 80%;
+    --beige-600: 30, 17%, 74%;
+    --beige-700: 0, 3%, 72%;
   }
 
   .dark:root {
@@ -97,6 +101,10 @@
     --neutral-background: 0, 0%, 32%;
     --neutral-foreground: 0, 0%, 98%;
     --modal-background: 228, 17%, 18%;
+    --beige-400: 0, 0%, 85%;
+    --beige-500: 21, 10%, 80%;
+    --beige-600: 30, 17%, 74%;
+    --beige-700: 0, 3%, 72%;
   }
 }
 /* Keep the format */

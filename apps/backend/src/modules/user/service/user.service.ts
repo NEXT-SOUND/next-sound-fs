@@ -19,14 +19,16 @@ export class UsersService {
       ? await bcrypt.hash(createUserDto.password, 10)
       : undefined;
 
-    return this.userModel.create({
+    const userData = {
       id: uuidv4(),
       ...createUserDto,
       password: hashedPassword,
       isEmailVerified: false,
       createdAt: new Date(),
       updatedAt: new Date(),
-    });
+    };
+
+    return await this.userModel.create(userData);
   }
 
   async findByEmail(email: string): Promise<User | null> {
@@ -56,7 +58,7 @@ export class UsersService {
     id: string,
     isVerified: boolean,
   ): Promise<User> {
-    return this.userModel.update({ id } as UserKey, {
+    return await this.userModel.update({ id } as UserKey, {
       isEmailVerified: isVerified,
     });
   }
@@ -66,7 +68,7 @@ export class UsersService {
     verificationToken: string | undefined,
     verificationTokenExpiresAt: Date | undefined,
   ): Promise<User> {
-    return this.userModel.update({ id } as UserKey, {
+    return await this.userModel.update({ id } as UserKey, {
       verificationToken,
       verificationTokenExpiresAt,
     });
@@ -77,10 +79,18 @@ export class UsersService {
     accessToken?: string,
     refreshToken?: string,
   ): Promise<User> {
-    return this.userModel.update({ id } as UserKey, {
-      accessToken,
-      refreshToken,
+    const updateData: any = {
       updatedAt: new Date(),
-    });
+    };
+
+    if (accessToken !== undefined) {
+      updateData.accessToken = accessToken;
+    }
+
+    if (refreshToken !== undefined) {
+      updateData.refreshToken = refreshToken;
+    }
+
+    return await this.userModel.update({ id } as UserKey, updateData);
   }
 }

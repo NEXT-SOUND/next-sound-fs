@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Home } from "@/app/home";
-import AuthButton from '../components/AuthButton';
+import AuthButton from "@/components/auth/user-menu";
 
 const HomePage = () => {
   return (

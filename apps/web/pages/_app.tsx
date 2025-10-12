@@ -10,7 +10,8 @@ import { cn } from "@/ui/utils/cn";
 import { Button } from "@/ui/button";
 import { useColorScheme } from "@/utils/theme/useColorSchema";
 import { Toaster } from "react-hot-toast";
-import { AuthProvider } from "../contexts/AuthContext";
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from '@/services/query-client';
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -22,25 +23,25 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <ThemeProvider>
-        <AuthProvider>
-          <Head>
-            <title>Instage</title>
-            <meta
-              name="Someone get inspired by your music"
-              content="Instage is a platform for artists to showcase their work and connect with fans."
-            />
-            <link rel="icon" href="/favicon.ico" />
-          </Head>
-          <main
-            className={cn(
-              montserrat.variable,
-              "transition duration-500 flex-1 bg-background overflow-x-hidden",
-            )}
-          >
-            <Component {...pageProps} />
-          </main>
+        <QueryClientProvider client={queryClient}>
+        <Head>
+          <title>Instage</title>
+          <meta
+            name="Someone get inspired by your music"
+            content="Instage is a platform for artists to showcase their work and connect with fans."
+          />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <main
+          className={cn(
+            montserrat.variable,
+            "transition duration-500 flex-1 bg-background overflow-x-hidden",
+          )}
+        >
+          <Component {...pageProps} />
+        </main>
+          </QueryClientProvider>
           <Toaster />
-        </AuthProvider>
       </ThemeProvider>
     </>
   );

@@ -6,13 +6,13 @@ export const IS_WEB = Platform.OS === "web";
 export const IS_IOS = Platform.OS === "ios";
 export const IS_ANDROID = Platform.OS === "android";
 
-export const SCREEN_WIDTH = IS_WEB
+const SCREEN_WIDTH = IS_WEB
   ? typeof window !== "undefined"
     ? window.innerWidth
     : 0
   : Dimensions.get("window").width;
 
-export const SCREEN_HEIGHT = IS_WEB
+const SCREEN_HEIGHT = IS_WEB
   ? typeof window !== "undefined"
     ? window.innerHeight
     : 0

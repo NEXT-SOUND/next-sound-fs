@@ -1,5 +1,11 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 
+
+
+
+
+export type UserProvider = 'local' | 'google' | 'github';
+
 export type UserKey = {
   id: string;
 };
@@ -12,11 +18,23 @@ export class User {
   @Field()
   email: string;
 
+  // password는 GraphQL에서 노출하지 않음 (보안상 이유)
+  password?: string;
+
   @Field()
   name: string;
 
   @Field()
-  provider: string;
+  provider: UserProvider;
+
+  @Field({ nullable: true })
+  providerId?: string;
+
+  @Field({ nullable: true })
+  accessToken?: string;
+
+  @Field({ nullable: true })
+  refreshToken?: string;
 
   @Field()
   isEmailVerified: boolean;

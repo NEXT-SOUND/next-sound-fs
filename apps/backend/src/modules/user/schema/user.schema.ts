@@ -1,5 +1,9 @@
 import { Schema } from 'dynamoose';
 
+
+
+
+
 export const UserSchema = new Schema({
   id: {
     type: String,
@@ -28,6 +32,14 @@ export const UserSchema = new Schema({
     required: true,
   },
   providerId: {
+    type: String,
+    required: false,
+  },
+  accessToken: {
+    type: String,
+    required: false,
+  },
+  refreshToken: {
     type: String,
     required: false,
   },

@@ -246,8 +246,16 @@ const useQuery = <
   });
 
   const setData = useCallback(
-    (updater: TResult | ((oldData: TResult | undefined) => TResult)) => {
-      queryClient.setQueryData(queryKey, updater);
+    (updater: (oldData: TResult | undefined) => TResult) => {
+      queryClient.setQueryData<ApolloQueryResult<TResult>>(
+        queryKey,
+        (oldData) => ({
+          ...oldData,
+          data: {
+            ...updater(oldData?.data as TResult),
+          } as TResult,
+        }),
+      );
     },
     [queryKey],
   );

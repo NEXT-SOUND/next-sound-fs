@@ -17,20 +17,20 @@ export default {
     },
     extend: {
       fontWeight: {
-        readexExtraLight: "200",
-        readexLight: "300",
-        readex: "400",
-        readexMedium: "500",
-        readexSemiBold: "600",
-        readexBold: "700",
+        montThin: "200",
+        montLight: "300",
+        mont: "400",
+        montMedium: "500",
+        montSemiBold: "600",
+        montBold: "700",
       },
       fontFamily: {
-        readexExtraLight: ["ReadexPro_200ExtraLight", "var(--font-readex-pro)"],
-        readexLight: ["ReadexPro_300Light", "var(--font-readex-pro)"],
-        readex: ["ReadexPro_400Regular", "var(--font-readex-pro)"],
-        readexMedium: ["ReadexPro_500Medium", "var(--font-readex-pro)"],
-        readexSemiBold: ["ReadexPro_600SemiBold", "var(--font-readex-pro)"],
-        readexBold: ["ReadexPro_700Bold", "var(--font-readex-pro)"],
+        montThin: ["montserrat_200ExtraLight", "var(--font-montserrat)"],
+        montLight: ["montserrat_300Light", "var(--font-montserrat)"],
+        mont: ["montserrat_400Regular", "var(--font-montserrat)"],
+        montMedium: ["montserrat_500Medium", "var(--font-montserrat)"],
+        montSemiBold: ["montserrat_600SemiBold", "var(--font-montserrat)"],
+        montBold: ["montserrat_700Bold", "var(--font-montserrat)"],
       },
       fontSize: {
         "3xs": ["8px", "12px"],
@@ -121,6 +121,12 @@ export default {
         },
         modal: {
           DEFAULT: "hsl(var(--modal-background))",
+        },
+        beige: {
+          400: "hsl(var(--beige-400))",
+          500: "hsl(var(--beige-500))",
+          600: "hsl(var(--beige-600))",
+          700: "hsl(var(--beige-700))",
         },
       },
       borderWidth: {
