@@ -1,9 +1,9 @@
-import { useColorScheme } from "./theme/useColorSchema";
-import ColorUtil from "./colorUtils";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSharedValue, withTiming } from "react-native-reanimated";
 import { NAV_THEME } from "utils/theme/constants";
+import ColorUtil from "./colorUtils";
 import { getImageColors } from "./fast-image-color";
+import { useColorScheme } from "./theme/useColorSchema";
 
 export interface Colors {
   background: string;
@@ -26,8 +26,8 @@ const fetchAverageColor = async (
   options?: Options,
 ): Promise<Colors> => {
   return getImageColors(imageUrl, {
-    fallback: options?.fallbackColors?.average,
-    quality: options?.quality,
+    fallback: options?.fallbackColors?.average ?? "#FFFFFF69",
+    quality: options?.quality as "lowest" | "low" | "high" | "highest",
   }).catch((e) => {
     console.error(e);
     throw e;

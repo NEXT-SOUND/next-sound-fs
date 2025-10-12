@@ -1,24 +1,24 @@
 import showToast from "@/lib/toast";
-import { DocumentNode } from "graphql";
 import {
-  useQueryClient,
-  useQuery as useTanstackQuery,
-  useSuspenseQuery as useTanstackSuspenseQuery,
-  useMutation as useTanstackMutation,
-  QueryObserverOptions,
-  UseMutationOptions,
-} from "@tanstack/react-query";
-import {
-  OperationVariables,
-  FetchResult,
   ApolloClient,
+  FetchResult,
   HttpLink,
   InMemoryCache,
+  OperationVariables,
 } from "@apollo/client";
-import { useCallback } from "react";
-import PUBLIC_PAGES from "constants/public-pages";
-import { queryClient } from "./query-client";
+import {
+  QueryObserverOptions,
+  UseMutationOptions,
+  useQueryClient,
+  useMutation as useTanstackMutation,
+  useQuery as useTanstackQuery,
+  useSuspenseQuery as useTanstackSuspenseQuery,
+} from "@tanstack/react-query";
 import GLOBAL_ENV from "constants/global-env";
+import PUBLIC_PAGES from "constants/public-pages";
+import { DocumentNode } from "graphql";
+import { useCallback } from "react";
+import { queryClient } from "./query-client";
 
 const createApolloClient = () =>
   new ApolloClient({
@@ -29,11 +29,11 @@ const createApolloClient = () =>
   });
 
 export type ApolloQueryResult<T, R = any> = {
-  data?: T | null | undefined;
-  loading?: boolean;
-  networkStatus?: number;
-  stale?: boolean;
-  errors?: any[];
+  data: T | null | undefined;
+  loading?: boolean | undefined;
+  networkStatus?: number | undefined;
+  stale?: boolean | undefined;
+  errors?: any[] | undefined;
 };
 
 type TVariables<T> = T;
@@ -456,21 +456,21 @@ type SkipToken = never;
 const skipToken: SkipToken = null as never;
 
 export {
-  useQuery,
-  useMutation,
-  useLazyQuery,
-  useSuspenseQuery,
   getGql,
   skipToken,
+  useLazyQuery,
+  useMutation,
+  useQuery,
+  useSuspenseQuery,
 };
 export type {
-  ApolloQueryResult as QueryResult,
-  QueryHookOptions,
-  MutationHookOptions,
-  LazyQueryHookOptions,
-  SuspenseQueryHookOptions,
-  MutationFunction,
-  MutationResult,
   BaseMutationOptions,
+  LazyQueryHookOptions,
+  MutationFunction,
+  MutationHookOptions,
+  MutationResult,
+  QueryHookOptions,
+  ApolloQueryResult as QueryResult,
   SkipToken,
+  SuspenseQueryHookOptions,
 };

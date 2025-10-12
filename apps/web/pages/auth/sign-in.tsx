@@ -1,9 +1,9 @@
-import React from "react";
-import { useRouter } from "next/router";
+import { SignInPage } from "@/app/auth/sign-in";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
-import { SignInPage } from "@/app/auth/sign-in";
+import { useRouter } from "next/router";
+import React from "react";
 
 //@ts-ignore: next-line
 function Login() {

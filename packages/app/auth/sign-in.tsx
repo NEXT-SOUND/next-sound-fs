@@ -1,7 +1,6 @@
-import * as React from "react";
-import { View } from "@/ui/view";
-import { SidebarBanner } from "@/components/auth/sidebar-banner";
 import { LoginForm } from "@/components/auth/login-form";
+import { SidebarBanner } from "@/components/auth/sidebar-banner";
+import { View } from "@/ui/view";
 
 export function SignInPage() {
   return (

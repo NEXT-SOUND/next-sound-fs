@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
-import { BlurImageProps } from "./types";
-import { useWindowSize } from "utils/screen";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import { useWindowSize } from "utils/screen";
+import { BlurImageProps } from "./types";
 
 export function BlurImage({
   src,

@@ -4,7 +4,9 @@ import { Colors } from "../useAverageColor";
 
 class ImageColors {
   getColors(
+    // @ts-ignore FIXME:
     imageUrl: string,
+    // @ts-ignore FIXME:
     options?: {
       fallback?: string;
       quality?: "lowest" | "low" | "high" | "highest";
@@ -29,7 +31,7 @@ export const getImageColors = async (
 ): Promise<Colors> => {
   return new ImageColors()
     .getColors(imageUrl, {
-      fallback: options?.fallback,
+      fallback: options?.fallback ?? "#FFFFFF69",
       quality: options?.quality ?? "low",
     })
     .then((colors) => {

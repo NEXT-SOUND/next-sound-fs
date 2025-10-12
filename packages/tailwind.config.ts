@@ -1,4 +1,3 @@
-// @ts-expect-error - no types
 import { hairlineWidth } from "nativewind/theme";
 
 export default {
