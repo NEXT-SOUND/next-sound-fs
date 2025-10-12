@@ -2,11 +2,10 @@ import { TrackCarouselItem } from "@/components/track-carousel-item.tsx";
 import { Button } from "@/ui/button";
 import { Carousel } from "@/ui/carousel";
 import { Text } from "@/ui/text";
-import { H1, SectionTitle } from "@/ui/typography";
+import { SectionTitle } from "@/ui/typography";
 import { View } from "@/ui/view";
 import { useTranslation } from "@/utils/i18n";
 import { useWindowSize } from "@/utils/screen";
-import { SolitoImage } from "solito/image";
 
 const DummyData = [
   {

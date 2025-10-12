@@ -12,7 +12,12 @@
     "clean": "turbo run clean && rm -rf node_modules",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "codegen": "graphql-codegen --config codegen.yml",
-    "codegen:watch": "graphql-codegen --config codegen.yml --watch"
+    "codegen:watch": "graphql-codegen --config codegen.yml --watch",
+    "lint": "eslint packages apps/web/pages apps/web/lib apps/native/app --ext .ts,.tsx,.js,.jsx --ignore-pattern '**/node_modules/**' --ignore-pattern '**/.next/**' --ignore-pattern '**/build/**'",
+    "lint:fix": "eslint packages apps/web/pages apps/web/lib apps/native/app --ext .ts,.tsx,.js,.jsx --fix --ignore-pattern '**/node_modules/**' --ignore-pattern '**/.next/**' --ignore-pattern '**/build/**'",
+    "type-check": "tsc --noEmit --project apps/web/tsconfig.json",
+    "check-all": "npm run type-check && npm run lint",
+    "fix-all": "npm run lint:fix && npm run format"
   },
   "workspaces": [
     "apps/*",
@@ -20,15 +25,18 @@
   ],
   "packageManager": "yarn@1.22.19",
   "devDependencies": {
+    "@eslint/compat": "^1.4.0",
     "@graphql-codegen/cli": "^6.0.0",
     "@graphql-codegen/typescript": "^5.0.1",
     "@graphql-codegen/typescript-operations": "^5.0.1",
     "@graphql-codegen/typescript-react-apollo": "^4.3.3",
     "clsx": "^2.1.1",
-    "eslint-plugin-unused-imports": "^4.1.4",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-unused-imports": "^4.2.0",
     "prettier": "^3.3.2",
     "tailwind-merge": "^2.5.2",
-    "turbo": "^2.0.4"
+    "turbo": "^2.0.4",
+    "typescript-eslint": "^8.46.0"
   },
   "resolutions": {
     "react": "18.3.1",

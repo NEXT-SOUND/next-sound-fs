@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { Eye, EyeOff } from "lucide-react";
-import { useForm, Controller } from "react-hook-form";
-import GLOBAL_ENV from "constants/global-env";
 import { useAuth } from "@/services/auth/use-user";
-import { View } from "@/ui/view";
-import { Text } from "@/ui/text";
 import { Button } from "@/ui/button";
 import { Input } from "@/ui/input";
+import { Text } from "@/ui/text";
+import { View } from "@/ui/view";
+import GLOBAL_ENV from "constants/global-env";
+import { Eye, EyeOff } from "lucide-react";
+import * as React from "react";
+import { Controller, useForm } from "react-hook-form";
 
 type FormData = {
   name: string;
@@ -27,14 +27,14 @@ export function SignUpPage() {
     formState: { errors },
   } = useForm<FormData>({
     defaultValues: {
-      name: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
     },
   });
 
-  const password = watch('password');
+  const password = watch("password");
 
   const onSubmit = async (data: FormData) => {
     try {

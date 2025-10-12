@@ -1,11 +1,10 @@
 import * as React from "react";
 import { SIDE_BANNER_ASSETS } from "constants/side-banner-aseets";
 import { View } from "@/ui/view";
-import { Text } from "@/ui/text";
 import Gradient from "@/ui/gradient";
 import { SolitoImage } from "solito/image";
 import { useWindowSize } from '@/utils/screen';
-import { H1, H4, H5, Large, P } from "@/ui/typography";
+import { H1, H5 } from "@/ui/typography";
 import Logo from "../logo";
 import { MotiView } from "moti";
 

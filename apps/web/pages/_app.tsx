@@ -1,15 +1,15 @@
-import Head from "next/head";
-import { appWithTranslation } from "next-i18next";
-import "../global.css";
-import { AppProps } from "next/app";
-import "raf/polyfill";
-import "@/utils/i18n/i18n.web";
-import { Montserrat } from "next/font/google";
-import ThemeProvider from "@/utils/theme/ThemeProvider.web";
+import { queryClient } from "@/services/query-client";
 import { cn } from "@/ui/utils/cn";
+import "@/utils/i18n/i18n.web";
+import ThemeProvider from "@/utils/theme/ThemeProvider.web";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { appWithTranslation } from "next-i18next";
+import { AppProps } from "next/app";
+import { Montserrat } from "next/font/google";
+import Head from "next/head";
+import "raf/polyfill";
 import { Toaster } from "react-hot-toast";
-import { QueryClientProvider } from '@tanstack/react-query';
-import { queryClient } from '@/services/query-client';
+import "../global.css";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -22,28 +22,27 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <ThemeProvider>
         <QueryClientProvider client={queryClient}>
-        <Head>
-          <title>Instage</title>
-          <meta
-            name="Someone get inspired by your music"
-            content="Instage is a platform for artists to showcase their work and connect with fans."
-          />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <main
-          className={cn(
-            montserrat.variable,
-            "transition duration-500 flex-1 bg-background overflow-x-hidden",
-          )}
-        >
-          <Component {...pageProps} />
-        </main>
-          </QueryClientProvider>
-          <Toaster />
+          <Head>
+            <title>Instage</title>
+            <meta
+              name="Someone get inspired by your music"
+              content="Instage is a platform for artists to showcase their work and connect with fans."
+            />
+            <link rel="icon" href="/favicon.ico" />
+          </Head>
+          <main
+            className={cn(
+              montserrat.variable,
+              "transition duration-500 flex-1 bg-background overflow-x-hidden",
+            )}
+          >
+            <Component {...pageProps} />
+          </main>
+        </QueryClientProvider>
+        <Toaster />
       </ThemeProvider>
     </>
   );
 }
-
 
 export default appWithTranslation(MyApp);

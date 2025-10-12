@@ -1,10 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
 import { BlurImageProps } from "./types";
 import { useWindowSize } from "utils/screen";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 export function BlurImage({
   src,

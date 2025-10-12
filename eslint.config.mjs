@@ -1,12 +1,15 @@
-import globals from "globals";
-import pluginJs from "@eslint/js";
-import tseslint from "typescript-eslint";
-import pluginReactConfig from "eslint-plugin-react/configs/recommended.js";
 import { fixupConfigRules } from "@eslint/compat";
-
+import pluginJs from "@eslint/js";
+import pluginReactConfig from "eslint-plugin-react/configs/recommended.js";
+import unusedImports from "eslint-plugin-unused-imports";
+import globals from "globals";
+import tseslint from "typescript-eslint";
 
 export default [
   {
+    plugins: {
+      "unused-imports": unusedImports,
+    },
     rules: {
       "no-unused-vars": "off",
       "unused-imports/no-unused-imports": "error",
@@ -19,6 +22,7 @@ export default [
           argsIgnorePattern: "^_",
         },
       ],
+      "react/react-in-jsx-scope": "off", // Next.js 17+ JSX Transform
     },
   },
   { files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"] },
@@ -28,4 +32,9 @@ export default [
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   ...fixupConfigRules(pluginReactConfig),
+  {
+    rules: {
+      "react/react-in-jsx-scope": "off", // Next.js 17+ JSX Transform
+    },
+  },
 ];

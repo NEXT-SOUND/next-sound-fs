@@ -5,7 +5,6 @@ import {
   ThemeProvider as NativeThemeProvider,
 } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Platform } from "react-native";
 import { NAV_THEME } from "./constants";
 import { useColorScheme } from ".";
 import { setAndroidNavigationBar } from "utils/android-navigation-bar";

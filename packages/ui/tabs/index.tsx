@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Button } from "../button";
 import { Pressable } from "../primitives/slot";
 import { Text } from "../text";
 import { cn } from "../utils/cn";

@@ -1,5 +1,4 @@
-import { Link, TextLink } from "solito/link";
-import Gradient from "@/ui/gradient";
+import { Link } from "solito/link";
 import { Text } from "@/ui/text";
 import { View } from "ui/view";
 import { useWindowSize } from "utils/screen";

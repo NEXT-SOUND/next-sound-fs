@@ -1,7 +1,6 @@
 import {
   View as ReactNativeView,
   ViewProps as RNViewProps,
-  SafeAreaView,
 } from "react-native";
 import { cssInterop } from "nativewind";
 import { cn } from "ui/utils/cn";

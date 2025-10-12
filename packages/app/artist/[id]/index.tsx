@@ -1,17 +1,10 @@
-import React from "react";
-import Gradient from "@/ui/gradient";
-import { View } from "ui/view";
-import { IS_WEB, useWindowSize } from "utils/screen";
-import { useSafeArea } from "utils/safe-area";
-import { BlurImage } from "@/ui/blur-image";
-import useAverageColor from "utils/useAverageColor";
-import { Text } from "@/ui/text";
 import { ProfileLayout } from "@/components/profile-layout";
-import { PopularTracks } from "./overview/popular-tracks";
+import { Button } from "@/ui/button";
 import Tabs from "@/ui/tabs";
+import { Text } from "@/ui/text";
 import { SectionTitle } from "@/ui/typography";
 import { useTranslation } from "@/utils/i18n";
-import { Button } from "@/ui/button";
+import { View } from "ui/view";
 import ArtistOverview from "./overview";
 
 export function ArtistProfileLayout() {

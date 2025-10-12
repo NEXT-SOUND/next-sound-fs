@@ -1,8 +1,7 @@
-import React from "react";
+import { SignUpPage } from "@/app/auth/sign-up";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
-import { SignUpPage } from "@/app/auth/sign-up";
 
 //@ts-ignore: next-line
 function Register() {
