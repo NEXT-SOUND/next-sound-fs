@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Home } from "@/app/home";
 import AuthButton from "@/components/auth/user-menu";
 
@@ -14,7 +13,7 @@ const HomePage = () => {
           <AuthButton />
         </div>
       </header>
-      
+
       {/* 메인 콘텐츠 */}
       <main>
         <Home />

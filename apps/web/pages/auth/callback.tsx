@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { useRouter } from 'next/router';
 import { useAuth } from "@/services/auth/use-user";
-import toast from "react-hot-toast";
 import { Loader2 } from "lucide-react";
+import { useRouter } from "next/router";
+import * as React from "react";
+import toast from "react-hot-toast";
 
 const AuthCallbackPage = () => {
   const router = useRouter();
