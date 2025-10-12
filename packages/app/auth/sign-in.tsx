@@ -7,7 +7,7 @@ import { View } from "@/ui/view";
 export function SignInPage() {
   return (
     <View className="min-h-screen flex flex-row">
-      <View className="lg:hidden flex-1 absolute p-3 w-full border-b border-border flex flex-row gap-2 items-center">
+      <View className="md:hidden flex-1 absolute p-3 w-full border-b border-border flex flex-row gap-2 items-center">
         <Logo size="xl" />
         <Small className="text-black-50">Next Music Cloud</Small>
       </View>
