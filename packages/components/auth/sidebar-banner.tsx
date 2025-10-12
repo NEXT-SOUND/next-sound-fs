@@ -1,12 +1,12 @@
-import * as React from "react";
-import { SIDE_BANNER_ASSETS } from "constants/side-banner-aseets";
-import { View } from "@/ui/view";
 import Gradient from "@/ui/gradient";
-import { SolitoImage } from "solito/image";
-import { useWindowSize } from '@/utils/screen';
 import { H1, H5 } from "@/ui/typography";
-import Logo from "../logo";
+import { View } from "@/ui/view";
+import { useWindowSize } from "@/utils/screen";
+import { SIDE_BANNER_ASSETS } from "constants/side-banner-aseets";
 import { MotiView } from "moti";
+import * as React from "react";
+import { SolitoImage } from "solito/image";
+import Logo from "../logo";
 
 interface SidebarBannerProps {
   className?: string;
@@ -42,10 +42,12 @@ export function SidebarBanner({ className }: SidebarBannerProps) {
             height: "100%",
           }}
         />
-        <View className="flex items-center justify-between flex-1 mt-[25%]">
+        <View className="flex items-center justify-between flex-1 mt-[10vh]">
           <View className="flex flex-col items-center justify-center gap-2">
-            <H1 className="text-center">{title?.replace("<br/>", "\n")}</H1>
-            <Logo />
+            <H1 className="text-center text-white">
+              {title?.replace("<br/>", "\n")}
+            </H1>
+            <Logo color="white" />
           </View>
           <SolitoImage
             src={image || "/side-banner-1.png"}

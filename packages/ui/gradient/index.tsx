@@ -1,6 +1,6 @@
 import { Canvas, LinearGradient, Rect, vec } from "@shopify/react-native-skia";
-import type { GradientProps } from "./types";
 import { cssInterop } from "nativewind";
+import type { GradientProps } from "./types";
 
 const TwCanvas = cssInterop(Canvas, {
   className: {
@@ -33,7 +33,7 @@ const Gradient = ({
         colors={colors}
         start={vec(0, 0)}
         end={vec(0, height)}
-        positions={positions}
+        positions={positions || []}
       />
     </Rect>
   </TwCanvas>
