@@ -47,7 +47,7 @@ export function SidebarBanner({ className }: SidebarBannerProps) {
           <H1 className="text-center text-white pb-2">
             {title?.replace("<br/>", "\n")}
           </H1>
-          <Logo color="white" />
+          <Logo color="white" size="2xl" />
         </View>
         <SolitoImage
           src={image || "/side-banner-1.png"}

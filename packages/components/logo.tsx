@@ -3,11 +3,11 @@ import { cn } from "@/ui/utils/cn";
 import { View } from "@/ui/view";
 
 interface LogoProps {
-  size?: "sm" | "md" | "lg" | "xl";
+  size?: "sm" | "md" | "lg" | "xl" | "2xl";
   color?: "white" | "black";
 }
 
-const Logo = ({ size = "xl", color = "black" }: LogoProps) => {
+const Logo = ({ size = "2xl", color = "black" }: LogoProps) => {
   return (
     <View className="flex flex-row items-baseline">
       <Text
@@ -17,10 +17,11 @@ const Logo = ({ size = "xl", color = "black" }: LogoProps) => {
           {
             "text-white": color === "white",
             "text-black": color === "black",
-            "text-sm": size === "sm",
-            "text-md": size === "md",
-            "text-lg": size === "lg",
-            "text-xl": size === "xl",
+            "text-xs": size === "sm",
+            "text-sm": size === "md",
+            "text-md": size === "lg",
+            "text-base": size === "xl",
+            "text-xl": size === "2xl",
           },
         )}
       >
@@ -34,6 +35,7 @@ const Logo = ({ size = "xl", color = "black" }: LogoProps) => {
           "text-md": size === "md",
           "text-lg": size === "lg",
           "text-xl": size === "xl",
+          "text-2xl": size === "2xl",
         })}
       >
         Stage
