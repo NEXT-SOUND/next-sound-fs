@@ -16,7 +16,7 @@ type FormData = {
 };
 
 export function SignUpPage() {
-  const { register, isLoading, isAuthenticated } = useAuth();
+  const { register, isLoading } = useAuth();
   const [showPassword, setShowPassword] = React.useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
 
@@ -40,7 +40,7 @@ export function SignUpPage() {
     try {
       await register(data.email, data.password, data.name);
       // 성공시 리다이렉트는 useAuth에서 처리
-    } catch (error) {
+    } catch {
       // 에러는 useAuth에서 토스트로 처리됨
     }
   };

@@ -1,13 +1,13 @@
-import React from "react";
-import { StatusBar } from "expo-status-bar";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   type Theme,
   ThemeProvider as NativeThemeProvider,
 } from "@react-navigation/native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { NAV_THEME } from "./constants";
-import { useColorScheme } from ".";
+import { StatusBar } from "expo-status-bar";
+import React from "react";
 import { setAndroidNavigationBar } from "utils/android-navigation-bar";
+import { useColorScheme } from ".";
+import { NAV_THEME } from "./constants";
 
 const LIGHT_THEME: Theme = {
   dark: false,
@@ -37,6 +37,7 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     })().finally(() => {
       // SplashScreen.hideAsync();
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

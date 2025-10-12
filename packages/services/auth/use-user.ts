@@ -1,16 +1,16 @@
 import { useCallback } from 'react';
 import {
-  useCheckSessionQuery,
-  useLoginMutation,
-  useRegisterMutation,
-  useLogoutMutation,
-  User,
   LoginInput,
   RegisterInput,
+  useCheckSessionQuery,
+  useLoginMutation,
+  useLogoutMutation,
+  User,
+  useRegisterMutation,
 } from "../types/generated";
 
 // Re-export generated types for convenience
-export type { User, LoginInput, RegisterInput };
+export type { LoginInput, RegisterInput, User };
 
 export const useLogin = () => {
   const {
@@ -22,12 +22,8 @@ export const useLogin = () => {
 
   const login = useCallback(
     async (email: string, password: string) => {
-      try {
-        const result = await loginMutation({ input: { email, password } });
-        return result.data?.login?.user || null;
-      } catch (error) {
-        throw error;
-      }
+      const result = await loginMutation({ input: { email, password } });
+      return result.data?.login?.user || null;
     },
     [loginMutation],
   );
@@ -50,14 +46,10 @@ export const useRegister = () => {
 
   const register = useCallback(
     async (email: string, password: string, name: string) => {
-      try {
-        const result = await registerMutation({
-          input: { email, password, name },
-        });
-        return result.data?.register || "";
-      } catch (error) {
-        throw error;
-      }
+      const result = await registerMutation({
+        input: { email, password, name },
+      });
+      return result.data?.register || "";
     },
     [registerMutation],
   );
@@ -79,12 +71,8 @@ export const useLogout = () => {
   } = useLogoutMutation();
 
   const logout = useCallback(async () => {
-    try {
-      const result = await logoutMutation();
-      return result.data?.logout || "";
-    } catch (error) {
-      throw error;
-    }
+    const result = await logoutMutation();
+    return result.data?.logout || "";
   }, [logoutMutation]);
 
   return {

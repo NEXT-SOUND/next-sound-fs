@@ -5,8 +5,10 @@ import { Colors } from "../useAverageColor";
 class ImageColors {
   getColors(
     // @ts-ignore FIXME:
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, unused-imports/no-unused-vars
     imageUrl: string,
     // @ts-ignore FIXME:
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, unused-imports/no-unused-vars
     options?: {
       fallback?: string;
       quality?: "lowest" | "low" | "high" | "highest";

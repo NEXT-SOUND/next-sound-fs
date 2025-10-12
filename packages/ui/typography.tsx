@@ -246,6 +246,8 @@ const SectionTitle = React.forwardRef<TextRef, SlottableTextProps>(
   },
 );
 
+SectionTitle.displayName = "SectionTitle";
+
 export {
   BlockQuote,
   Code,
@@ -261,3 +263,4 @@ export {
   SectionTitle,
   Small,
 };
+

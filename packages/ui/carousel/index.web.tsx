@@ -169,7 +169,7 @@ const CarouselContent = React.forwardRef<
         )}
         {...props}
       />
-      {/* <div
+      <div
         className={cn(
           "absolute top-0 bottom-0 left-0 w-8 bg-gradient-to-r from-background to-transparent pointer-events-none",
           orientation === "horizontal" ? "block" : "hidden",
@@ -182,7 +182,7 @@ const CarouselContent = React.forwardRef<
           orientation === "horizontal" ? "block" : "hidden",
           !canScrollNext && "!opacity-0",
         )}
-      /> */}
+      />
     </div>
   );
 });
@@ -218,8 +218,9 @@ const CarouselPrevious = React.forwardRef<
 
   return (
     <Button
+      ref={ref as any}
       variant={variant}
-      size="icon"
+      size={size}
       className={cn(
         "absolute h-8 w-8 rounded-full bg-background cursor-pointer opacity-0 group-hover/carousel:opacity-100 hidden sm:flex",
         orientation === "horizontal"
@@ -247,8 +248,9 @@ const CarouselNext = React.forwardRef<
 
   return (
     <Button
+      ref={ref as any}
       variant={variant}
-      size="icon"
+      size={size}
       className={cn(
         "absolute h-8 w-8 rounded-full bg-background cursor-pointer opacity-0 group-hover/carousel:opacity-100 hidden sm:flex",
         orientation === "horizontal"

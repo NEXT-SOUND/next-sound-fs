@@ -1,4 +1,4 @@
-interface TArtist {
+export interface TArtist {
   id: string;
   name: string;
   imageUrl: string;

@@ -1,5 +1,6 @@
 import { fixupConfigRules } from "@eslint/compat";
 import pluginJs from "@eslint/js";
+import reactHooks from "eslint-plugin-react-hooks";
 import pluginReactConfig from "eslint-plugin-react/configs/recommended.js";
 import unusedImports from "eslint-plugin-unused-imports";
 import globals from "globals";
@@ -9,6 +10,7 @@ export default [
   {
     plugins: {
       "unused-imports": unusedImports,
+      "react-hooks": reactHooks,
     },
     rules: {
       "no-unused-vars": "off",
@@ -35,6 +37,11 @@ export default [
   {
     rules: {
       "react/react-in-jsx-scope": "off", // Next.js 17+ JSX Transform
+      "@typescript-eslint/ban-ts-comment": "off", // Allow @ts-ignore comments
+      "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
+      "react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
+      "@typescript-eslint/no-require-imports": "off", // Allow require() imports
+      "@typescript-eslint/no-explicit-any": "off", // Allow any type
     },
   },
 ];

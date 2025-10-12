@@ -28,6 +28,8 @@ const createApolloClient = () =>
     cache: new InMemoryCache(),
   });
 
+// @ts-ignore
+// eslint-disable-next-line unused-imports/no-unused-vars, @typescript-eslint/no-unused-vars
 export type ApolloQueryResult<T, R = any> = {
   data: T | null | undefined;
   loading?: boolean | undefined;
@@ -448,6 +450,8 @@ type MutationResult<TResult> = {
   errors?: any[];
 };
 
+// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/no-unused-vars, unused-imports/no-unused-vars
 type BaseMutationOptions<TResult, TVariables extends OperationVariables> = {
   variables: TVariables;
 };
@@ -474,3 +478,4 @@ export type {
   SkipToken,
   SuspenseQueryHookOptions,
 };
+

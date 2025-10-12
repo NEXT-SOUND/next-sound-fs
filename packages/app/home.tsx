@@ -1,11 +1,8 @@
-import { Link } from "solito/link";
 import { Text } from "@/ui/text";
+import { Link } from "solito/link";
 import { View } from "ui/view";
-import { useWindowSize } from "utils/screen";
 
 export function Home() {
-  const { width } = useWindowSize();
-
   return (
     <View className="flex-1 bg-background" edges={["top"]}>
       <View className="px-4 py-8">
@@ -17,16 +14,18 @@ export function Home() {
             음악과 함께하는 여정을 시작하세요
           </Text>
         </View>
-        
+
         <View className="space-y-4">
           <Link href="/artist/1">
-            <Text className="text-primary hover:underline">아티스트 페이지로 이동</Text>
+            <Text className="text-primary hover:underline">
+              아티스트 페이지로 이동
+            </Text>
           </Link>
-          
+
           <Link href="/auth/login">
             <Text className="text-primary hover:underline">로그인</Text>
           </Link>
-          
+
           <Link href="/auth/register">
             <Text className="text-primary hover:underline">회원가입</Text>
           </Link>
