@@ -1,6 +1,5 @@
-import * as React from "react";
-import { User, LogOut, LogIn } from "lucide-react";
 import { useAuth } from "@/services/auth/use-user";
+import { LogIn, LogOut, User } from "lucide-react";
 import { Link } from "solito/link";
 
 const AuthButton = () => {

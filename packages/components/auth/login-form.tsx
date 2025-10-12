@@ -1,16 +1,16 @@
-import * as React from "react";
-import { Eye, EyeOff } from "lucide-react";
-import { useForm, Controller } from "react-hook-form";
-import GLOBAL_ENV from "constants/global-env";
-import { SIDE_BANNER_ASSETS } from "constants/side-banner-aseets";
+import showToast from "@/lib/toast";
 import { useAuth } from "@/services/auth/use-user";
-import { View } from "@/ui/view";
-import { Text } from "@/ui/text";
 import { Button } from "@/ui/button";
 import { Input } from "@/ui/input";
-import { useLink } from "solito/link";
-import showToast from "@/lib/toast";
+import { Text } from "@/ui/text";
+import { View } from "@/ui/view";
+import GLOBAL_ENV from "constants/global-env";
+import { SIDE_BANNER_ASSETS } from "constants/side-banner-aseets";
+import { Eye, EyeOff } from "lucide-react";
+import * as React from "react";
+import { Controller, useForm } from "react-hook-form";
 import { SolitoImage } from "solito/image";
+import { useLink } from "solito/link";
 
 type FormData = {
   email: string;
@@ -25,7 +25,7 @@ export function LoginForm({ className }: LoginFormProps) {
   const { login, isLoading } = useAuth();
   const [showPassword, setShowPassword] = React.useState(false);
   const link = useLink({ href: "/" });
-  
+
   // 랜덤 배너 선택 (모바일용)
   const [randomBanner] = React.useState(() => {
     const randomIndex = Math.floor(Math.random() * SIDE_BANNER_ASSETS.length);
@@ -57,7 +57,9 @@ export function LoginForm({ className }: LoginFormProps) {
   };
 
   return (
-    <View className={`flex items-center justify-center bg-gradient-to-br from-background to-secondary/20 p-4 lg:p-8 ${className || ""}`}>
+    <View
+      className={`flex items-center justify-center bg-gradient-to-br from-background to-secondary/20 p-4 lg:p-8 ${className || ""}`}
+    >
       <View className="w-full max-w-md animate-in fade-in-0 slide-in-from-bottom-4 duration-500">
         {/* 모바일에서만 표시되는 로고 */}
         <View className="lg:hidden text-center mb-8">
