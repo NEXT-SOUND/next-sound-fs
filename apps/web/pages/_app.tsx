@@ -7,8 +7,6 @@ import "@/utils/i18n/i18n.web";
 import { Montserrat } from "next/font/google";
 import ThemeProvider from "@/utils/theme/ThemeProvider.web";
 import { cn } from "@/ui/utils/cn";
-import { Button } from "@/ui/button";
-import { useColorScheme } from "@/utils/theme/useColorSchema";
 import { Toaster } from "react-hot-toast";
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from '@/services/query-client';
