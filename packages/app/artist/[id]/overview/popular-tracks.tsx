@@ -5,7 +5,6 @@ import { Text } from "@/ui/text";
 import { SectionTitle } from "@/ui/typography";
 import { View } from "@/ui/view";
 import { useTranslation } from "@/utils/i18n";
-import { useWindowSize } from "@/utils/screen";
 
 const DummyData = [
   {
@@ -91,9 +90,6 @@ const DummyData = [
 ];
 
 const PopularTracks = () => {
-  const { width, isTablet, isMobile, isLargeScreen, isDesktop } =
-    useWindowSize();
-
   const [t] = useTranslation("artist");
   const [commonT] = useTranslation("common");
 
