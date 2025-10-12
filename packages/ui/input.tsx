@@ -2,9 +2,10 @@ import { cn } from "@/ui/utils/cn";
 import { type VariantProps, cva } from "class-variance-authority";
 import * as React from "react";
 import { TextInput } from "react-native";
+import { View } from "./view";
 
 const inputVariants = cva(
-  "web:transition-all web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2 border border-border",
+  "web:transition-all web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2 border border-border placeholder:text-placeholder",
   {
     variants: {
       variant: {
@@ -14,7 +15,7 @@ const inputVariants = cva(
       size: {
         default: "h-10 px-3 py-2",
         sm: "h-8 px-2 py-1 text-sm",
-        lg: "h-12 px-4 py-3 text-lg",
+        lg: "h-12 px-4 py-3 text-base",
       },
       radius: {
         none: "rounded-none",
@@ -28,7 +29,7 @@ const inputVariants = cva(
     defaultVariants: {
       variant: "default",
       size: "default",
-      radius: "md",
+      radius: "xl",
     },
   },
 );
@@ -41,11 +42,14 @@ type InputProps = React.ComponentPropsWithoutRef<typeof TextInput> &
   };
 
 const Input = React.forwardRef<React.ElementRef<typeof TextInput>, InputProps>(
-  ({ className, variant, size, radius, label, error, helperText, ...props }, ref) => {
+  (
+    { className, variant, size, radius, label, error, helperText, ...props },
+    ref,
+  ) => {
     return (
-      <div className="space-y-2">
+      <View className="space-y-2 w-full">
         {label && (
-          <label className="text-sm font-medium text-foreground">
+          <label className="text-sm font-montMedium text-black-50">
             {label}
           </label>
         )}
@@ -58,13 +62,11 @@ const Input = React.forwardRef<React.ElementRef<typeof TextInput>, InputProps>(
           ref={ref}
           {...props}
         />
-        {error && (
-          <p className="text-sm text-destructive">{error}</p>
-        )}
+        {error && <p className="text-sm text-destructive">{error}</p>}
         {helperText && !error && (
           <p className="text-sm text-muted-foreground">{helperText}</p>
         )}
-      </div>
+      </View>
     );
   },
 );
@@ -73,3 +75,4 @@ Input.displayName = "Input";
 
 export { Input, inputVariants };
 export type { InputProps };
+

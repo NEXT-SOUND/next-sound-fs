@@ -4,7 +4,7 @@ import { View } from "@/ui/view";
 
 export function SignInPage() {
   return (
-    <View className="min-h-screen flex">
+    <View className="min-h-screen flex flex-row">
       {/* 좌측 사이드 배너 - 데스크톱에서만 표시 */}
       <SidebarBanner className="hidden md:flex md:w-2/5" />
 

@@ -31,7 +31,7 @@ export default function Gradient({
           height,
         }}
         exit={{ opacity: animated ? 0 : 1 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.1 }}
         style={{
           // @ts-expect-error
           ...style,
@@ -41,3 +41,4 @@ export default function Gradient({
     </AnimatePresence>
   );
 }
+// FIXME: animation

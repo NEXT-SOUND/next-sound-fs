@@ -17,7 +17,8 @@
         "@/utils/*": ["./utils/*"],
         "@/locales/*": ["../apps/web/public/locales/*"],
         "@/lib/*": ["./lib/*"],
-        "@/services/*": ["./services/*"]
+        "@/services/*": ["./services/*"],
+        "@/assets/*": ["./assets/*"]
       },
       "jsx": "react-jsx"
     },

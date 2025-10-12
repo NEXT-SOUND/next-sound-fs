@@ -1,10 +1,10 @@
+import * as Slot from "@/ui/primitives/slot";
 import { Text, TextClassContext } from "@/ui/text";
 import { cn } from "@/ui/utils/cn";
 import { type VariantProps, cva } from "class-variance-authority";
+import { Loader } from "lucide-react";
 import * as React from "react";
 import { Pressable } from "react-native";
-import * as Slot from "@/ui/primitives/slot";
-import { Loader } from "lucide-react";
 
 const buttonVariants = cva(
   "group flex flex-row gap-2 items-center justify-center web:ring-offset-background web:transition-all web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2",
@@ -12,7 +12,6 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-primary web:hover:opacity-90 active:opacity-90",
-        destructive: "bg-destructive web:hover:opacity-90 active:opacity-90",
         outline:
           "border border-border web:hover:bg-accent web:hover:text-accent-foreground active:bg-accent",
         secondary: "bg-secondary web:hover:opacity-80 active:opacity-80",
@@ -34,6 +33,7 @@ const buttonVariants = cva(
       radius: {
         sm: "rounded-sm",
         lg: "rounded-lg",
+        "2xl": "rounded-2xl",
         xl: "rounded-xl",
         md: "rounded-md",
         none: "rounded-none",
@@ -49,12 +49,11 @@ const buttonVariants = cva(
 );
 
 const buttonTextVariants = cva(
-  "web:whitespace-nowrap text-base font-medium text-foreground web:transition-all",
+  "web:whitespace-nowrap font-montBold text-foreground web:transition-all",
   {
     variants: {
       variant: {
         default: "text-primary-foreground",
-        destructive: "text-destructive-foreground",
         outline: "text-foreground",
         secondary:
           "text-secondary-foreground group-active:text-secondary-foreground",
@@ -95,18 +94,37 @@ const Button = React.forwardRef<
     ref,
   ) => {
     const Component = asChild ? Slot.Pressable : Pressable;
+
+    // className에서 text-와 font- 관련 클래스 추출
+    const extractTextClasses = (className: string | undefined) => {
+      if (!className) return "";
+      const textFontClasses = className
+        .split(" ")
+        .filter((cls) => cls.startsWith("text-") || cls.startsWith("font-"))
+        .join(" ");
+      return textFontClasses;
+    };
+
+    const textClasses = extractTextClasses(className);
+    const remainingClasses =
+      className
+        ?.split(" ")
+        .filter((cls) => !cls.startsWith("text-") && !cls.startsWith("font-"))
+        .join(" ") || "";
+
     return (
       <TextClassContext.Provider
         value={cn(
           props.disabled && "web:pointer-events-none",
           buttonTextVariants({ variant, size }),
+          textClasses,
         )}
       >
         <Component
           className={cn(
             buttonVariants({ variant, size, radius }),
             props.disabled && "opacity-35 web:pointer-events-none ",
-            className,
+            remainingClasses,
           )}
           ref={ref}
           role="button"
@@ -138,3 +156,4 @@ Button.displayName = "Button";
 
 export { Button, buttonTextVariants, buttonVariants };
 export type { ButtonProps };
+

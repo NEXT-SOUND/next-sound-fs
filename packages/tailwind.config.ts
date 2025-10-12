@@ -126,6 +126,7 @@ export default {
           600: "hsl(var(--beige-600))",
           700: "hsl(var(--beige-700))",
         },
+        placeholder: "hsl(var(--placeholder))",
       },
       borderWidth: {
         hairline: hairlineWidth(),

@@ -12,7 +12,7 @@ const H1 = React.forwardRef<TextRef, SlottableTextProps>(
         role="heading"
         aria-level="1"
         className={cn(
-          "web:scroll-m-20 text-4xl text-foreground tracking-tight web:select-text leading-[1.2] native:leading-[42px] mb-3 font-montBold",
+          "web:scroll-m-20 text-4xl text-foreground tracking-tight web:select-text leading-[1.2] native:leading-[42px] font-montBold",
           className,
         )}
         ref={ref}
@@ -32,7 +32,7 @@ const H2 = React.forwardRef<TextRef, SlottableTextProps>(
         role="heading"
         aria-level="2"
         className={cn(
-          "web:scroll-m-20 pb-2 text-3xl text-foreground tracking-tight first:mt-0 web:select-text leading-[1.25] native:leading-[36px] mb-2.5 font-montBold",
+          "web:scroll-m-20 pb-2 text-3xl text-foreground tracking-tight first:mt-0 web:select-text leading-[1.25] native:leading-[36px] font-montBold",
           className,
         )}
         ref={ref}
@@ -52,7 +52,7 @@ const H3 = React.forwardRef<TextRef, SlottableTextProps>(
         role="heading"
         aria-level="3"
         className={cn(
-          "web:scroll-m-20 text-2xl text-foreground tracking-tight web:select-text leading-[1.3] native:leading-[32px] mb-2 font-montBold",
+          "web:scroll-m-20 text-2xl text-foreground tracking-tight web:select-text leading-[1.3] native:leading-[32px] font-montBold",
           className,
         )}
         ref={ref}
@@ -72,7 +72,7 @@ const H4 = React.forwardRef<TextRef, SlottableTextProps>(
         role="heading"
         aria-level="4"
         className={cn(
-          "web:scroll-m-20 text-xl text-foreground tracking-tight web:select-text leading-[1.3] native:leading-[28px] mb-1.5 font-montBold",
+          "web:scroll-m-20 text-xl text-foreground tracking-tight web:select-text leading-[1.3] native:leading-[28px] font-montBold",
           className,
         )}
         ref={ref}
@@ -92,7 +92,7 @@ const H5 = React.forwardRef<TextRef, SlottableTextProps>(
         role="heading"
         aria-level="4"
         className={cn(
-          "web:scroll-m-20 text-lg text-foreground tracking-tight web:select-text leading-[1.3] native:leading-[24px] mb-1 font-montBold",
+          "web:scroll-m-20 text-lg text-foreground tracking-tight web:select-text leading-[1.3] native:leading-[24px] font-montBold",
           className,
         )}
         ref={ref}
