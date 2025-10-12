@@ -47,7 +47,7 @@ export function LoginForm({ className }: LoginFormProps) {
     try {
       await login(data.email, data.password);
       link.onPress();
-    } catch (error) {
+    } catch (error: any) {
       showToast(error.message);
     }
   };
