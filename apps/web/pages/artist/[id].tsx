@@ -1,8 +1,7 @@
-import React from "react";
+import { ArtistProfileLayout } from "@/app/artist/[id]";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
-import { ArtistProfileLayout } from "@/app/artist/[id]";
 
 function ArtistPage() {
   const { t } = useTranslation("common");
