@@ -8,7 +8,7 @@ import React from "react";
 //@ts-ignore: next-line
 function Login() {
   const { t } = useTranslation("common");
-  const { t: ogT } = useTranslation("common");
+  const { t: authT } = useTranslation("auth");
   const router = useRouter();
 
   // URL 파라미터에서 오류 메시지 처리
@@ -42,12 +42,14 @@ function Login() {
     }
   }, [router]);
 
+  const title = `${t("title")} - ${authT("login")}`;
+
   return (
     <>
       <Head>
-        <title>{t("title")} - 로그인</title>
+        <title>{title}</title>
         <meta property="og:type" content="website" />
-        <meta property="og:title" content={`${ogT("title")} - 로그인`} />
+        <meta property="og:title" content={title} />
       </Head>
       <SignInPage />
     </>
@@ -57,7 +59,7 @@ function Login() {
 export async function getStaticProps({ locale }: { locale: string }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common"])),
+      ...(await serverSideTranslations(locale, ["common", "auth"])),
     },
   };
 }

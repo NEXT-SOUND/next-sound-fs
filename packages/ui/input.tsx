@@ -5,7 +5,7 @@ import { TextInput } from "react-native";
 import { View } from "./view";
 
 const inputVariants = cva(
-  "web:transition-all web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2 border border-border placeholder:text-placeholder",
+  "web:transition-all web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring border border-border placeholder:text-placeholder",
   {
     variants: {
       variant: {
@@ -47,9 +47,9 @@ const Input = React.forwardRef<React.ElementRef<typeof TextInput>, InputProps>(
     ref,
   ) => {
     return (
-      <View className="space-y-2 w-full">
+      <View className="space-y-2">
         {label && (
-          <label className="text-sm font-montMedium text-black-50">
+          <label className="text-sm font-montMedium text-description">
             {label}
           </label>
         )}

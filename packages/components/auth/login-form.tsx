@@ -11,6 +11,7 @@ import * as React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { SolitoImage } from "solito/image";
 import { Link, useLink } from "solito/link";
+import Logo from "../logo";
 
 type FormData = {
   email: string;
@@ -48,31 +49,36 @@ export function LoginForm() {
 
   return (
     <View className="flex justify-center items-center flex-1">
-      <View className="flex flex-col gap-5 justify-center items-center flex-1">
-        <H3 className="text-black-60">Sign In Account</H3>
-        <P className="text-black-50 font-mont">
-          To create a fan page for you or your favorite artist
-        </P>
-        <View className="flex flex-col gap-2 my-5">
-          <Button
-            onPress={handleGoogleLogin}
-            disabled={isLoading}
-            variant="outline"
-            className="h-12 web:px-6 native:px-4 font-montBold text-black-60 text-sm"
-            radius="2xl"
-          >
-            <SolitoImage
-              src="/google.svg"
-              width={21}
-              height={20}
-              alt="google"
-            />
-            Google
-          </Button>
+      <View className="flex flex-col gap-5 md:justify-center items-center flex-1 relative">
+        <View className="flex flex-col relative md:bottom-20 py-10 md:gap-5 gap-4 justify-center md:items-center md:w-[115%]">
+          <View className="flex flex-row gap-2 items-center">
+            <H3 className="text-title">Welcome!</H3>
+            <Logo className="md:hidden flex" />
+          </View>
+          <P className="text-description font-mont">
+            To create a fan page for you or your favorite artist
+          </P>
+          <View className="flex flex-col gap-2 my-5 w-full">
+            <Button
+              onPress={handleGoogleLogin}
+              disabled={isLoading}
+              variant="outline"
+              className="h-12 web:px-6 native:px-4 font-montBold text-black-60 text-sm w-[48%]"
+              radius="2xl"
+            >
+              <SolitoImage
+                src="/google.svg"
+                width={21}
+                height={20}
+                alt="google"
+              />
+              Google
+            </Button>
+          </View>
+          <Divider height={1} middleLabel="Or" />
         </View>
-        <Divider height={1} middleLabel="Or" />
-        <View className="flex flex-col w-full justify-center py-12 gap-6">
-          <View className="w-full">
+        <View className="flex flex-col w-full justify-center gap-6 pb-32 items-center">
+          <View className="w-[90%]">
             <Controller
               control={control}
               name="email"
@@ -100,7 +106,7 @@ export function LoginForm() {
               </P>
             )}
           </View>
-          <View className="w-full">
+          <View className="w-[90%]">
             <Controller
               control={control}
               name="password"
@@ -148,9 +154,11 @@ export function LoginForm() {
           {isLoading ? "로그인 중..." : "Login"}
         </Button>
         <View className="flex flex-row gap-2 flex-wrap">
-          <P className="text-black-50 font-mont">Don&apos;t have an account?</P>
+          <P className="text-description font-mont">
+            Don&apos;t have an account?
+          </P>
           <Link href="/auth/sign-up">
-            <P className="font-montBold text-black-60 hover:underline">
+            <P className="font-montBold text-description hover:underline">
               Sign up
             </P>
           </Link>
