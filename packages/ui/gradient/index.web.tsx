@@ -19,18 +19,32 @@ export default function Gradient({
         .map((color, index) => `${color} ${positions[index] * 100}%`)
         .join(", ")
     : colors.join(", ");
+
+  if (!animated) {
+    return (
+      <div
+        {...props}
+        style={{
+          // @ts-expect-error
+          ...style,
+          background: `linear-gradient(${direction}, ${gradientColors})`,
+        }}
+      />
+    );
+  }
+
   return (
     <AnimatePresence>
       <MotiView
         {...props}
         key={colors.join(",")}
-        from={{ opacity: animated ? 0 : 1 }}
+        from={{ opacity: 0 }}
         animate={{
-          opacity: animated ? 1 : 1,
+          opacity: 1,
           width,
           height,
         }}
-        exit={{ opacity: animated ? 0 : 1 }}
+        exit={{ opacity: 0 }}
         transition={{ duration: 0.1 }}
         style={{
           // @ts-expect-error
@@ -41,4 +55,3 @@ export default function Gradient({
     </AnimatePresence>
   );
 }
-// FIXME: animation

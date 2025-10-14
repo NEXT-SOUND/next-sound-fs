@@ -3,17 +3,15 @@ import { useAuth } from "@/services/auth/use-user";
 import { Button } from "@/ui/button";
 import Divider from "@/ui/divider";
 import { Input } from "@/ui/input";
-import { H3, P } from "@/ui/typography";
+import { Bold, Description, H3 } from "@/ui/typography";
 import { View } from "@/ui/view";
 import { useTranslation } from "@/utils/i18n";
-import GLOBAL_ENV from "constants/global-env";
-import { Eye, EyeOff } from "lucide-react";
 import * as React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { TextInput } from "react-native";
-import { SolitoImage } from "solito/image";
 import { Link, useLink } from "solito/link";
 import Logo from "../logo";
+import GoogleLoginButton from "./actions/google-login-button";
 
 type FormData = {
   email: string;
@@ -22,7 +20,6 @@ type FormData = {
 
 export function LoginForm() {
   const { login, isLoading } = useAuth();
-  const [showPassword, setShowPassword] = React.useState(false);
   const link = useLink({ href: "/" });
   const passwordRef = React.useRef<TextInput>(null);
   const { t } = useTranslation("auth");
@@ -47,38 +44,17 @@ export function LoginForm() {
     }
   };
 
-  const handleGoogleLogin = () => {
-    window.location.href = `${GLOBAL_ENV.BACKEND_URL}/auth/google`;
-  };
-
   return (
     <View className="flex justify-center items-center flex-1">
-      <View className="flex flex-col gap-5 md:justify-center items-center flex-1 relative pb-[25%] px-4">
+      <View className="flex flex-col gap-5 md:justify-center items-center flex-1 relative pb-[25%] px-4 w-full max-w-[412px]">
         <View className="flex flex-col relative md:bottom-0 md:py-6 py-6 pb-3 md:gap-5 gap-4 justify-center md:items-center md:w-[115%]">
           <View className="flex flex-row gap-2 items-center">
-            <H3 className="text-title">{t("auth:welcome")}</H3>
+            <H3>{t("auth:welcome")}</H3>
             <Logo className="md:hidden flex" />
           </View>
-          <P className="text-description font-mont">
-            {t("auth:welcomeDescription")}
-          </P>
+          <Description>{t("auth:welcomeDescription")}</Description>
           <View className="flex flex-col gap-2 my-5 w-full">
-            <Button
-              onPress={handleGoogleLogin}
-              disabled={isLoading}
-              variant="outline"
-              className="h-12 web:px-6 native:px-4 font-montBold text-black-60 text-sm w-[48%]"
-              radius="2xl"
-            >
-              {/* @ts-ignore */}
-              <SolitoImage
-                src="/google.svg"
-                width={21}
-                height={20}
-                alt="google"
-              />
-              {t("auth:google")}
-            </Button>
+            <GoogleLoginButton />
           </View>
           <Divider height={1} middleLabel={t("auth:or")} />
         </View>
@@ -105,14 +81,10 @@ export function LoginForm() {
                   returnKeyType="next"
                   blurOnSubmit={false}
                   onSubmitEditing={() => passwordRef.current?.focus()}
+                  error={errors.email?.message}
                 />
               )}
             />
-            {errors.email && (
-              <P className="text-red-500 text-sm mt-1">
-                {errors.email.message}
-              </P>
-            )}
           </View>
           <View className="w-[90%]">
             <Controller
@@ -122,38 +94,20 @@ export function LoginForm() {
                 required: t("auth:passwordRequired"),
               }}
               render={({ field: { onChange, value } }) => (
-                <View className="relative">
-                  <Input
-                    label={t("auth:password")}
-                    size="lg"
-                    placeholder={t("auth:passwordPlaceholder")}
-                    value={value}
-                    onChangeText={onChange}
-                    secureTextEntry={!showPassword}
-                    ref={passwordRef}
-                    returnKeyType="done"
-                    onSubmitEditing={() => handleSubmit(onSubmit)()}
-                  />
-                  <Button
-                    onPress={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-9 text-placeholder p-1"
-                    variant="ghost"
-                    size="sm"
-                  >
-                    {showPassword ? (
-                      <EyeOff className="w-4 h-4 text-placeholder" />
-                    ) : (
-                      <Eye className="w-4 h-4 text-placeholder" />
-                    )}
-                  </Button>
-                </View>
+                <Input
+                  label={t("auth:password")}
+                  size="lg"
+                  placeholder={t("auth:passwordPlaceholder")}
+                  value={value}
+                  onChangeText={onChange}
+                  isPassword
+                  ref={passwordRef}
+                  returnKeyType="done"
+                  onSubmitEditing={() => handleSubmit(onSubmit)()}
+                  error={errors.password?.message}
+                />
               )}
             />
-            {errors.password && (
-              <P className="text-red-500 text-sm mt-1">
-                {errors.password.message}
-              </P>
-            )}
           </View>
         </View>
         <Button
@@ -165,11 +119,11 @@ export function LoginForm() {
           {isLoading ? t("auth:loggingIn") : t("auth:login")}
         </Button>
         <View className="flex flex-row gap-2 flex-wrap">
-          <P className="text-description font-mont">{t("auth:noAccount")}</P>
+          <Description>{t("auth:noAccount")}</Description>
           <Link href="/auth/sign-up">
-            <P className="font-montBold text-description hover:underline">
+            <Bold className="text-description hover:underline">
               {t("auth:signUp")}
-            </P>
+            </Bold>
           </Link>
         </View>
       </View>

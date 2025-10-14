@@ -30,7 +30,7 @@ export function SidebarBanner({ className }: SidebarBannerProps) {
       from={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 300 }}
+      transition={{ duration: 100 }}
     >
       <Gradient
         colors={colors || ["#5D7A97", "#000"]}

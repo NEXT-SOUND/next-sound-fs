@@ -1,7 +1,10 @@
 import { cn } from "@/ui/utils/cn";
 import { type VariantProps, cva } from "class-variance-authority";
+import { Eye, EyeOff } from "lucide-react";
 import * as React from "react";
 import { TextInput } from "react-native";
+import { Button } from "./button";
+import { Label } from "./typography";
 import { View } from "./view";
 
 const inputVariants = cva(
@@ -34,34 +37,63 @@ const inputVariants = cva(
   },
 );
 
-type InputProps = React.ComponentPropsWithoutRef<typeof TextInput> &
+type InputProps = Omit<
+  React.ComponentPropsWithoutRef<typeof TextInput>,
+  "secureTextEntry"
+> &
   VariantProps<typeof inputVariants> & {
     label?: string;
-    error?: string;
+    error?: string | undefined;
     helperText?: string;
+    isPassword?: boolean;
   };
 
 const Input = React.forwardRef<React.ElementRef<typeof TextInput>, InputProps>(
   (
-    { className, variant, size, radius, label, error, helperText, ...props },
+    {
+      className,
+      variant,
+      size,
+      radius,
+      label,
+      error,
+      helperText,
+      isPassword,
+      ...props
+    },
     ref,
   ) => {
+    const [secureTextEntry, setSecureTextEntry] = React.useState(isPassword);
+
     return (
       <View className="space-y-1">
-        {label && (
-          <label className="text-sm font-montMedium text-description">
-            {label}
-          </label>
-        )}
-        <TextInput
-          className={cn(
-            inputVariants({ variant, size, radius }),
-            error && "border-destructive focus:border-destructive",
-            className,
+        {label && <Label>{label}</Label>}
+        <View className="relative">
+          <TextInput
+            className={cn(
+              inputVariants({ variant, size, radius }),
+              error && "border-destructive focus:border-destructive",
+              className,
+            )}
+            ref={ref}
+            secureTextEntry={secureTextEntry}
+            {...props}
+          />
+          {isPassword && (
+            <Button
+              className="absolute right-3 top-2 text-placeholder p-1"
+              variant="ghost"
+              size="sm"
+              onPress={() => setSecureTextEntry(!secureTextEntry)}
+            >
+              {secureTextEntry ? (
+                <EyeOff className="w-4 h-4 text-placeholder" />
+              ) : (
+                <Eye className="w-4 h-4 text-placeholder" />
+              )}
+            </Button>
           )}
-          ref={ref}
-          {...props}
-        />
+        </View>
         {error && <p className="text-sm text-destructive">{error}</p>}
         {helperText && !error && (
           <p className="text-sm text-muted-foreground">{helperText}</p>
