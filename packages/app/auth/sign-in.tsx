@@ -1,4 +1,5 @@
 import { LoginForm } from "@/components/auth/login-form";
+import AuthPageHeader from "@/components/auth/page-header";
 import { SidebarBanner } from "@/components/auth/sidebar-banner";
 import { View } from "@/ui/view";
 
@@ -9,7 +10,10 @@ export function SignInPage() {
       <SidebarBanner className="hidden md:flex md:w-2/5" />
 
       {/* 우측 로그인 폼 */}
-      <LoginForm />
+      <View className="flex-1">
+        <AuthPageHeader />
+        <LoginForm />
+      </View>
     </View>
   );
 }

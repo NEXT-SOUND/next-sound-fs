@@ -22,11 +22,11 @@ export function Home() {
             </Text>
           </Link>
 
-          <Link href="/auth/login">
+          <Link href="/auth/sign-in">
             <Text className="text-primary hover:underline">로그인</Text>
           </Link>
 
-          <Link href="/auth/register">
+          <Link href="/auth/sign-up">
             <Text className="text-primary hover:underline">회원가입</Text>
           </Link>
         </View>

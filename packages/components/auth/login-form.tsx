@@ -9,6 +9,7 @@ import GLOBAL_ENV from "constants/global-env";
 import { Eye, EyeOff } from "lucide-react";
 import * as React from "react";
 import { Controller, useForm } from "react-hook-form";
+import { TextInput } from "react-native";
 import { SolitoImage } from "solito/image";
 import { Link, useLink } from "solito/link";
 import Logo from "../logo";
@@ -22,6 +23,7 @@ export function LoginForm() {
   const { login, isLoading } = useAuth();
   const [showPassword, setShowPassword] = React.useState(false);
   const link = useLink({ href: "/" });
+  const passwordRef = React.useRef<TextInput>(null);
 
   const {
     control,
@@ -49,10 +51,10 @@ export function LoginForm() {
 
   return (
     <View className="flex justify-center items-center flex-1">
-      <View className="flex flex-col gap-5 md:justify-center items-center flex-1 relative">
-        <View className="flex flex-col relative md:bottom-20 py-10 md:gap-5 gap-4 justify-center md:items-center md:w-[115%]">
+      <View className="flex flex-col gap-5 md:justify-center items-center flex-1 relative pb-[25%] px-4">
+        <View className="flex flex-col relative md:bottom-0 md:py-6 py-6 pb-3 md:gap-5 gap-4 justify-center md:items-center md:w-[115%]">
           <View className="flex flex-row gap-2 items-center">
-            <H3 className="text-title">Welcome!</H3>
+            <H3 className="text-title">Welcome</H3>
             <Logo className="md:hidden flex" />
           </View>
           <P className="text-description font-mont">
@@ -77,7 +79,7 @@ export function LoginForm() {
           </View>
           <Divider height={1} middleLabel="Or" />
         </View>
-        <View className="flex flex-col w-full justify-center gap-6 pb-32 items-center">
+        <View className="flex flex-col w-full justify-center gap-6 md:pb-16 pb-4 items-center">
           <View className="w-[90%]">
             <Controller
               control={control}
@@ -97,6 +99,9 @@ export function LoginForm() {
                   value={value}
                   onChangeText={onChange}
                   inputMode="email"
+                  returnKeyType="next"
+                  blurOnSubmit={false}
+                  onSubmitEditing={() => passwordRef.current?.focus()}
                 />
               )}
             />
@@ -122,6 +127,9 @@ export function LoginForm() {
                     value={value}
                     onChangeText={onChange}
                     secureTextEntry={!showPassword}
+                    ref={passwordRef}
+                    returnKeyType="done"
+                    onSubmitEditing={() => handleSubmit(onSubmit)()}
                   />
                   <Button
                     onPress={() => setShowPassword(!showPassword)}

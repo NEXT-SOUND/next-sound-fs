@@ -47,7 +47,7 @@ const Input = React.forwardRef<React.ElementRef<typeof TextInput>, InputProps>(
     ref,
   ) => {
     return (
-      <View className="space-y-2">
+      <View className="space-y-1">
         {label && (
           <label className="text-sm font-montMedium text-description">
             {label}
