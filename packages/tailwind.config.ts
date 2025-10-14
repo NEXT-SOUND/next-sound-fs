@@ -129,6 +129,9 @@ export default {
         placeholder: "hsl(var(--placeholder))",
         title: "hsl(var(--title))",
         description: "hsl(var(--description))",
+        switch: {
+          background: "hsl(var(--switch-background))",
+        },
       },
       borderWidth: {
         hairline: hairlineWidth(),

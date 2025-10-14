@@ -5,6 +5,7 @@ import Divider from "@/ui/divider";
 import { Input } from "@/ui/input";
 import { H3, P } from "@/ui/typography";
 import { View } from "@/ui/view";
+import { useTranslation } from "@/utils/i18n";
 import GLOBAL_ENV from "constants/global-env";
 import { Eye, EyeOff } from "lucide-react";
 import * as React from "react";
@@ -24,6 +25,7 @@ export function LoginForm() {
   const [showPassword, setShowPassword] = React.useState(false);
   const link = useLink({ href: "/" });
   const passwordRef = React.useRef<TextInput>(null);
+  const { t } = useTranslation("auth");
 
   const {
     control,
@@ -54,11 +56,11 @@ export function LoginForm() {
       <View className="flex flex-col gap-5 md:justify-center items-center flex-1 relative pb-[25%] px-4">
         <View className="flex flex-col relative md:bottom-0 md:py-6 py-6 pb-3 md:gap-5 gap-4 justify-center md:items-center md:w-[115%]">
           <View className="flex flex-row gap-2 items-center">
-            <H3 className="text-title">Welcome</H3>
+            <H3 className="text-title">{t("auth:welcome")}</H3>
             <Logo className="md:hidden flex" />
           </View>
           <P className="text-description font-mont">
-            To create a fan page for you or your favorite artist
+            {t("auth:welcomeDescription")}
           </P>
           <View className="flex flex-col gap-2 my-5 w-full">
             <Button
@@ -68,16 +70,17 @@ export function LoginForm() {
               className="h-12 web:px-6 native:px-4 font-montBold text-black-60 text-sm w-[48%]"
               radius="2xl"
             >
+              {/* @ts-ignore */}
               <SolitoImage
                 src="/google.svg"
                 width={21}
                 height={20}
                 alt="google"
               />
-              Google
+              {t("auth:google")}
             </Button>
           </View>
-          <Divider height={1} middleLabel="Or" />
+          <Divider height={1} middleLabel={t("auth:or")} />
         </View>
         <View className="flex flex-col w-full justify-center gap-6 md:pb-16 pb-4 items-center">
           <View className="w-[90%]">
@@ -85,17 +88,17 @@ export function LoginForm() {
               control={control}
               name="email"
               rules={{
-                required: "이메일을 입력해주세요.",
+                required: t("auth:emailRequired"),
                 pattern: {
                   value: /\S+@\S+\.\S+/,
-                  message: "올바른 이메일 형식을 입력해주세요.",
+                  message: t("auth:emailInvalid"),
                 },
               }}
               render={({ field: { onChange, value } }) => (
                 <Input
-                  label="Email"
+                  label={t("auth:email")}
                   size="lg"
-                  placeholder="your@email.com"
+                  placeholder={t("auth:emailPlaceholder")}
                   value={value}
                   onChangeText={onChange}
                   inputMode="email"
@@ -116,14 +119,14 @@ export function LoginForm() {
               control={control}
               name="password"
               rules={{
-                required: "비밀번호를 입력해주세요.",
+                required: t("auth:passwordRequired"),
               }}
               render={({ field: { onChange, value } }) => (
                 <View className="relative">
                   <Input
-                    label="Password"
+                    label={t("auth:password")}
                     size="lg"
-                    placeholder="••••••••"
+                    placeholder={t("auth:passwordPlaceholder")}
                     value={value}
                     onChangeText={onChange}
                     secureTextEntry={!showPassword}
@@ -159,15 +162,13 @@ export function LoginForm() {
           className="text-base w-full"
           disabled={isLoading}
         >
-          {isLoading ? "로그인 중..." : "Login"}
+          {isLoading ? t("auth:loggingIn") : t("auth:login")}
         </Button>
         <View className="flex flex-row gap-2 flex-wrap">
-          <P className="text-description font-mont">
-            Don&apos;t have an account?
-          </P>
+          <P className="text-description font-mont">{t("auth:noAccount")}</P>
           <Link href="/auth/sign-up">
             <P className="font-montBold text-description hover:underline">
-              Sign up
+              {t("auth:signUp")}
             </P>
           </Link>
         </View>

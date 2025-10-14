@@ -13,11 +13,15 @@ interface SidebarBannerProps {
 }
 
 export function SidebarBanner({ className }: SidebarBannerProps) {
-  const [{ colors, image, title, name }] = React.useState(() => {
-    const randomIndex = Math.floor(Math.random() * SIDE_BANNER_ASSETS.length);
-    return SIDE_BANNER_ASSETS[randomIndex]!;
-  });
+  const [bannerData, setBannerData] = React.useState(SIDE_BANNER_ASSETS[0]!);
 
+  React.useEffect(() => {
+    // Due to SSR, we need to set the banner data on the client side
+    const randomIndex = Math.floor(Math.random() * SIDE_BANNER_ASSETS.length);
+    setBannerData(SIDE_BANNER_ASSETS[randomIndex]!);
+  }, []);
+
+  const { colors, image, title, name, subName } = bannerData;
   const { width, height } = useWindowSize();
 
   return (
@@ -49,15 +53,19 @@ export function SidebarBanner({ className }: SidebarBannerProps) {
           </H1>
           <Logo color="white" size="2xl" />
         </View>
+        {/* @ts-ignore */}
         <SolitoImage
           src={image || "/side-banner-1.png"}
           alt="background"
           height={0}
           width={width}
         />
-        <H5 className="absolute bottom-4 right-4 font-montBold text-beige-600">
-          {name}
-        </H5>
+        <View className="absolute bottom-4 right-4 flex flex-col gap-1 items-end">
+          <H5 className=" font-montBold text-beige-600">{name}</H5>
+          {subName && (
+            <H5 className="text-sm font-mont text-beige-400">{subName}</H5>
+          )}
+        </View>
       </View>
     </AnimatedView>
   );

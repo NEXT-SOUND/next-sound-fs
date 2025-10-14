@@ -23,12 +23,12 @@ function ThemeToggle({ label = false }: { size?: number; label?: boolean }) {
   }, []);
 
   const SunIcon = Icons?.Sun ? (
-    <Icons.Sun size={16} color={isDarkColorScheme ? "#9ca3af" : "#111827"} />
+    <Icons.Sun size={16} color={isDarkColorScheme ? "#ffffff" : "#111827"} />
   ) : (
     "☀️"
   );
   const MoonIcon = Icons?.Moon ? (
-    <Icons.Moon size={16} color={isDarkColorScheme ? "#e5e7eb" : "#6b7280"} />
+    <Icons.Moon size={16} color={isDarkColorScheme ? "#000000" : "#6b7280"} />
   ) : (
     "🌙"
   );

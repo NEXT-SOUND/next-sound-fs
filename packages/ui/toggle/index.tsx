@@ -1,8 +1,8 @@
 import { cn } from "@/ui/utils/cn";
 import { cva } from "class-variance-authority";
 import { MotiText, MotiView } from "moti";
-import { useMemo } from "react";
-import { Pressable, Text, View } from "react-native";
+import { useMemo, useState } from "react";
+import { Platform, Pressable, Text, View } from "react-native";
 
 type ToggleProps = {
   checked: boolean;
@@ -20,19 +20,15 @@ const SIZE_DIMENSIONS: Record<NonNullable<ToggleProps["size"]>, Dimensions> = {
   lg: { trackWidth: 72, trackHeight: 40, knobSize: 30 },
 };
 
-const trackVariants = cva("rounded-full justify-center", {
-  variants: { state: { on: "bg-gray-900", off: "bg-gray-200" } },
-  defaultVariants: { state: "off" },
-});
+const trackVariants = cva("rounded-full justify-center");
 
 // knobVariants no longer used; knob color set via style for reliability
 
 const labelVariants = cva("", {
   variants: {
-    state: { on: "text-white", off: "text-gray-900" },
     size: { sm: "text-xs", md: "text-sm", lg: "text-base" },
   },
-  defaultVariants: { state: "off", size: "md" },
+  defaultVariants: { size: "md" },
 });
 
 export default function Toggle({
@@ -43,6 +39,7 @@ export default function Toggle({
   leftIcon,
   rightIcon,
 }: ToggleProps) {
+  const [isHovered, setIsHovered] = useState(false);
   const { trackWidth, trackHeight, knobSize } = SIZE_DIMENSIONS[size];
   const containerPadding = (trackHeight - knobSize) / 2;
   const travel = trackWidth - knobSize - containerPadding * 2;
@@ -51,11 +48,15 @@ export default function Toggle({
     [checked, travel],
   );
   const state: "on" | "off" = checked ? "on" : "off";
-  const knobBg = state === "on" ? "#374151" : "#ffffff"; // ensure visible even if className fails
+  const knobBg = state === "on" ? "hsl(24, 85%, 50%)" : "#ffffff"; // ensure visible even if className fails
 
   return (
     <Pressable
       onPress={() => onChange(!checked)}
+      {...(Platform.OS === "web" && {
+        onMouseEnter: () => setIsHovered(true),
+        onMouseLeave: () => setIsHovered(false),
+      })}
       accessibilityRole="switch"
       accessibilityState={{ checked }}
       accessibilityLabel="Toggle"
@@ -63,7 +64,7 @@ export default function Toggle({
       style={{ gap: 8 }}
     >
       <View
-        className={cn(trackVariants({ state }))}
+        className={cn(trackVariants(), "bg-switch-background")}
         style={{
           width: trackWidth,
           height: trackHeight,
@@ -93,7 +94,11 @@ export default function Toggle({
 
         <MotiView
           from={{ translateX: 0 }}
-          animate={{ translateX: knobTranslateX, backgroundColor: knobBg }}
+          animate={{
+            translateX: knobTranslateX,
+            backgroundColor: knobBg,
+            scale: Platform.OS === "web" && isHovered ? 1.1 : 1,
+          }}
           transition={{ type: "timing", duration: 250 }}
           style={{
             width: knobSize,
@@ -111,7 +116,7 @@ export default function Toggle({
       </View>
 
       {label && (
-        <Text className={cn(labelVariants({ state, size }))}>
+        <Text className={cn(labelVariants({ size }))}>
           {typeof label === "string" ? label : checked ? "On" : "Off"}
         </Text>
       )}
