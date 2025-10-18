@@ -53,7 +53,6 @@
     "graphql": "^16.11.0",
     "lucide-react": "^0.469.0",
     "react-hook-form": "^7.65.0",
-    "react-i18next": "^15.5.3",
     "tailwindcss-animate": "^1.0.7",
     "zustand": "^5.0.1"
   }

@@ -22,11 +22,13 @@ const Divider = ({ className, height = 1, middleLabel }: DividerProps) => {
    }
 
    return (
-    <View className={cn("w-full flex-row flex items-center gap-3", className)} style={{ height }}>
-        {renderDivider()}
-        <P className="text-center text-sm text-placeholder font-mont">{middleLabel}</P>
-        {renderDivider()}
-    </View>
+     <View className={cn("w-full flex-row flex items-center gap-3", className)}>
+       {renderDivider()}
+       <P className="text-center text-sm text-placeholder font-mont">
+         {middleLabel}
+       </P>
+       {renderDivider()}
+     </View>
    );
 
 };

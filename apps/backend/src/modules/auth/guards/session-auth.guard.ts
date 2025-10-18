@@ -1,13 +1,12 @@
-import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
-
-
+import {
+  CanActivate,
+  ExecutionContext,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 
 import { UsersService } from '../../user/service/user.service';
 import { SessionService } from '../session.service';
-
-
-
-
 
 @Injectable()
 export class SessionAuthGuard implements CanActivate {
@@ -19,20 +18,24 @@ export class SessionAuthGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
 
+    if (!request.cookies) {
+      return false;
+    }
+
     const sessionId = request.cookies?.sessionId;
 
     if (!sessionId) {
-      throw new UnauthorizedException('세션이 없습니다.');
+      throw new UnauthorizedException('No session found');
     }
 
     const userId = await this.sessionService.validateSession(sessionId);
     if (!userId) {
-      throw new UnauthorizedException('유효하지 않은 세션입니다.');
+      throw new UnauthorizedException('Invalid session');
     }
 
     const user = await this.usersService.findById(userId);
     if (!user) {
-      throw new UnauthorizedException('사용자를 찾을 수 없습니다.');
+      throw new UnauthorizedException('User not found');
     }
 
     request.user = user;

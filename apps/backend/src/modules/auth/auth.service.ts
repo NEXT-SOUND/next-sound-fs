@@ -3,11 +3,12 @@ import * as bcrypt from 'bcryptjs';
 import { Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 
-
-
-import { Inject, Injectable, InternalServerErrorException, forwardRef } from '@nestjs/common';
-
-
+import {
+  Inject,
+  Injectable,
+  InternalServerErrorException,
+  forwardRef,
+} from '@nestjs/common';
 
 import { User, UserProvider } from '../user/model/user.model';
 import { UsersService } from '../user/service/user.service';
@@ -16,14 +17,10 @@ import { RegisterInput } from './dto/register.input';
 import { EmailVerificationRequiredException } from './exceptions/email-verification-required.exception';
 import { SessionService } from './session.service';
 
-
-
-
-
 @Injectable()
 export class AuthService {
   private sesClient: SESClient;
-  private readonly RESEND_COOLDOWN = 3 * 60 * 1000; // 3분
+  private readonly RESEND_COOLDOWN = 3 * 60 * 1000; // 3 minutes
 
   constructor(
     @Inject(forwardRef(() => UsersService))
@@ -97,7 +94,7 @@ export class AuthService {
           (this.RESEND_COOLDOWN - timeSinceLastSent) / 1000,
         );
         throw new InternalServerErrorException(
-          `잠시 후 다시 시도해주세요. (${remainingTime}초 남음)`,
+          `Please try again later. (${remainingTime} seconds left)`,
         );
       }
     }
@@ -112,7 +109,7 @@ export class AuthService {
       expiresAt,
     );
 
-    return { message: '인증 이메일이 재전송되었습니다.' };
+    return { message: 'Verification email has been resent.' };
   }
 
   async validateUser(
@@ -144,7 +141,7 @@ export class AuthService {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax',
-        maxAge: 24 * 60 * 60 * 1000, // 24시간
+        maxAge: 24 * 60 * 60 * 1000, // 24 hours
         path: '/',
       };
 
@@ -164,7 +161,7 @@ export class AuthService {
   async register(registerDto: RegisterInput): Promise<{ message: string }> {
     const existingUser = await this.usersService.findByEmail(registerDto.email);
     if (existingUser) {
-      throw new InternalServerErrorException('이미 존재하는 이메일입니다.');
+      throw new InternalServerErrorException('Email already exists');
     }
 
     const verificationToken = uuidv4();
@@ -180,13 +177,13 @@ export class AuthService {
       new Date(Date.now() + 5 * 60 * 1000), // 5분 후 만료
     );
 
-    return { message: '회원가입이 완료되었습니다. 이메일을 확인해주세요.' };
+    return { message: 'Registration completed. Please check your email.' };
   }
 
   async verifyEmail(token: string): Promise<{ message: string }> {
     const users = await this.usersService.findByVerificationToken(token);
     if (!users || users.length === 0) {
-      throw new InternalServerErrorException('유효하지 않은 토큰입니다.');
+      throw new InternalServerErrorException('Invalid token');
     }
 
     const user = users[0];
@@ -197,7 +194,7 @@ export class AuthService {
       new Date() > new Date(user.verificationTokenExpiresAt)
     ) {
       throw new InternalServerErrorException(
-        '인증 링크가 만료되었습니다. 새로운 인증 이메일을 요청해주세요.',
+        'Verification link has expired. Please request a new verification email.',
       );
     }
 
@@ -209,7 +206,7 @@ export class AuthService {
     );
 
     // TODO: 인증완료시 로그인 하도록 수정해보자
-    return { message: '이메일 인증이 완료되었습니다.' };
+    return { message: 'Email verification completed. Please login.' };
   }
 
   async handleOAuthLogin(
@@ -245,6 +242,6 @@ export class AuthService {
       await this.sessionService.deleteSession(sessionId);
     }
     response.clearCookie('sessionId');
-    return { message: '로그아웃이 완료되었습니다.' };
+    return { message: 'Logout completed.' };
   }
 }

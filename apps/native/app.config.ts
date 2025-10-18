@@ -9,5 +9,10 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     reactCompiler: true,
   },
   newArchEnabled: true,
-  plugins: [["expo-localization"]],
+  plugins: [
+    ["expo-localization"],
+    ["expo-font"],
+    ["expo-router"],
+    ["expo-web-browser"],
+  ],
 });

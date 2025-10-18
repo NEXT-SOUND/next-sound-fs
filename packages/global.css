@@ -108,6 +108,7 @@
     --neutral-background: 0, 0%, 32%;
     --neutral-foreground: 0, 0%, 98%;
     --modal-background: 228, 17%, 18%;
+    --switch-background: 225, 14%, 30%;
 
     --ring: 24, 85%, 50%;
     --primary: 24, 85%, 50%;
@@ -118,10 +119,12 @@
     
     --border: 225, 14%, 30%;
     --placeholder: 210, 23%, 80%;
-    --switch-background: 225, 14%, 30%;
 
     --title: 0, 0%, 100%;
     --description: 0, 0%, 65%;
+
+    --atomic : 0, 0%, 100%;
+    --atomic-focused: 200, 12%, 92%;
   }
 }
 /* Keep the format */
